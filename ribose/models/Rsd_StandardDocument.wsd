@@ -1,0 +1,68 @@
+@startuml Rsd_StandardDocument
+/'
+Diagram:        Rsd_StandardDocument
+DateCreate:     23/08/2018
+Description:    This is where we keep the Metanorma RSD model definitions.
+                The RSD Standard Document format is an instance of the Metanorma IsoDoc model.
+                Details of the general model can be found on its page.
+
+Hystory of changes:
+> DD/MM/YYYY
+    -
+    -
+'/
+
+'******* CONFIGURATION ************************************************
+!include style.uml.inc
+
+'******* CLASS DEFINITION *********************************************
+class StandardDocument <<StandardDocument>> {
+
+}
+
+class RiboseStandardDocument{
+    +bibdata: RiboseBibliographicItem
+    +foreword: HierarchicalSection[0..1]
+    +introduction: HierarchicalSection[0..1]
+    +sections: ClauseSection[1..*]
+    +annex: AnnexSection[0..*]
+}
+
+class BibliographicItem <<StandardDocument>>{
+
+}
+
+class RiboseBibliographicItem{
+    +type: RiboseDocumentType
+    +security: String[0..1]
+}
+
+class TextElement <<Basicdoc>>{
+
+}
+
+class Keyword{
+
+}
+
+enum RiboseDocumentType <<enumeration>>{
+    code
+    presentation
+    proposal
+    standard
+    report
+    specification
+}
+
+'******* NOTES ********************************************************
+
+
+'******* CLASS RELATIONS **********************************************
+StandardDocument <|-- RiboseStandardDocument
+BibliographicItem <|-- RiboseBibliographicItem
+RiboseStandardDocument <-- RiboseBibliographicItem
+RiboseBibliographicItem <-left- RiboseDocumentType
+
+TextElement <|-- Keyword
+
+@enduml
