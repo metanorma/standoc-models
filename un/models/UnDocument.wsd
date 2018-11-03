@@ -1,0 +1,108 @@
+@startuml UnDocument
+/'
+Diagram:        UnDocument
+'/
+
+'******* CONFIGURATION ************************************************
+!include style.uml.inc
+
+
+'******* CLASS DEFINITION *********************************************
+class StandardDocument <<StandardDocument>> {
+
+}
+
+class UnStandardDocument {
+    +bibdata: UnBibliographicItem
+    +foreword: HierarchicalSection[0..1]
+    +introduction: HierarchicalSection[0..1]
+    +sections: ClauseSection[1..*]
+    +annex: AnnexSection[0..*]
+}
+
+class BibliographicItem <<StandardDocument>>{
+
+}
+
+class UnBibliographicItem {
+    +committee: UnTechnicalCommittee[1..*]
+    +type: UnDocumentType
+    +title: FormattedString
+}
+
+class UnTechnicalCommittee{
+    +type: UnCommitteeType
+    +name: String
+}
+
+class DocumentStatus{
+    +status: UnStatusType
+}
+
+class TextElement <<BasicDoc>>{
+
+}
+
+class Keyword{
+
+}
+
+class IdElement <<BasicDoc>>{
+
+}
+
+class Figure{
+    +source: String[0..1]
+    +name: LocalizedString[0..1]
+    +note: ParagraphWithFootnote[0..*]
+    +figure: Figure[0..*]
+    +definitions: DefinitionList[0..1]
+    +pre: String[0..1]
+    +content: TextElement[0..*]
+}
+
+enum UnStatusType <<enumeration>>{
+    proposal
+    working_draft
+    committee_draft
+    final_draft
+    published
+    withdrawn
+}
+
+enum UnDocumentType <<enumeration>>{
+    directive
+    standard
+    guide
+    specification
+    amendment
+    technical_corrigendum
+    report
+    administrative
+}
+
+enum UnCommitteeType <<enumeration>>{
+    technical
+    provisional
+}
+
+'******* NOTES ********************************************************
+note right of UnStatusType: LocalizedString\nused instead if\nbibliographic\nitem is not a\nUNDOC document
+
+'******* CLASS RELATIONS **********************************************
+StandardDocument <|-- UnStandardDocument
+BibliographicItem <|-- UnBibliographicItem
+UnStandardDocument <-- UnBibliographicItem
+
+UnBibliographicItem <-- UnTechnicalCommittee
+UnBibliographicItem <-- UnDocumentType
+UnBibliographicItem <-- DocumentStatus
+
+UnTechnicalCommittee <-- UnCommitteeType
+DocumentStatus <-- UnStatusType
+
+TextElement <|-- Keyword
+
+IdElement <|-- Figure
+
+@enduml
