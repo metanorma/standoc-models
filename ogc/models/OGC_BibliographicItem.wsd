@@ -52,7 +52,8 @@ enum OgcStatusType <<enumeration>>{
     'committee_draft
     'final_draft
     published
-    withdrawn
+    deprecated
+    retired
 }
 
 /'
