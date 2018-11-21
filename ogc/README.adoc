@@ -1,0 +1,16 @@
+= Metanorma OGC Models
+
+This is where we keep the Metanorma OGC model definitions.
+
+The OGC Standard Document format is an instance of the
+https://github.com/riboseinc/metanorma-model-standoc[Metanorma StandardDocument model].
+Details of the general model can be found on its page.
+
+== OGC Standard Document Model
+
+image::images/OgcStandardDocument.png[]
+
+== OGC Bibliographic Item Model
+
+image::images/OgcBibliographicItem.png[]
+

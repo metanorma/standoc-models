@@ -1,0 +1,123 @@
+@startuml OgcBibliographicItem
+/'
+Diagram:        OgcBibliographicItem
+DateCreate:     22/08/2018
+Description:    Metanorma IsoDoc is a family of document models intended to represent ISO Standards and similarly structured standards,
+                based on the Metanorma StandardDocument ("StanDoc") and BasicDocument ("BasicDoc") models.
+                It is used to abstract the automated generation of standard documents in various formats from well-defined authoring tools;
+                and to validate the structural conformance of authored standards to specifications.
+'/
+
+'******* CONFIGURATION ************************************************
+!include style.uml.inc
+
+
+'******* CLASS DEFINITION *********************************************
+class BibliographicItem <<StandardDocument>>{
+
+}
+
+class OgcBibliographicItem {
+    +projectGroup: OgcProjectGroup[1..*]
+    +type: OgcDocumentType
+    +title: FormattedString
+}
+
+class OgcProjectGroup{
+    +committee: OgcCommittee
+    +subcommittee: OgcSubGroup[0..1]
+    +workgroup: OgcSubGroup[0..1]
+}
+
+enum OgcCommittee <<enumeration>>{
+    technical
+    planning
+    strategic-member-advisory
+}
+
+class OgcSubGroup{
+    +type: String[0..1]
+    +number: Integer[0..1]
+    +name: String
+}
+
+class DocumentStatus{
+    +status: OgcStatusType
+}
+
+enum OgcStatusType <<enumeration>>{
+    rfc
+    candidate
+    'working_draft
+    'committee_draft
+    'final_draft
+    published
+    withdrawn
+}
+
+/'
+Document types detailed in:
+http://docs.opengeospatial.org/pol/05-020r24/05-020r24.html#77
+
+* OGC Policy Document
+* Standards
+* OGC Reference Model
+* Discussion Papers
+* Public Engineering Reports
+* Best Practices Documents
+
+Undocumented:
+
+* User Guide
+
+Types of standards:
+
+* Implementation Standard
+* Abstract Specification
+* Community Standard
+* Profile
+
+
+'/
+
+enum OgcDocumentType <<enumeration>>{
+    policy
+    standard
+    standard-with-suite
+    community-standard
+    abstract-specification
+    profile
+    discussion-paper
+    engineering-report
+    reference-model
+    best-practice
+    user-guide
+    guide
+    amendment
+    technical-corrigendum
+    administrative
+}
+
+'******* NOTES ********************************************************
+
+note right of OgcSubGroup: Under Technical Committee:\n\n* OAB\n* OGC-NA\n* Subcommittees\n* Working Groups\n** domain-working-group\n** standards-working-group\n** special-interest-group
+
+note right of OgcDocumentType: Document types include:\n\n* OGC Policy Document\n* OGC Standard\n* OGC Standard with compliance suite\n* OGC Community Standard\n* Abstract Specification\n* Profile / Application Profile\n* Discussion Papers\n* Public Engineering Reports\n* OGC Reference Model\n* Best Practices Documents\n* User Guide\n* Internal administrative documents\n* 9.12 "Technical Amendment"\n* 9.11 "Corrigendum (errata) Changes to OGC Standards"\n
+
+note right of OgcStatusType: * rfc: "OGC RFC", the proposal\n* candidate: "candidate standard"\n
+
+
+
+'******* CLASS RELATIONS **********************************************
+BibliographicItem <|-- OgcBibliographicItem
+
+OgcBibliographicItem <-- OgcProjectGroup
+OgcBibliographicItem <-- OgcDocumentType
+OgcBibliographicItem <-- DocumentStatus
+
+OgcProjectGroup <-- OgcCommittee
+OgcProjectGroup <-- OgcSubGroup
+
+DocumentStatus <-- OgcStatusType
+
+@enduml
