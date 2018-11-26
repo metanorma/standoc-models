@@ -71,14 +71,17 @@ enum UnStatusType <<enumeration>>{
 }
 
 enum UnDocumentType <<enumeration>>{
-    directive
-    standard
-    guide
-    specification
-    amendment
-    technical_corrigendum
-    report
-    administrative
+        plenary
+recommendation
+addendum
+communication
+corrigendum
+reissue
+agenda
+budgetary
+sec-gen-notes
+expert-report
+resolution
 }
 
 enum UnCommitteeType <<enumeration>>{
