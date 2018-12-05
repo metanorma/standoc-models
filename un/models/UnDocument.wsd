@@ -28,6 +28,8 @@ class UnBibliographicItem {
     +committee: UnTechnicalCommittee[1..*]
     +type: UnDocumentType
     +title: FormattedString
+    +submissionlanguage: Iso639Code[0..*]
+    +distribution: UnDistributionType[0.1]
 }
 
 class UnTechnicalCommittee{
@@ -70,6 +72,12 @@ enum UnStatusType <<enumeration>>{
     withdrawn
 }
 
+enum UnDistributionType <<enumeration>>{
+    general
+    limited
+    restricted
+}
+
 enum UnDocumentType <<enumeration>>{
         plenary
 recommendation
@@ -91,6 +99,7 @@ enum UnCommitteeType <<enumeration>>{
 
 '******* NOTES ********************************************************
 note right of UnStatusType: LocalizedString\nused instead if\nbibliographic\nitem is not a\nUNDOC document
+note right of UnBibliographicItem: The language attribute of BibliographicItem refers to the language of issued documents
 
 '******* CLASS RELATIONS **********************************************
 StandardDocument <|-- UnStandardDocument
@@ -100,6 +109,7 @@ UnStandardDocument <-- UnBibliographicItem
 UnBibliographicItem <-- UnTechnicalCommittee
 UnBibliographicItem <-- UnDocumentType
 UnBibliographicItem <-- DocumentStatus
+UnBibliographicItem <-- UnDistributionType
 
 UnTechnicalCommittee <-- UnCommitteeType
 DocumentStatus <-- UnStatusType
