@@ -1,0 +1,96 @@
+= Metanorma ITU Models
+
+This is where we keep the Metanorma ITU model definitions.
+
+The ITU Standard Document format is an instance of the
+https://github.com/riboseinc/metanorma-model-standoc[Metanorma StandardDocument model].
+Details of the general model can be found on its page.
+
+
+== ITU Standard Document Model
+
+image::images/ITUStandardDocument.png[]
+
+== ITU Bibliographic Item Model
+
+image::images/ITUBibliographicItem.png[]
+
+== TODOs
+
+
+Author's guide
+
+* https://www.itu.int/oth/T0A0F000004/en
+
+Document types
+
+* ITU-T Recommendation
+* ITU-T Supplement to Recommendation
+* ITU-T Amendment to Recommendation
+* ITU-T Corrigendum to Recommendation
+* ITU-T Errata to Recommendation
+* ITU-T Annex to Recommendation
+* ITU-T Focus Group document
+* ITU-T | ISO/IEC document
+* ITU-T Implementers' Guide
+* ITU-T Technical Paper
+* ITU-T Technical Report
+
+Document attributes:
+
+* Serie
+* Recommendation number
+* Title, e.g. : Requirement for in-band full-duplex in HFC based network
+* Citation, e.g.: http://handle.itu.int/11.1002/1000/13839
+* Approval date: 2019-01-13
+* Provisional name: J.fdx-req
+* Approval process: AAP
+* Status: In force
+* Maintenance responsibility: ITU-T Study Group 9
+* Abstract
+
+Status:
+
+* In force
+* Superseded
+* In force (prepublished)
+* Withdrawn
+
+Editions:
+
+* Main edition
+* Date (Edition date: MM/YYYY)
+
+// ITU-T J.1109 (01/2019)
+
+Languages:
+
+* Arabic
+* Chinese 中文
+* English
+* Español
+* Français
+* Русский
+
+
+
+AAP Status codes:
+
+* A	- Approved
+* LC	- Last Call
+* AC	- Approved with Substantial Changes
+* LJ	- Last Call Judgment (includes Last Call Comment resolution)
+* AJ	- Additional Review Judgment
+* NA	- Not Approved
+* AR	- Additional Review
+* RI	- Re-Initiate Last Call
+* AT	- Approved with Typographical Corrections
+* SG	- Referred to Study Group Approval
+* C	- Consented
+* TAP	- Moved to TAP (ITU-T A.8 / §5.2)
+
+
+Study Groups (ITU-T)
+
+* 2, 3, 5, 9, 11, 12, 13, 15, 16, 17, 20
+* TSAG

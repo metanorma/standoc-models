@@ -1,0 +1,17 @@
+
+BO  Satellite delivery
+BR  Recording for production, archival and play-out; film for television
+BS  Broadcasting service (sound)
+BT  Broadcasting service (television)
+F Fixed service
+M Mobile, radiodetermination, amateur and related satellite services
+P Radiowave propagation
+RA  Radio astronomy
+RS  Remote sensing systems
+S Fixed-satellite service
+SA  Space applications and meteorology
+SF  Frequency sharing and coordination between fixed-satellite and fixed service systems
+SM  Spectrum management
+SNG Satellite news gathering
+TF  Time signals and frequency standards emissions
+V Vocabulary and related subjects
