@@ -1,0 +1,233 @@
+@startuml ItuBibliographicItem
+/'
+Diagram:        ItuBibliographicItem
+DateCreate:     19/02/2019
+Description:    Metanorma IsoDoc is a family of document models intended to represent ISO Standards and similarly structured standards,
+                based on the Metanorma StandardDocument ("StanDoc") and BasicDocument ("BasicDoc") models.
+                It is used to abstract the automated generation of standard documents in various formats from well-defined authoring tools;
+                and to validate the structural conformance of authored standards to specifications.
+'/
+
+'******* CONFIGURATION ************************************************
+!include style.uml.inc
+
+
+'******* CLASS DEFINITION *********************************************
+class BibliographicItem <<StandardDocument>>{
+
+}
+
+class ItuBibliographicItem {
+  +documentIdentifier: ItuDocumentId
+  +title: FormattedString
+  +projectGroup: ItuProjectGroup[1..*]
+  +type: ItuDocumentType
+  +provisionalName: String[0..1]
+  ' e.g. https://www.itu.int/ITU-T/workprog/wp_item.aspx?isn=13511
+  +citationUri: Uri
+  +documentStatus: ItuDocumentStatus[0..1]
+  +edition: Date
+  +projectStatus: ItuProjectStatus[0..1]
+}
+
+
+class ItuDocumentId {
+  +serie: ItuSerie
+  +code: Integer
+}
+
+enum ItuSerie <<enumeration>> {
+  A
+  D
+  E
+  F
+  G
+  H
+  I
+  J
+  K
+  L
+  M
+  N
+  O
+  P
+  Q
+  R
+  S
+  T
+  U
+  V
+  X
+  Y
+  Z
+}
+
+class ItuProjectGroup{
+  +group: ItuGroup
+  +subgroup: ItuGroup[0..1]
+  +workgroup: ItuGroup[0..1]
+}
+
+/'
+ITU Groups (we're not modelling this)
+https://www.itu.int/en/ITU-T/groups/Pages/default.aspx
+****
+TSAG
+Study Groups
+Review Committee
+Regional Groups (a Regional group is a type of group inside a Study group)
+Focus Groups (a Focus group is just a type of group in a Study group)
+Joint Coordination Activities
+Global Standards Initiatives
+Collaboration on ITS Communication Standards
+Standardization Committee for Vocabulary
+CTO Group
+TSB Director's Ad Hoc IPR Group
+TSB Director’s Ad hoc Group on Education about Standardization
+ITU/WMO/UNESCO IOC Joint Task Force
+****
+
+Under a Study Group, there can be:
+- "Working Parties" (a work group)
+- "Question Parties"
+- "Workgroups"
+
+'/
+
+enum ItuGroupType <<enumeration>> {
+  tsag
+  study-group
+  work-group
+}
+
+class ItuGroup {
+  +name: FormattedString
+  +type: ItuGroupType[0..1]
+  +acronym: String[0..1]
+  +period: ItuStudyPeriod[0..1]
+}
+
+class ItuStudyPeriod {
+  +yearStart: Integer
+  +yearEnd: Integer
+}
+
+enum ItuDocumentStatus <<enumeration>> {
+  in-force
+  superseded
+  in-force-prepublished
+  withdrawn
+}
+
+class ItuProjectStatus {
+  +from: Date
+  +to: Date
+  +approvalProcess: ItuApprovalProcess[0..1]
+  +approvalStage: ItuApprovalStatusCode[0..1]
+}
+
+enum ItuApprovalProcess <<enumeration>>{
+  tap
+  aap
+}
+
+class ItuApprovalStatusCode {
+  +tapStatusCode: ItuTapStatusCode[0..1]
+  +aapStatusCode: ItuAapStatusCode[0..1]
+}
+
+/'
+* A	- Approved
+* LC	- Last Call
+* AC	- Approved with Substantial Changes
+* LJ	- Last Call Judgment (includes Last Call Comment resolution)
+* AJ	- Additional Review Judgment
+* NA	- Not Approved
+* AR	- Additional Review
+* RI	- Re-Initiate Last Call
+* AT	- Approved with Typographical Corrections
+* SG	- Referred to Study Group Approval
+* C	- Consented
+* TAP	- Moved to TAP (ITU-T A.8 / §5.2)
+'/
+enum ItuAapStatusCode <<enumeration>> {
+  a
+  lc
+  ac
+  lj
+  aj
+  na
+  ar
+  ri
+  at
+  sg
+  c
+  tap
+}
+
+enum ItuTapStatusCode <<enumeration>> {
+  determined
+  in-force
+}
+
+/'
+Document types
+
+* ITU-T Recommendation
+* ITU-T Supplement to Recommendation
+* ITU-T Amendment to Recommendation
+* ITU-T Corrigendum to Recommendation
+* ITU-T Errata to Recommendation
+* ITU-T Annex to Recommendation
+* ITU-T Focus Group document
+* ITU-T | ISO/IEC document
+* ITU-T Implementers' Guide
+* ITU-T Technical Paper
+* ITU-T Technical Report
+'/
+
+enum ItuDocumentType <<enumeration>>{
+    recommendation
+    recommendation-supplement
+    recommendation-amendment
+    recommendation-corrigendum
+    recommendation-errata
+    recommendation-annex
+    focus-group
+    implementers-guide
+    technical-paper
+    technical-report
+    joint-itu-iso-iec
+}
+
+'******* NOTES ********************************************************
+
+'note right of ItuSubGroup: Under Technical Committee:\n\n* OAB\n* OGC-NA\n* Subcommittees\n* Working Groups\n** domain-working-group\n** standards-working-group\n** special-interest-group
+
+'note right of ItuDocumentType: Document types include:\n\n* OGC Policy Document\n* OGC Standard\n* OGC Standard with compliance suite\n* OGC Community Standard\n* Abstract Specification\n* Profile / Application Profile\n* Discussion Papers\n* Public Engineering Reports\n* OGC Reference Model\n* Best Practices Documents\n* User Guide\n* Internal administrative documents\n* 9.12 "Technical Amendment"\n* 9.11 "Corrigendum (errata) Changes to OGC Standards"\n
+
+
+'******* CLASS RELATIONS **********************************************
+BibliographicItem <|-- ItuBibliographicItem
+
+ItuBibliographicItem <-- ItuDocumentId
+ItuBibliographicItem <-- ItuProjectGroup
+ItuBibliographicItem <-- ItuDocumentType
+ItuBibliographicItem <-- ItuDocumentStatus
+ItuBibliographicItem <-- ItuProjectStatus
+
+ItuDocumentId <-- ItuSerie
+
+ItuProjectGroup <-- ItuGroup
+
+ItuGroup <-- ItuStudyPeriod
+ItuGroup <-- ItuGroupType
+
+ItuProjectStatus <-- ItuApprovalProcess
+ItuProjectStatus <-- ItuApprovalStatusCode
+
+ItuApprovalStatusCode <-- ItuAapStatusCode
+ItuApprovalStatusCode <-- ItuTapStatusCode
+
+@enduml
+

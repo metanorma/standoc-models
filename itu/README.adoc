@@ -9,11 +9,11 @@ Details of the general model can be found on its page.
 
 == ITU Standard Document Model
 
-image::images/ITUStandardDocument.png[]
+image::images/ItuStandardDocument.png[]
 
 == ITU Bibliographic Item Model
 
-image::images/ITUBibliographicItem.png[]
+image::images/ItuBibliographicItem.png[]
 
 == TODOs
 

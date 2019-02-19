@@ -30,7 +30,7 @@ class TextElement <<BasicDoc>>{
 
 }
 
-class Keyword{
+class Keyword {
 
 }
 
