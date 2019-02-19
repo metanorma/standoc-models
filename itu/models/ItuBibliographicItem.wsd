@@ -27,7 +27,7 @@ class ItuBibliographicItem {
   +citationUri: Uri
   +documentStatus: ItuDocumentStatus[0..1]
   +edition: Date
-  +projectStatus: ItuProjectStatus[0..1]
+  +projectStatus: ItuRecommendationStatus[0..1]
 }
 
 
@@ -119,21 +119,22 @@ enum ItuDocumentStatus <<enumeration>> {
   withdrawn
 }
 
-class ItuProjectStatus {
+'Only applies to Recommendations
+class ItuRecommendationStatus {
   +from: Date
   +to: Date
-  +approvalProcess: ItuApprovalProcess[0..1]
-  +approvalStage: ItuApprovalStatusCode[0..1]
+  +approvalStage: ItuApprovalProcessStage[0..1]
+}
+
+class ItuApprovalProcessStage {
+  +process: ItuApprovalProcess
+  +tapStatusCode: ItuTapStatusCode[0..1]
+  +aapStatusCode: ItuAapStatusCode[0..1]
 }
 
 enum ItuApprovalProcess <<enumeration>>{
   tap
   aap
-}
-
-class ItuApprovalStatusCode {
-  +tapStatusCode: ItuTapStatusCode[0..1]
-  +aapStatusCode: ItuAapStatusCode[0..1]
 }
 
 /'
@@ -214,7 +215,7 @@ ItuBibliographicItem <-- ItuDocumentId
 ItuBibliographicItem <-- ItuProjectGroup
 ItuBibliographicItem <-- ItuDocumentType
 ItuBibliographicItem <-- ItuDocumentStatus
-ItuBibliographicItem <-- ItuProjectStatus
+ItuBibliographicItem <-- ItuRecommendationStatus
 
 ItuDocumentId <-- ItuSerie
 
@@ -223,11 +224,10 @@ ItuProjectGroup <-- ItuGroup
 ItuGroup <-- ItuStudyPeriod
 ItuGroup <-- ItuGroupType
 
-ItuProjectStatus <-- ItuApprovalProcess
-ItuProjectStatus <-- ItuApprovalStatusCode
+ItuRecommendationStatus <-- ItuApprovalProcessStage
 
-ItuApprovalStatusCode <-- ItuAapStatusCode
-ItuApprovalStatusCode <-- ItuTapStatusCode
+ItuApprovalProcessStage <-- ItuAapStatusCode
+ItuApprovalProcessStage <-- ItuTapStatusCode
 
 @enduml
 
