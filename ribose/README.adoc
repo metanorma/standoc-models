@@ -3,7 +3,7 @@
 This is where we keep the Metanorma RSD model definitions.
 
 The RSD Standard Document format is an instance of the
-https://github.com/riboseinc/metanorma-model-iso[Metanorma IsoDoc model].
+https://github.com/metanorma/metanorma-model-iso[Metanorma IsoDoc model].
 Details of the general model can be found on its page.
 
 == RSD Standard Document Model
