@@ -7,6 +7,10 @@ Description:    Metanorma IsoDoc is a family of document models intended to repr
                 It is used to abstract the automated generation of standard documents in various formats from well-defined authoring tools;
                 and to validate the structural conformance of authored standards to specifications.
 - 20190311: Moved Keyword from TextElement to ItuBibliographicItem
+- 20190311: Renamed projectGroup as editorialGroup (Relaton terminology)
+- 20190311: Made period/YearEnd optional
+- 20190311: Rename citationUri to uri
+- 20190311: Rename edition to version/revision-date
 '/
 
 '******* CONFIGURATION ************************************************
@@ -19,17 +23,18 @@ class BibliographicItem <<StandardDocument>>{
 }
 
 class ItuBibliographicItem {
+  +type: ItuDocumentType
   +documentIdentifier: ItuDocumentId
   +title: FormattedString
-  +projectGroup: ItuProjectGroup[1..*]
-  +type: ItuDocumentType
   +provisionalName: String[0..1]
   ' e.g. https://www.itu.int/ITU-T/workprog/wp_item.aspx?isn=13511
-  +citationUri: Uri
+  +uri: Uri
   +documentStatus: ItuDocumentStatus[0..1]
-  +edition: Date
+  +version: VersionInfo
   +projectStatus: ItuRecommendationStatus[0..1]
   +keyword: FormattedString[0..*]
+  +editorialGroup: ItuProjectGroup[1..*]
+  +series: SeriesType[0..*]
 }
 
 
@@ -64,7 +69,14 @@ enum ItuSerie <<enumeration>> {
   Z
 }
 
+enum ItuBureau <<enumeration>> {
+T
+D
+R
+}
+
 class ItuProjectGroup{
+  +bureau: ItuBureau
   +group: ItuGroup
   +subgroup: ItuGroup[0..1]
   +workgroup: ItuGroup[0..1]
@@ -111,7 +123,7 @@ class ItuGroup {
 
 class ItuStudyPeriod {
   +yearStart: Integer
-  +yearEnd: Integer
+  +yearEnd: Integer[0..1]
 }
 
 enum ItuDocumentStatus <<enumeration>> {
@@ -222,6 +234,7 @@ ItuBibliographicItem <-- ItuRecommendationStatus
 ItuDocumentId <-- ItuSerie
 
 ItuProjectGroup <-- ItuGroup
+ItuProjectGroup <-- ItuBureau
 
 ItuGroup <-- ItuStudyPeriod
 ItuGroup <-- ItuGroupType
