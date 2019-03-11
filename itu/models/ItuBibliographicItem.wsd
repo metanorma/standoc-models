@@ -6,6 +6,7 @@ Description:    Metanorma IsoDoc is a family of document models intended to repr
                 based on the Metanorma StandardDocument ("StanDoc") and BasicDocument ("BasicDoc") models.
                 It is used to abstract the automated generation of standard documents in various formats from well-defined authoring tools;
                 and to validate the structural conformance of authored standards to specifications.
+- 20190311: Moved Keyword from TextElement to ItuBibliographicItem
 '/
 
 '******* CONFIGURATION ************************************************
@@ -28,6 +29,7 @@ class ItuBibliographicItem {
   +documentStatus: ItuDocumentStatus[0..1]
   +edition: Date
   +projectStatus: ItuRecommendationStatus[0..1]
+  +keyword: FormattedString[0..*]
 }
 
 
@@ -228,6 +230,7 @@ ItuRecommendationStatus <-- ItuApprovalProcessStage
 
 ItuApprovalProcessStage <-- ItuAapStatusCode
 ItuApprovalProcessStage <-- ItuTapStatusCode
+ItuApprovalProcessStage <-- ItuApprovalProcess
 
 @enduml
 
