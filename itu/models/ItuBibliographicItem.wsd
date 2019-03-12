@@ -11,6 +11,7 @@ Description:    Metanorma IsoDoc is a family of document models intended to repr
 - 20190311: Made period/YearEnd optional
 - 20190311: Rename citationUri to uri
 - 20190311: Rename edition to version/revision-date
+- 20190312: Correct interpretation of provisionalName
 '/
 
 '******* CONFIGURATION ************************************************
@@ -24,9 +25,9 @@ class BibliographicItem <<StandardDocument>>{
 
 class ItuBibliographicItem {
   +type: ItuDocumentType
-  +documentIdentifier: ItuDocumentId
-  +title: FormattedString
-  +provisionalName: String[0..1]
+  +documentIdentifier: ItuDocumentId[0..1]
+  +provisionalName: DocumentIdentifier[0..1]
+  +title: TypedTitleString
   ' e.g. https://www.itu.int/ITU-T/workprog/wp_item.aspx?isn=13511
   +uri: Uri
   +documentStatus: ItuDocumentStatus[0..1]
@@ -36,7 +37,6 @@ class ItuBibliographicItem {
   +editorialGroup: ItuProjectGroup[1..*]
   +series: SeriesType[0..*]
 }
-
 
 class ItuDocumentId {
   +serie: ItuSerie
