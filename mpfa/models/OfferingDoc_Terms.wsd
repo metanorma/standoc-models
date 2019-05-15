@@ -1,0 +1,55 @@
+@startuml OfferingDoc_Terms
+
+'******* CONFIGURATION ************************************************
+!include style.uml.inc
+
+'******* CLASS DEFINITION *********************************************
+class TermCollection <<Term>> {
+    +terms: Term[0..*]
+}
+
+class Term <<Term>> {
+    +id: String[0..1]
+    +preferred: <<BasicDocument>> LocalizedString[1..*]
+    +admitted: <<BasicDocument>> LocalizedString[0..*]
+    +deprecates: <<BasicDocument>> LocalizedString[0..*]
+    +domain: <<BasicDocument>> LocalizedString[0..1]
+    +definition: <<BasicDocument>> Definition[1..*]
+    +note: <<BasicDocument>> ParagraphBlock[0..*]
+    +example: <<BasicDocument>> ParagraphBlock[0..*]
+    +source: TermSource[0..*]
+}
+
+class TermSource <<Term>>{
+    +status: TermOriginStatus
+    +origin: <<Bibliography>> Citation
+    +modification: <<BasicDocument>> ParagraphBlock[0..1]
+}
+
+class DefinitionCollection{
+    +definitions: Definition[0..*]
+}
+
+class Definition <<BasicDocument>>{
+
+}
+
+enum TermSourceStatus <<enumeration>>{
+    identical
+    modified
+}
+
+'******* NOTES ********************************************************
+note "Term modelled according to ISO/IEC Directives 2,\n16.6\n* Multiple preferred terms\n* Single definition\n* Multiple notes\n* Multiple admitted terms\n* Multiple deprecated terms\n* Multiple examples\n* Single domain\n* Multiple sources\nParagraph/TextElement may contain a formula." as N1
+note bottom of Definition: Definition modelled according to ISO/IEC\nDirectives 2, 17.\n* Can be a synbol or abbreviation\n* A DefinitionCollection is represented as\n a single clause
+
+'******* CLASS RELATIONS **********************************************
+TermCollection <-- Term
+Term <-- TermSource
+TermSource <-- TermSourceStatus
+
+DefinitionCollection <-- Definition
+
+
+
+@enduml

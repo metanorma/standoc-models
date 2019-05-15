@@ -1,0 +1,32 @@
+@startuml OfferingDoc_Bibliography
+
+'******* CONFIGURATION ************************************************
+!include style.uml.inc
+
+
+'******* CLASS DEFINITION *********************************************
+class BibliographicItem <<Bibliography>>{
+
+}
+
+class OfferingDocBibliographicItem {
+	+status: OfferingDocStatus
+}
+
+enum OfferingDocStatus <<enumeration>>{
+    proposal
+    working_draft
+    committee_draft
+    draft_standard
+    final_draft
+    published
+    withdrawn
+}
+
+'******* NOTES ********************************************************
+
+'******* CLASS RELATIONS **********************************************
+BibliographicItem <|-- OfferingDocBibliographicItem
+BibliographicItem <-- OfferingDocStatus
+
+@enduml

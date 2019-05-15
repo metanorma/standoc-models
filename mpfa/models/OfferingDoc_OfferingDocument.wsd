@@ -1,0 +1,39 @@
+@startuml OfferingDoc_OfferingDocument
+
+'******* CONFIGURATION ************************************************
+!include style.uml.inc
+
+
+'******* CLASS DEFINITION *********************************************
+class BasicDocument <<BasicDocument>> {
+
+}
+
+class OfferingDocument {
+	+ boilerplate:                                        BoilerplateType[0..1]
+	+ preface:                                            OfferingDocSection[0..*]
+	+ sections:                                           OfferingDocSection[1..*]
+	+ annex:                                              OfferingDocSection[0..*]
+	+ bibliography:                                       StandardReferencesSection[0..*]
+	+ upfrontRiskDisclosureStatement:                     UpfrontRiskDisclosureStatementSection[1]
+	+ directoryOfApprovedTrusteeAndOtherServiceProviders: DirectoryOfApprovedTrusteeAndOtherServiceProvidersSection[1]
+	+ fundOptionsInvestmentObjectivesAndPolicies:         FundOptionsInvestmentObjectivesAndPoliciesSection[1]
+	+ risks:                                              RisksSection[1]
+	+ feesAndCharges:                                     FeesAndChargesSection[1]
+	+ administrativeProcedures:                           AdministrativeProceduresSection[1]
+	+ otherInformation:                                   OtherInformationSection[1]
+}
+
+class BoilerplateType {
+	+ copyright: HierarchicalSection[0..1]
+	+ license: HierarchicalSection[0..1]
+	+ legal: HierarchicalSection[0..1]
+	+ feedback: HierarchicalSection[0..1]
+}
+
+'******* NOTES ********************************************************
+
+'******* CLASS RELATIONS **********************************************
+BasicDocument <|-- OfferingDocument
+
+@enduml
