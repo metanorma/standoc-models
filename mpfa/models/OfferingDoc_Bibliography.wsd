@@ -1,32 +1,30 @@
-@startuml OfferingDoc_Bibliography
+@startuml OfferingDocBibliography
 
 '******* CONFIGURATION ************************************************
 !include style.uml.inc
 
 
 '******* CLASS DEFINITION *********************************************
-class BibliographicItem <<Bibliography>>{
-
+class MpfaBibliographicItem <<Bibliography>>{
+ +schemeName: String
+ +status: MpfaDocStatus
 }
 
-class OfferingDocBibliographicItem {
-	+status: OfferingDocStatus
-}
-
-enum OfferingDocStatus <<enumeration>>{
-    proposal
-    working_draft
-    committee_draft
-    draft_standard
-    final_draft
-    published
-    withdrawn
+enum MpfaDocStatus <<enumeration>>{
+  internal_draft
+  working_draft
+  committee_draft
+  approval_draft
+  final_draft
+  published
+  withdrawn
 }
 
 '******* NOTES ********************************************************
+note bottom of MpfaBibliographicItem: version, edition, contributors(enquiry) are provided in BibliographicItem. OrganizationProfile includes contact methods and website information.
 
 '******* CLASS RELATIONS **********************************************
-BibliographicItem <|-- OfferingDocBibliographicItem
-BibliographicItem <-- OfferingDocStatus
+BibliographicItem <|-- MpfaBibliographicItem
+MpfaBibliographicItem <-- MpfaDocStatus
 
 @enduml

@@ -1,0 +1,102 @@
+@startuml OfferingDocFeeTable
+
+'******* CONFIGURATION ************************************************
+!include style.uml.inc
+
+
+'******* CLASS DEFINITION *********************************************
+
+class FeeTable {
+  +partA: UpfrontFee[0..2]
+  +partB: TransactionFee[0..*]
+  +partC: ConstituentFundFee[0..*]
+  +partD: BasicFeeItem[0..*]
+  +partE: BasicFeeItem[0..*]
+}
+
+FeeTable <-- UpfrontFee
+FeeTable <-- TransactionFee
+FeeTable <-- ConstituentFundFee
+FeeTable <-- BasicFeeItem
+
+class FeeValue {
+  +float: Float
+  +percentage: Float
+  +baseAsset
+}
+
+enum FeeAudience <<enumeration>>{
+  employeeOrPersonalMember
+  selfEmployedPerson
+  individualEmployeeMember
+}
+
+class BasicFeeItem {
+  +description: String
+  +value: FeeValue
+  +audience: FeeAudience[0..*]
+}
+
+BasicFeeItem <-- FeeValue
+BasicFeeItem <-- FeeAudience
+
+' Part A
+class UpfrontFee {
+  +type: UpfrontFeeType
+	+payableBy: PayableEntity[0..1]
+}
+
+BasicFeeItem <|-- UpfrontFee
+UpfrontFee <-- PayableEntity
+
+enum UpfrontFeeType <<enumeration>>{
+	joiningFee
+	annualFee
+}
+
+UpfrontFee <-- UpfrontFeeType
+
+' Part B
+class TransactionFee {
+	+fundName: String
+  +type: TransactionFeeType
+	+payableBy: PayableEntity[0..1]
+}
+TransactionFee <-- PayableEntity
+BasicFeeItem <|-- TransactionFee
+
+enum TransactionFeeType <<enumeration>>{
+	contribution_charge
+	offer_spread
+	bid_spread
+	withdrawal_charge
+}
+
+TransactionFee <-- TransactionFeeType
+
+' Part C
+class ConstituentFundFee {
+  'Disclosure Code "Other expenses" allow fees not bound to funds
+	+fundName: String[0..*]
+  +type: ConstituentFundFeeType
+	+payableBy: PayableEntity[0..1]
+}
+
+BasicFeeItem <|-- ConstituentFundFee
+ConstituentFundFee <-- PayableEntity
+
+enum ConstituentFundFeeType <<enumeration>>{
+	managementFees
+	guaranteeCharge
+	other
+}
+ConstituentFundFee <-- ConstituentFundFeeType
+
+class PayableEntity {
+}
+
+
+'******* NOTES ********************************************************
+
+'******* CLASS RELATIONS **********************************************
+@enduml

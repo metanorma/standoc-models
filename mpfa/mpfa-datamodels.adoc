@@ -44,7 +44,7 @@ Markup conventions in text markup schemes (such as Asciidoctor) that enable gene
 [bibliography]
 == Normative References
 
-// Surely the following boilerplate can be suppressed
+// Surely the following preface can be suppressed
 
 The following documents are referred to in the text in such a way that some or
 all of their content constitutes requirements of this document. For dated
@@ -623,7 +623,7 @@ The _ISO Standard Document_ model is given here as an exemplar of the applicatio
 
 The _ISO Standard Document_ model extends the _Standards Document_ modelling of the document by requiring the following specific types of section:
 
-* A _Preface_, consisting of a mandatory _Foreword_ (a Basic Section: <<basicsection>>), and an optional _Introduction_ (a ClauseSection: <<standardssection>>, since an ISO Introduction can optionally have numbered subsections).
+* A _Preface_, consisting of a mandatory _Foreword_ (a Basic Section: <<basicsection>>), and an optional _Introduction_ (a HierarchicalSection: <<standardssection>>, since an ISO Introduction can optionally have numbered subsections).
 * One or more Clause Sections (<<standardssection>>).
 * Zero or more Annexes (<<standardssection>>).
 

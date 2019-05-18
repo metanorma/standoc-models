@@ -1,4 +1,4 @@
-@startuml OfferingDoc_OfferingDocument
+@startuml OfferingDocument
 
 '******* CONFIGURATION ************************************************
 !include style.uml.inc
@@ -6,34 +6,127 @@
 
 '******* CLASS DEFINITION *********************************************
 class BasicDocument <<BasicDocument>> {
-
 }
 
-class OfferingDocument {
-	+ boilerplate:                                        BoilerplateType[0..1]
-	+ preface:                                            OfferingDocSection[0..*]
-	+ sections:                                           OfferingDocSection[1..*]
-	+ annex:                                              OfferingDocSection[0..*]
-	+ bibliography:                                       StandardReferencesSection[0..*]
-	+ upfrontRiskDisclosureStatement:                     UpfrontRiskDisclosureStatementSection[1]
-	+ directoryOfApprovedTrusteeAndOtherServiceProviders: DirectoryOfApprovedTrusteeAndOtherServiceProvidersSection[1]
-	+ fundOptionsInvestmentObjectivesAndPolicies:         FundOptionsInvestmentObjectivesAndPoliciesSection[1]
-	+ risks:                                              RisksSection[1]
-	+ feesAndCharges:                                     FeesAndChargesSection[1]
-	+ administrativeProcedures:                           AdministrativeProceduresSection[1]
-	+ otherInformation:                                   OtherInformationSection[1]
+class TermCollection <<StandardDocument>> {
 }
 
-class BoilerplateType {
-	+ copyright: HierarchicalSection[0..1]
-	+ license: HierarchicalSection[0..1]
-	+ legal: HierarchicalSection[0..1]
-	+ feedback: HierarchicalSection[0..1]
+class SchemeOfferingDocument {
+	+preface:     SchemeOfferPreface
+  +body:        SchemeOfferBody
+	+annex:       ClauseSection[0..*]
+  +terms: <<Term>>TermCollection
 }
+
+class SchemeOfferPreface{
+  ' G2.1 (c)(i)
+
+  +riskDisclosure: BasicSection
+  ' G2.1 (c)(iii)
+
+  +introduction: BasicSection
+}
+
+class SchemeOfferBody{
+  +summary: ClauseSection
+  ' G2.1 (c)(iv)
+  +management: ServiceProvider[1..*]
+  ' G2.1 (d)
+  +investment: InvestmentSection
+  ' G2.1 (c)(viii)
+  +contributions: ClauseSection
+  ' G2.1 (c)(viii)
+  +valuation: ClauseSection
+  ' G2.1 (c)(viii)
+  +dealing: ClauseSection
+  ' G2.1 (c)(vii)
+  +fees: FeesAndChargesSection
+  ' G2.1 (c)(ix)
+  +general: ClauseSection
+}
+
+class InvestmentSection {
+  ' G2.1 (c)(v)
+	+funds: FundDescription
+  ' G2.1 (c)(vi)
+	+risks: RiskSection
+}
+
+class ServiceProvider {
+  +profile: <<BasicProfile>> OrganizationProfile
+  +type: ServiceProviderType
+}
+
+enum ServiceProviderType <<enumeration>>{
+  trustee
+  sponsor
+  investmentManager
+  legalAdviser
+  auditor
+  administrator
+  guarantor
+  enquiryContact
+}
+
+class RiskSection {
+  +name: String
+  +description: ClauseSection
+}
+
+class FundDescription {
+  ' G2.1(f)(i)
+  +name: String
+  ' G2.1(f)(ii)
+  +managerProfile: <<BasicProfile>> PersonalProfile
+  ' G2.1(f)(iii)
+  +structure: ClauseSection
+  ' G2.1(f)(iv)
+  +descriptor: ClauseSection
+  ' G2.1(f)(v)
+  +investmentFocus: ClauseSection
+  +risks: FundRisk
+  '+objectives: ClauseSection
+  '+policies: ClauseSection
+}
+
+class FundRisk {
+  'G3.4 (b)
+  +description: ClauseSection
+  'G3.2 & G3.4(c)
+  +riskClass: <<enumeration>> Integer (0..7)[0..1]
+  'G3.4(c)
+  +referTo: <<BasicProfile>> OrganizationProfile
+}
+
+class FeesAndChargesSection {
+	+feeTables: FeeTable[1..*]
+	+definitions: DefinitionSection
+}
+
 
 '******* NOTES ********************************************************
 
 '******* CLASS RELATIONS **********************************************
-BasicDocument <|-- OfferingDocument
+BasicDocument <|-- SchemeOfferingDocument
+SchemeOfferingDocument <-- SchemeOfferPreface
+SchemeOfferingDocument <-- SchemeOfferBody
+SchemeOfferingDocument <-- TermCollection
+
+SchemeOfferBody <-- InvestmentSection
+SchemeOfferBody <-- ServiceProvider
+SchemeOfferBody <-- FeesAndChargesSection
+
+InvestmentSection <-- FundDescription
+InvestmentSection <-- RiskSection
+
+ServiceProvider <-- OrganizationProfile
+ServiceProvider <-- ServiceProviderType
+
+FundDescription <-- PersonalProfile
+FundDescription <-- FundRisk
+
+FundRisk <-- OrganizationProfile
+FeesAndChargesSection <-- FeeTable
+FeesAndChargesSection <-- DefinitionSection
 
 @enduml

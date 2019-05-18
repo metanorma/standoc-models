@@ -1,4 +1,4 @@
-@startuml OfferingDoc_DataTypes
+@startuml OfferingDocDataTypes
 
 '******* CONFIGURATION ************************************************
 !include style.uml.inc
@@ -6,53 +6,26 @@
 
 '******* CLASS DEFINITION *********************************************
 class Uri <<dataType>> {
-
 }
 
 class String <<primitiveType>> {
-
 }
 
 class Iso8601DateTime <<dataType>> {
-
 }
 
 class Iso15924Code <<dataType>> {
-
 }
 
 class Iso639Code <<dataType>> {
-
 }
 
-class LocalizedString{
-    +language: Iso639Code[0..*]
-    +script: Iso15924Code[0..*]
-    +content: String
-}
-
-class FormattedString{
-    +format: StringFormat = "plain"
-}
-
-enum StringFormat <<enumeration>>{
-    plain
-    html
-    docbook
-    tei
-    asciidoc
-    markdown
-    standarddoc
-    isodoc
+class LocalizedString <<StandardDocument>> {
 }
 
 '******* NOTES ********************************************************
-note right of FormattedString: FormattedString\ndefaults to "plain"
-note right of StringFormat: The corresponding\nMIME types\n, defaults to\n"text/plain"\n(docbook /\nasciidoc /\nisdoc\nare not registered\n types yet)
 
 '******* CLASS RELATIONS **********************************************
-LocalizedString <|-- FormattedString
-FormattedString <-- StringFormat
 
 Uri -[hidden]- String
 String -[hidden]- Iso8601DateTime
