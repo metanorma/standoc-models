@@ -12,6 +12,8 @@ class FeeTable {
   +partC: ConstituentFundFee[0..*]
   +partD: BasicFeeItem[0..*]
   +partE: BasicFeeItem[0..*]
+  +terminology: <<Terms>> Terms
+  +guidance: <<StandardDocument>> ClauseSection
 }
 
 FeeTable <-- UpfrontFee
@@ -25,20 +27,24 @@ class FeeValue {
   +baseAsset
 }
 
+class FeeClass {
+  +audiences: FeeAudience[1..*]
+}
 enum FeeAudience <<enumeration>>{
   employeeOrPersonalMember
   selfEmployedPerson
   individualEmployeeMember
 }
+FeeClass <-- FeeAudience
 
 class BasicFeeItem {
   +description: String
   +value: FeeValue
-  +audience: FeeAudience[0..*]
+  +class: FeeClass[0..*]
 }
 
 BasicFeeItem <-- FeeValue
-BasicFeeItem <-- FeeAudience
+BasicFeeItem <-- FeeClass
 
 ' Part A
 class UpfrontFee {
