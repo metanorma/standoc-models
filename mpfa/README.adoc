@@ -28,7 +28,7 @@ outputs, is out of scope of this document.
 
 === OfferingDoc Document Model
 
-image::images/offeringdoc-offeringdocument.png[]
+image::images/offeringdoc-offering-document.png[]
 
 === OfferingDoc Bibliographic Item Model
 
