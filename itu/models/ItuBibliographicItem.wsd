@@ -39,8 +39,9 @@ class ItuBibliographicItem {
 }
 
 class ItuDocumentId {
-  +serie: ItuSerie
+  +series: ItuSerie
   +code: Integer
+  +annex: String[0..1]
 }
 
 enum ItuSerie <<enumeration>> {
