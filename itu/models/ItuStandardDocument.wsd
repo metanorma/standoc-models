@@ -41,14 +41,6 @@ class Figure{
     +content: TextElement[0..*]
 }
 
-class Formula{
-    +stem: StemElement
-    +unnumbered: Boolean[0..1]
-    +inequality: Boolean[0..1]
-    +definitions: DefinitionList[0..1]
-}
-
-
 '******* NOTES ********************************************************
 
 
