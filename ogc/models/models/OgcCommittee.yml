@@ -1,0 +1,10 @@
+name: OgcCommittee
+modelType: enum
+type: enumeration
+values:
+  technical:
+    definition: 
+  planning:
+    definition: 
+  strategic-member-advisory:
+    definition: 

@@ -1,0 +1,9 @@
+name: IdElement
+modelType: class
+definition: |
+
+attributes:
+  type:
+    definition:
+    type: BasicDoc
+  

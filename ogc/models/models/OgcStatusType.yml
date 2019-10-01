@@ -1,0 +1,22 @@
+# * rfc: "OGC RFC", the proposal
+# * candidate: "candidate standard"
+name: OgcStatusType
+modelType: enum
+type: enumeration
+values:
+  rfc:
+    definition: 
+  candidate:
+    definition: 
+  # working_draft:
+  #   definition: 
+  # committee_draft:
+  #   definition: 
+  # final_draft:
+  #   definition: 
+  published:
+    definition: 
+  deprecated:
+    definition: 
+  retired:
+    definition: 
