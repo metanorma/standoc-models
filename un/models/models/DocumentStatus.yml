@@ -1,0 +1,14 @@
+name: DocumentStatus
+modelType: class
+definition: |
+
+attributes:
+  status:
+    definition:
+    type: UnStatusType
+relations:
+  - target: UnBibliographicItem
+    relationship:
+      target:
+        type: direct
+    direction: up  

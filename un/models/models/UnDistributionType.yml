@@ -1,0 +1,10 @@
+name: UnDistributionType
+modelType: enum
+type: enumeration
+values:
+  general:
+    definition: 
+  limited:
+    definition: 
+  restricted:
+    definition: 

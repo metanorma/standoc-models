@@ -1,0 +1,59 @@
+name: UnSessionType
+modelType: class
+definition: |
+
+attributes:
+  number:
+    definition:
+    type: String
+    cardinality:
+      min: 0
+      max: 1
+  session-date:
+    definition:
+    type: xsd:date
+    cardinality:
+      min: 0
+      max: 1
+  item-number:
+    definition:
+    type: String
+    cardinality:
+      min: 0
+      max: "*"
+  item-name:
+    definition:
+    type: String
+    cardinality:
+      min: 0
+      max: "*"
+  subitem-name:
+    definition:
+    type: String
+    cardinality:
+      min: 0
+      max: "*"
+  collaborator:
+    definition:
+    type: String
+    cardinality:
+      min: 0
+      max: 1
+  agenda-id:
+    definition:
+    type: String
+    cardinality:
+      min: 0
+      max: 1
+  item-footnote:
+    definition:
+    type: String
+    cardinality:
+      min: 0
+      max: 1
+relations:
+  - target: UnBibliographicItem
+    relationship:
+      target:
+        type: direct
+    direction: right    
