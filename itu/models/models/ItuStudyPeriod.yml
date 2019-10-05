@@ -1,0 +1,20 @@
+name: ItuStudyPeriod
+modelType: class
+definition: |
+
+attributes:
+  yearStart:
+    definition:
+    type: Integer
+  yearEnd:
+    definition:
+    type: Integer
+    cardinality:
+      min: 0
+      max: 1
+relations:
+  - target: ItuProjectGroup
+    relationship:
+      target:
+        type: direct
+    direction: up  

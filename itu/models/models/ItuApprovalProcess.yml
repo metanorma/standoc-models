@@ -1,0 +1,8 @@
+name: ItuApprovalProcess
+modelType: enum
+type: enumeration
+values:
+  tap:
+    definition:
+  aap:
+    definition:

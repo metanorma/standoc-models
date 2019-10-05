@@ -1,0 +1,66 @@
+name: ItuBibliographicItem
+modelType: class
+definition: |
+
+attributes:
+  type:
+    definition:
+    type: ItuDocumentType
+  documentIdentifier:
+    definition:
+    type: ItuDocumentId
+    cardinality:
+      min: 0
+      max: 1
+  provisionalName:
+    definition:
+    type: DocumentIdentifier
+    cardinality:
+      min: 0
+      max: 1
+  title:
+    definition:
+    type: TypedTitleString
+    # e.g. https://www.itu.int/ITU-T/workprog/wp_item.aspx?isn=13511
+    uri:
+    definition:  
+    type: Uri
+  documentStatus:
+    definition:
+    type: ItuDocumentStatus
+    cardinality:
+      min: 0
+      max: 1
+  version:
+    definition:
+    type: VersionInfo
+  projectStatus:
+    definition:
+    type: ItuRecommendationStatus
+    cardinality:
+      min: 0
+      max: 1
+  keyword:
+    definition:
+    type: FormattedString
+    cardinality:
+      min: 0
+      max: "*"
+  editorialGroup:
+    definition:
+    type: ItuProjectGroup
+    cardinality:
+      min: 1
+      max: "*"
+  series:
+    definition:
+    type: SeriesType
+    cardinality:
+      min: 0
+      max: "*"
+relations:
+  - target: BibliographicItem
+    relationship:
+      target:
+        type: inheritance
+    direction: up  

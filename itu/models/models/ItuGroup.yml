@@ -1,0 +1,32 @@
+name: ItuGroup
+modelType: class
+definition: |
+
+attributes:
+  name:
+    definition:
+    type: FormattedString
+  type:
+    definition:
+    type: ItuGroupType
+    cardinality:
+      min: 0
+      max: 1
+  acronym:
+    definition:
+    type: String
+    cardinality:
+      min: 0
+      max: 1
+  period:
+    definition:
+    type: ItuStudyPeriod
+    cardinality:
+      min: 0
+      max: 1
+relations:
+  - target: ItuProjectGroup
+    relationship:
+      target:
+        type: direct
+    direction: up  

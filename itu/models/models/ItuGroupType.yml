@@ -1,0 +1,10 @@
+name: ItuGroupType
+modelType: enum
+type: enumeration
+values:
+  tsag:
+    definition:
+  study-group:
+    definition:
+  work-group:
+    definition:

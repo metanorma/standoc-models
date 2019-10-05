@@ -1,0 +1,10 @@
+name: ItuBureau
+modelType: enum
+type: enumeration
+values:
+  T:
+    definition:
+  D:
+    definition:
+  R:
+    definition:
