@@ -1,0 +1,16 @@
+name: RiboseDocumentType
+modelType: enum
+type: enumeration
+values:
+  code:
+    definition:
+  presentation:
+    definition:
+  proposal:
+    definition:
+  standard:
+    definition:
+  report:
+    definition:
+  specification:
+    definition:
