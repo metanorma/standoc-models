@@ -1,0 +1,38 @@
+name: M3Committee
+modelType: class
+definition: |
+
+attributes:
+  type:
+    definition:
+    type: M3CommitteeType
+  name:
+    definition:
+    type: String
+    cardinality:
+      min: 0
+      max: 1
+  introduction:
+    definition:
+    type: HiererchicalSection
+    cardinality:
+      min: 0
+      max: 1
+  sections:
+    definition:
+    type: ClauseSection
+    cardinality:
+      min: 1
+      max: "*"
+  annex:
+    definition:
+    type: AnnexSection
+    cardinality:
+      min: 0
+      max: "*"
+relations:
+  - target: M3DBibliographicItem
+    relationship:
+      target:
+        type: direct
+    direction: up
