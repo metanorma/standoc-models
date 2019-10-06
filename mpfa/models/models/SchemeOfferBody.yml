@@ -1,0 +1,45 @@
+name: SchemeOfferBody
+modelType: class
+definition: |
+
+attributes:
+  summary:
+    definition:
+    type: ClauseSection
+  # G2.1 (c)(iv)
+  management:
+    definition:
+    type: ServiceProvider
+    cardinality:
+      min: 1
+      max: "*"
+  # G2.1 (d)
+  investment:
+    definition:
+    type: InvestmentSection
+  # G2.1 (c)(viii)
+  contributions:
+    definition:
+    type: ClauseSection
+  # G2.1 (c)(viii)
+  valuation:
+    definition:
+    type: ClauseSection
+  # G2.1 (c)(viii)
+  dealing:
+    definition:
+    type: ClauseSection
+  # G2.1 (c)(vii)
+  fees:
+    definition:
+    type: FeesAndChargesSection
+  # G2.1 (c)(ix)
+  general:
+    definition:
+    type: ClauseSection
+relations:
+  - target: SchemeOfferingDocument
+    relationship:
+      target:
+        type: direct
+    direction: left

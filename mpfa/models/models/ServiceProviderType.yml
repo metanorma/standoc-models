@@ -1,0 +1,21 @@
+name: ServiceProviderType
+modelType: enum
+type: enumeration
+values:
+  trustee:
+    definition:
+  sponsor:
+    definition:
+  investmentManager:
+    definition:
+  legalAdviser:
+    definition:
+  auditor:
+    definition:
+  administrator:
+    definition:
+  guarantor:
+    definition:
+  enquiryContact:
+    definition:
+

@@ -1,0 +1,8 @@
+name: LocalizedString
+modelType: class
+definition: |
+
+attributes:
+  type:
+    definition:
+    type: StandardDocument

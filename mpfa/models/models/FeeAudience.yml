@@ -1,0 +1,11 @@
+name: FeeAudience
+modelType: enum
+type: enumeration
+values:
+  employeeOrPersonalMember:
+    definition:
+  selfEmployedPerson:
+    definition:
+  individualEmployeeMember:
+    definition:
+

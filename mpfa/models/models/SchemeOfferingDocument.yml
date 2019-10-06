@@ -1,0 +1,26 @@
+name: SchemeOfferingDocument
+modelType: class
+definition: |
+
+attributes:
+  preface:
+    definition:
+    type: SchemeOfferPreface
+  body:
+    definition:
+    type: SchemeOfferBody
+  annex:
+    definition:
+    type: ClauseSection
+    cardinality:
+      min: 0
+      max: "*"
+  terms:
+    definition:
+    type: TermCollection
+relations:
+  - target: BasicDocument
+    relationship:
+      target:
+        type: inheritance
+    direction: up

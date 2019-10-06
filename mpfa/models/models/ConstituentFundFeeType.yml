@@ -1,0 +1,11 @@
+name: ConstituentFundFeeType
+modelType: enum
+type: enumeration
+values:
+  managementFees:
+    definition:
+  guaranteeCharge:
+    definition:
+  other:
+    definition:
+

@@ -1,0 +1,33 @@
+# Part C
+name: ConstituentFundFee
+modelType: class
+definition: |
+
+attributes:
+  # Disclosure Code "Other expenses" allow fees not bound to funds
+  fundName:
+    definition: 
+    type: String
+    cardinality:
+      min: 0
+      max: "*"
+  type:
+    definition:
+    type: ConstituentFundFeeType
+  payableBy:
+    definition:
+    type: PayableEntity
+    cardinality:
+      min: 0
+      max: 1
+relations:
+  - target: BasicFeeTable
+    relationship:
+      target:
+        type: inheritance
+    direction: up
+  - target: FeeTable
+    relationship:
+      target:
+        type: direct
+    direction: up

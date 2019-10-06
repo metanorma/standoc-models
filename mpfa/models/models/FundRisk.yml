@@ -1,0 +1,26 @@
+name: FundRisk
+modelType: class
+definition: |
+
+attributes:
+  # G3.4 (b)
+  description:
+    definition:
+    type: ClauseSection
+  # G3.2 & G3.4(c)
+  riskClass:
+    definition:
+    type: Integer
+    cardinality:
+      min: 0
+      max: 1
+  # G3.4(c)
+  referTo:
+    definition:
+    type: OrganizationProfile
+relations:
+  - target: FundDescription
+    relationship:
+      target:
+        type: direct
+    direction: up
