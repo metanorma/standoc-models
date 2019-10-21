@@ -12,6 +12,7 @@ Description:    Metanorma IsoDoc is a family of document models intended to repr
 - 20190311: Rename citationUri to uri
 - 20190311: Rename edition to version/revision-date
 - 20190312: Correct interpretation of provisionalName
+- 20191021: Add Eesolution doctype
 '/
 
 '******* CONFIGURATION ************************************************
@@ -36,6 +37,7 @@ class ItuBibliographicItem {
   +keyword: FormattedString[0..*]
   +editorialGroup: ItuProjectGroup[1..*]
   +series: SeriesType[0..*]
+  +ipnoticereceived: boolean[0..*]
 }
 
 class ItuDocumentId {
@@ -78,7 +80,7 @@ R
 
 class ItuProjectGroup{
   +bureau: ItuBureau
-  +group: ItuGroup
+  +group: ItuGroup[0..1]
   +subgroup: ItuGroup[0..1]
   +workgroup: ItuGroup[0..1]
 }
@@ -209,6 +211,7 @@ enum ItuDocumentType <<enumeration>>{
     recommendation-corrigendum
     recommendation-errata
     recommendation-annex
+    resolution
     focus-group
     implementers-guide
     technical-paper
