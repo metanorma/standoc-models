@@ -1,0 +1,39 @@
+# Document types
+
+# * ITU-T Recommendation
+# * ITU-T Supplement to Recommendation
+# * ITU-T Amendment to Recommendation
+# * ITU-T Corrigendum to Recommendation
+# * ITU-T Errata to Recommendation
+# * ITU-T Annex to Recommendation
+# * ITU-T Focus Group document
+# * ITU-T | ISO/IEC document
+# * ITU-T Implementers' Guide
+# * ITU-T Technical Paper
+# * ITU-T Technical Report
+name: ItuDocumentType
+modelType: enum
+type: enumeration
+values:
+    recommendation:
+      definition:
+    recommendation-supplement:
+      definition:
+    recommendation-amendment:
+      definition:
+    recommendation-corrigendum:
+      definition:
+    recommendation-errata:
+      definition:
+    recommendation-annex:
+      definition:
+    focus-group:
+      definition:
+    implementers-guide:
+      definition:
+    technical-paper:
+      definition:
+    technical-report:
+      definition:
+    joint-itu-iso-iec:
+      definition:

@@ -1,0 +1,12 @@
+name: ItuDocumentStatus
+modelType: enum
+type: enumeration
+values:
+  in-force:
+    definition:
+  superseded:
+    definition:
+  in-force-prepublished:
+    definition:
+  withdrawn:
+    definition:

@@ -1,0 +1,12 @@
+name: Formula
+modelType: class
+definition: |
+
+attributes:
+
+relations:
+  - target: IdElement
+    relationship:
+      target:
+        type: inheritance
+    direction: up  

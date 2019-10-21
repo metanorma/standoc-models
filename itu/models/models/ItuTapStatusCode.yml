@@ -1,0 +1,8 @@
+name: ItuTapStatusCode
+modelType: enum
+type: enumeration
+values:
+  determined:
+    definition:
+  in-force:
+    definition:
