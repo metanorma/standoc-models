@@ -134,6 +134,7 @@ enum ItuDocumentStatus <<enumeration>> {
   superseded
   in-force-prepublished
   withdrawn
+  draft
 }
 
 'Only applies to Recommendations
