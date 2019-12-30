@@ -46,11 +46,10 @@ class DocumentStatus{
 }
 
 enum OgcStatusType <<enumeration>>{
-    rfc
-    candidate
-    'working_draft
-    'committee_draft
-    'final_draft
+    swg-draft
+    oab-review
+    public-rfc
+    tc-vote
     published
     deprecated
     retired
