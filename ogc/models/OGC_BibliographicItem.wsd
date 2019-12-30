@@ -20,6 +20,7 @@ class BibliographicItem <<StandardDocument>>{
 class OgcBibliographicItem {
     +projectGroup: OgcProjectGroup[1..*]
     +type: OgcDocumentType
+    +subtype: OgcDocumentSubType[0..1]
     +title: FormattedString
 }
 
@@ -81,41 +82,41 @@ Types of standards:
 '/
 
 enum OgcDocumentType <<enumeration>>{
-abstract-specification
+abstract-specification-topic
 best-practice
-candidate-standard
-conformance-class
-change-request
+change-request-supporting-document
 community-practice
 community-standard
 discussion-paper
-draft-discussion-paper
-interoperability-program-report
-implementation-standard
-implementation-standard-corrigendum
-extension-package-standard
-notes
-ogc-reference-model
-profile-corrigendum
-public-engineering-report
+engineering-report
+other
 policy
-policy-name-type=specification
-primer
+reference-model
+release-notes
+standard
+user-guide
+white-paper
+}
+
+enum OgcDocumentSubType <<enumeration>> {
+conceptual-model
+conceptual-model-and-encoding
+conceptual-model-and-implementation
+encoding
+extension
+implementation
 profile
-request-for-comment
-retired
-standard-application-profile
-test-suite
-whitepaper
-approved-technical-baseline
-recommendation-paper
+profile-with-extension
+general
+encoding
+extension
+profile
+profile-with-extension
 }
 
 '******* NOTES ********************************************************
 
 note right of OgcSubGroup: Under Technical Committee:\n\n* OAB\n* OGC-NA\n* Subcommittees\n* Working Groups\n** domain-working-group\n** standards-working-group\n** special-interest-group
-
-note right of OgcDocumentType: Document types include:\n\n* OGC Policy Document\n* OGC Standard\n* OGC Standard with compliance suite\n* OGC Community Standard\n* Abstract Specification\n* Profile / Application Profile\n* Discussion Papers\n* Public Engineering Reports\n* OGC Reference Model\n* Best Practices Documents\n* User Guide\n* Internal administrative documents\n* 9.12 "Technical Amendment"\n* 9.11 "Corrigendum (errata) Changes to OGC Standards"\n
 
 note right of OgcStatusType: * rfc: "OGC RFC", the proposal\n* candidate: "candidate standard"\n
 
@@ -126,6 +127,7 @@ BibliographicItem <|-- OgcBibliographicItem
 
 OgcBibliographicItem <-- OgcProjectGroup
 OgcBibliographicItem <-- OgcDocumentType
+OgcBibliographicItem <-- OgcDocumentSubType
 OgcBibliographicItem <-- DocumentStatus
 
 OgcProjectGroup <-- OgcCommittee
