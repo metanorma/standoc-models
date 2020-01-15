@@ -112,6 +112,7 @@ encoding
 extension
 profile
 profile-with-extension
+test-suite
 }
 
 '******* NOTES ********************************************************
