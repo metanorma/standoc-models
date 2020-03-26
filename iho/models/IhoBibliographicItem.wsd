@@ -33,33 +33,27 @@ class DocumentStatus{
 }
 
 enum IhoStatusType <<enumeration>>{
-    'Unpublished Drafts
     draft
-
-    'Draft Publications for discussion
     discussion-draft
-
-    'Draft Publications awaiting approval by Member States
     approval-draft
-
-    'Draft Publications in the final stage of editing following adoption by Member States
     final-draft
-
-    'In-force publications
     in-force
-
-    'Retired publications
     retired
 }
 
 enum IhoDocumentType <<enumeration>>{
-    basic
-    bathymetric '- Bathymetric Publications (Mainly related to GEBCO)
-    capacity '- Capacity Building Publications
-    misc '- Miscellaneous Publications (including Basic Documents)
-    periodic '- Periodic Publications
-    standards '- Standards and Specifications
+    bathymetric
+    capacity
+    misc
+    periodic
+    standards
 }
+
+'******* NOTES ********************************************************
+
+note bottom of IhoDocumentType: * B: Bathymetric Publications\n* C: Capacity Building Publications\n* P: Periodic Publications\n* S: Standards and Specifications\n* misc: Miscellaneous Publications (including Basic Documents)
+
+note bottom of IhoStatusType: * Unpublished Drafts\n* Draft Publications for discussion\n* Draft Publications awaiting approval by Member States\n* Draft Publications in the final stage of editing following adoption by Member States\n* In-force publications\n* Retired publications\n
 
 
 '******* CLASS RELATIONS **********************************************
