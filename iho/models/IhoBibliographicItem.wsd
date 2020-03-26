@@ -1,0 +1,77 @@
+@startuml IhoBibliographicItem
+
+'******* CONFIGURATION ************************************************
+!include style.uml.inc
+
+
+'******* CLASS DEFINITION *********************************************
+class BibliographicItem <<StandardDocument>>{
+
+}
+
+class IhoBibliographicItem {
+    +projectGroup: IhoProjectTeam[1..*]
+    +type: IhoDocumentType
+    +title: FormattedString
+}
+
+class IhoProjectTeam{
+    +committee: IhoCommittee
+    +workgroup: IhoWorkingGroup
+}
+
+enum IhoCommittee <<enumeration>>{
+    hssc
+}
+
+class IhoWorkingGroup{
+    +name: FormattedString
+}
+
+class DocumentStatus{
+    +status: IhoStatusType
+}
+
+enum IhoStatusType <<enumeration>>{
+    'Unpublished Drafts
+    draft
+
+    'Draft Publications for discussion
+    discussion-draft
+
+    'Draft Publications awaiting approval by Member States
+    approval-draft
+
+    'Draft Publications in the final stage of editing following adoption by Member States
+    final-draft
+
+    'In-force publications
+    in-force
+
+    'Retired publications
+    retired
+}
+
+enum IhoDocumentType <<enumeration>>{
+    basic
+    bathymetric '- Bathymetric Publications (Mainly related to GEBCO)
+    capacity '- Capacity Building Publications
+    misc '- Miscellaneous Publications (including Basic Documents)
+    periodic '- Periodic Publications
+    standards '- Standards and Specifications
+}
+
+
+'******* CLASS RELATIONS **********************************************
+BibliographicItem <|-- IhoBibliographicItem
+
+IhoBibliographicItem <-- IhoProjectTeam
+IhoBibliographicItem <-- IhoDocumentType
+IhoBibliographicItem <-- DocumentStatus
+
+IhoProjectTeam <-- IhoCommittee
+IhoProjectTeam <-- IhoWorkingGroup
+
+DocumentStatus <-- IhoStatusType
+
+@enduml

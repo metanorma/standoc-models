@@ -1,0 +1,16 @@
+= Metanorma IHO Models
+
+This is where we keep the Metanorma IHO model definitions.
+
+The IHO Standard Document format is an instance of the
+https://github.com/metanorma/metanorma-model-standoc[Metanorma StandardDocument model].
+Details of the general model can be found on its page.
+
+== IHO Standard Document Model
+
+image::images/IhoStandardDocument.png[]
+
+== IHO Bibliographic Item Model
+
+image::images/IhoBibliographicItem.png[]
+
