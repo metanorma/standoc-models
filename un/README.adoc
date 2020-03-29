@@ -1,5 +1,9 @@
 = Metanorma UNDOC Models
 
+image:https://github.com/metanorma/metanorma-model-un/workflows/ubuntu/badge.svg["Ubuntu Build Status", link="https://github.com/metanorma/metanorma-model-un/actions?query=workflow%3Aubuntu"]
+image:https://github.com/metanorma/metanorma-model-un/workflows/macos/badge.svg["OSX Build Status", link="https://github.com/metanorma/metanorma-model-un/actions?query=workflow%3Amacos"]
+image:https://github.com/metanorma/metanorma-model-un/workflows/windows/badge.svg["Windows Build Status", link="https://github.com/metanorma/metanorma-model-un/actions?query=workflow%3Awindows"]
+
 This is where we keep the Metanorma UNDOC model definitions.
 
 The UNDOC Standard Document format is an instance of the
