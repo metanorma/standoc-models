@@ -1,5 +1,9 @@
 = Metanorma RSD Models
 
+image:https://github.com/metanorma/metanorma-model-rsd/workflows/ubuntu/badge.svg["Ubuntu Build Status", link="https://github.com/metanorma/metanorma-model-rsd/actions?query=workflow%3Aubuntu"]
+image:https://github.com/metanorma/metanorma-model-rsd/workflows/macos/badge.svg["OSX Build Status", link="https://github.com/metanorma/metanorma-model-rsd/actions?query=workflow%3Amacos"]
+image:https://github.com/metanorma/metanorma-model-rsd/workflows/windows/badge.svg["Windows Build Status", link="https://github.com/metanorma/metanorma-model-rsd/actions?query=workflow%3Awindows"]
+
 This is where we keep the Metanorma RSD model definitions.
 
 The RSD Standard Document format is an instance of the
