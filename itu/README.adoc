@@ -1,5 +1,9 @@
 = Metanorma ITU Models
 
+image:https://github.com/metanorma/metanorma-model-itu/workflows/ubuntu/badge.svg["Ubuntu Build Status", link="https://github.com/metanorma/metanorma-model-itu/actions?query=workflow%3Aubuntu"]
+image:https://github.com/metanorma/metanorma-model-itu/workflows/macos/badge.svg["OSX Build Status", link="https://github.com/metanorma/metanorma-model-itu/actions?query=workflow%3Amacos"]
+image:https://github.com/metanorma/metanorma-model-itu/workflows/windows/badge.svg["Windows Build Status", link="https://github.com/metanorma/metanorma-model-itu/actions?query=workflow%3Awindows"]
+
 This is where we keep the Metanorma ITU model definitions.
 
 The ITU Standard Document format is an instance of the
