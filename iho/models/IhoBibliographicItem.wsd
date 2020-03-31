@@ -18,6 +18,13 @@ class IhoBibliographicItem {
   +relation: IhoDocumentRelation[0..*]
   +documentStatus: IhoDocumentStatus
   +commentPeriod: IhoCommentPeriod[0..1]
+  +locality: IhoDocumentCitation[0..*]
+}
+
+class Citation <<biblio>>{
+}
+
+class IhoDocumentCitation {
 }
 
 class IhoProjectTeam{
@@ -107,11 +114,13 @@ class DocumentRelationType <<biblio>> {
 
 note bottom of IhoPubSeriesEnum: * B: Bathymetric Publications\n* C: Capacity Building Publications\n* P: Periodic Publications\n* S: Standards and Specifications\n* misc: Miscellaneous Publications (including Basic Documents)
 
-note bottom of IhoDocumentType: * standard (framework document, e.g. S-57, S-100)\n* specification (implementation of framework, e.g. S-101, S-111)\n* resolutions (e.g. M-3)\n* regulations (e.g. S-4, M-7)
+note bottom of IhoDocumentType: * standard (framework document, e.g. S-57, S-100)\n* specification (implementation of framework, e.g. S-101, S-111)\n* resolutions (e.g. M-3)\n* regulations (e.g. S-4, M-7)\n* localities\n** chapter (e.g. S-57 Appendix A, Chapter {1,2})\n** appendix (e.g. S-52 Appendix 1)\n** annex (e.g. S-52 Annex A; S-57 Appendix A, Annex A; )
 
 note bottom of IhoDocumentStatusType: * Proposed Phase Draft\n* Development Phase Draft ("Draft Publications for discussion")\n* Testing Phase Draft\n* Implementation Stage Draft ("Draft Publications awaiting approval by Member States")\n* In-force publications:\n** In-force but prior to effective date ("Draft Publications in the final stage of editing following adoption by Member States")\n** In-force and effective\n* Retired publications
 
 note bottom of IhoCommittee: * Hydrographic Services and Standards Committee (HSSC)\n* Inter-Regional Coordination Committee (IRCC)
+
+note bottom of IhoDocumentCitation: To indicate current document's relationship\nwith parent documents (e.g. this document is\n annex B of section 3\n of an appendix A)
 
 '******* CLASS RELATIONS **********************************************
 BibliographicItem <|-- IhoBibliographicItem
@@ -132,6 +141,9 @@ BibliographicDate <|-- IhoBibliographicDate
 BibliographicDateType <|-- IhoBibliographicDateType
 BibliographicDate <-- BibliographicDateType
 IhoBibliographicDate <-- IhoBibliographicDateType
+
+Citation <|-- IhoDocumentCitation
+IhoBibliographicItem <-- IhoDocumentCitation
 
 IhoDocumentStatus <-- IhoDocumentStatusType
 

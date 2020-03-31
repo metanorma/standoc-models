@@ -15,6 +15,7 @@ class IhoStandardDocument {
     +introduction: HierarchicalSection[0..1]
     +sections: ClauseSection[1..*]
     +annex: AnnexSection[0..*]
+    +appendix: AnnexSection[0..*]
 }
 
 
