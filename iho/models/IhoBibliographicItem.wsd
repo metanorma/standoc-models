@@ -22,6 +22,7 @@ class IhoProjectTeam{
 
 enum IhoCommittee <<enumeration>>{
     hssc
+    ircc
 }
 
 class IhoWorkingGroup{
@@ -33,10 +34,10 @@ class DocumentStatus{
 }
 
 enum IhoStatusType <<enumeration>>{
-    draft
-    discussion-draft
-    approval-draft
-    final-draft
+    proposal-draft
+    development-draft
+    testing-draft
+    implementation-draft
     in-force
     retired
 }
@@ -53,8 +54,9 @@ enum IhoDocumentType <<enumeration>>{
 
 note bottom of IhoDocumentType: * B: Bathymetric Publications\n* C: Capacity Building Publications\n* P: Periodic Publications\n* S: Standards and Specifications\n* misc: Miscellaneous Publications (including Basic Documents)
 
-note bottom of IhoStatusType: * Unpublished Drafts\n* Draft Publications for discussion\n* Draft Publications awaiting approval by Member States\n* Draft Publications in the final stage of editing following adoption by Member States\n* In-force publications\n* Retired publications\n
+note bottom of IhoStatusType: * Proposed Phase Draft\n* Development Phase Draft ("Draft Publications for discussion")\n* Testing Phase Draft\n* Implementation Stage Draft ("Draft Publications awaiting approval by Member States")\n* In-force publications:\n** In-force but prior to effective date ("Draft Publications in the final stage of editing following adoption by Member States")\n** In-force and effective\n* Retired publications
 
+note bottom of IhoCommittee: * Hydrographic Services and Standards Committee (HSSC)\n* Inter-Regional Coordination Committee (IRCC)
 
 '******* CLASS RELATIONS **********************************************
 BibliographicItem <|-- IhoBibliographicItem
