@@ -39,6 +39,7 @@ class Figure{
 
 '******* NOTES ********************************************************
 
+note bottom of IhoStandardDocument: An Annex is allowed to have clauses and appendices.
 
 
 '******* CLASS RELATIONS **********************************************
