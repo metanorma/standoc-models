@@ -18,13 +18,6 @@ class IhoBibliographicItem {
   +relation: IhoDocumentRelation[0..*]
   +documentStatus: IhoDocumentStatus
   +commentPeriod: IhoCommentPeriod[0..1]
-  +locality: IhoDocumentCitation[0..*]
-}
-
-class Citation <<biblio>>{
-}
-
-class IhoDocumentCitation {
 }
 
 class IhoProjectTeam{
@@ -120,7 +113,7 @@ note bottom of IhoDocumentStatusType: * Proposed Phase Draft\n* Development Phas
 
 note bottom of IhoCommittee: * Hydrographic Services and Standards Committee (HSSC)\n* Inter-Regional Coordination Committee (IRCC)
 
-note bottom of IhoDocumentCitation: To indicate current document's relationship\nwith parent documents (e.g. this document is\n annex B of section 3\n of an appendix A)
+note bottom of IhoDocumentRelation: Also indicates current document's relationship\nwith parent documents (e.g. this document is\n annex B of section 3\n of an appendix A)
 
 '******* CLASS RELATIONS **********************************************
 BibliographicItem <|-- IhoBibliographicItem
