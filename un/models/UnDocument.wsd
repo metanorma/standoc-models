@@ -25,7 +25,7 @@ class BibliographicItem <<StandardDocument>>{
 }
 
 class UnBibliographicItem {
-    +committee: UnTechnicalCommittee[1..*]
+    +committee: UnTechnicalCommittee[0..1]
     +type: UnDocumentType
     +title: FormattedString
     +submissionlanguage: Iso639Code[0..*]
