@@ -31,6 +31,7 @@ class UnBibliographicItem {
     +submissionlanguage: Iso639Code[0..*]
     +distribution: UnDistributionType[0..1]
     +session: UnSessionType[0..1]
+    +job_number: String[0..1]
 }
 
 class UnTechnicalCommittee{
