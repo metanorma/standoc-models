@@ -13,6 +13,7 @@ Description:    Metanorma IsoDoc is a family of document models intended to repr
 - 20190311: Rename edition to version/revision-date
 - 20190312: Correct interpretation of provisionalName
 - 20191021: Add Resolution doctype
+- 20201007: Add amendment and corrigendum ids
 '/
 
 '******* CONFIGURATION ************************************************
@@ -44,6 +45,8 @@ class ItuDocumentId {
   +series: ItuSerie
   +code: Integer
   +annex: String[0..1]
+  +amendment: Integer[0..1]
+  +corrigendum: Integer[0..1]
 }
 
 enum ItuSerie <<enumeration>> {
