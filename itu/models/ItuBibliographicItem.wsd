@@ -14,6 +14,7 @@ Description:    Metanorma IsoDoc is a family of document models intended to repr
 - 20190312: Correct interpretation of provisionalName
 - 20191021: Add Resolution doctype
 - 20201007: Add amendment and corrigendum ids
+- 20201007: Technical report attributes
 '/
 
 '******* CONFIGURATION ************************************************
@@ -39,6 +40,10 @@ class ItuBibliographicItem {
   +editorialGroup: ItuProjectGroup[1..*]
   +series: SeriesType[0..*]
   +ipnoticereceived: boolean[0..*]
+  +meeting: String[0..1]
+  +meeting-date: BibliographicDate[0..1]
+  +intended-type: ItuIntendedDate[0..1]
+  +source: String[0..1]
 }
 
 class ItuDocumentId {
@@ -47,6 +52,12 @@ class ItuDocumentId {
   +annex: String[0..1]
   +amendment: Integer[0..1]
   +corrigendum: Integer[0..1]
+}
+
+enum ItuIntendedDate <<enumeration>> {
+R
+C
+TD
 }
 
 enum ItuSerie <<enumeration>> {
@@ -238,6 +249,7 @@ ItuBibliographicItem <-- ItuProjectGroup
 ItuBibliographicItem <-- ItuDocumentType
 ItuBibliographicItem <-- ItuDocumentStatus
 ItuBibliographicItem <-- ItuRecommendationStatus
+ItuBibliographicItem <-- ItuIntendedType
 
 ItuDocumentId <-- ItuSerie
 
