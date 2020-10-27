@@ -1,8 +1,6 @@
 = Metanorma OGC Models
 
-image:https://github.com/metanorma/metanorma-model-ogc/workflows/ubuntu/badge.svg["Ubuntu Build Status", link="https://github.com/metanorma/metanorma-model-ogc/actions?query=workflow%3Aubuntu"]
-image:https://github.com/metanorma/metanorma-model-ogc/workflows/macos/badge.svg["OSX Build Status", link="https://github.com/metanorma/metanorma-model-ogc/actions?query=workflow%3Amacos"]
-image:https://github.com/metanorma/metanorma-model-ogc/workflows/windows/badge.svg["Windows Build Status", link="https://github.com/metanorma/metanorma-model-ogc/actions?query=workflow%3Awindows"]
+image:https://github.com/metanorma/metanorma-model-ogc/workflows/make/badge.svg["Build Status", link="https://github.com/metanorma/metanorma-model-ogc/actions?query=workflow%3Amake"]
 
 This is where we keep the Metanorma OGC model definitions.
 
