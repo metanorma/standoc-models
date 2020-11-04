@@ -1,8 +1,6 @@
 = Metanorma MPFA Models
 
-image:https://github.com/metanorma/metanorma-model-mpfa/workflows/ubuntu/badge.svg["Ubuntu Build Status", link="https://github.com/metanorma/metanorma-model-mpfa/actions?query=workflow%3Aubuntu"]
-image:https://github.com/metanorma/metanorma-model-mpfa/workflows/macos/badge.svg["OSX Build Status", link="https://github.com/metanorma/metanorma-model-mpfa/actions?query=workflow%3Amacos"]
-image:https://github.com/metanorma/metanorma-model-mpfa/workflows/windows/badge.svg["Windows Build Status", link="https://github.com/metanorma/metanorma-model-mpfa/actions?query=workflow%3Awindows"]
+image:https://github.com/metanorma/metanorma-model-mpfa/workflows/make/badge.svg["Build Status", link="https://github.com/metanorma/metanorma-model-mpfa/actions?workflow=make"]
 
 This is where we keep the Metanorma MPFA model definitions.
 
