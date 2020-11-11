@@ -14,7 +14,8 @@ Description:    Metanorma IsoDoc is a family of document models intended to repr
 - 20190312: Correct interpretation of provisionalName
 - 20191021: Add Resolution doctype
 - 20201007: Add amendment and corrigendum ids
-- 20201007: Technical report attributes
+- 20201107: Technical report attributes
+- 20201111: Service Publication doctype
 '/
 
 '******* CONFIGURATION ************************************************
@@ -232,6 +233,7 @@ enum ItuDocumentType <<enumeration>>{
     technical-paper
     technical-report
     joint-itu-iso-iec
+    service-publication
 }
 
 '******* NOTES ********************************************************
