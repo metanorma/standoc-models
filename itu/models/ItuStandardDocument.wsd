@@ -9,6 +9,7 @@ Description:    Metanorma IsoDoc is a family of document models intended to repr
 - 20190311: Moved Keyword from TextElement to BibliographicItem
 - 20191029: Add ol/@class 
 - 20191106: Add add, del
+- 20210405: Move add, del to standoc
 '/
 
 '******* CONFIGURATION ************************************************
@@ -21,15 +22,6 @@ class StandardDocument <<StandardDocument>> {
 }
 
 class OrderedList <<BasicDocument>> {
-}
-
-class TextElement <<BasicDocument>> {
-}
-
-class Add {
-}
-
-class Del {
 }
 
 class ItuOrderedList {
@@ -74,8 +66,5 @@ StandardDocument <|-- ItuStandardDocument
 IdElement <|-- Figure
 OrderedList <|-- ItuOrderedList
 ItuOrderedList <-- ItuOrderedListClass
-
-TextElement <|-- Add
-TextElement <|-- Del
 
 @enduml
