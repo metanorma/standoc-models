@@ -19,11 +19,11 @@ PNG := $(patsubst views/%.lutaml,images/%.png,$(SRC))
 
 all: $(PNG)
 
-images/%.png: views/%.lutaml
+images/%.png: models/%.lutaml
 	lutaml -t png -o $@ $<
 
-views/%.lutaml: models/%.wsd | views
-	lutaml-wsd2uml $< > $@
+#views/%.lutaml: models/%.wsd | views
+#	lutaml-wsd2uml $< > $@
 
 views:
 	mkdir views

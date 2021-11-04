@@ -10,9 +10,9 @@ Details of the general model can be found on its page.
 
 == OGC Standard Document Model
 
-image::images/OgcStandardDocument.png[]
+image::images/OGC_StandardDocument.png[]
 
 == OGC Bibliographic Item Model
 
-image::images/OgcBibliographicItem.png[]
+image::images/OGC_BibliographicItem.png[]
 

@@ -36,6 +36,8 @@ diagram OGC_BibliographicItem {
   }
   
   enum OgcStatusType <<enumeration>>{
+      draft
+      work-item-draft
       swg-draft
       oab-review
       public-rfc
