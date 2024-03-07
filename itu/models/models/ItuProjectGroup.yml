@@ -3,6 +3,12 @@ modelType: class
 definition: |
 
 attributes:
+  sector:
+    definition:
+    type: String
+    cardinality:
+      min: 0
+      max: 1
   bureau:
     definition:
     type: ItuBureau
