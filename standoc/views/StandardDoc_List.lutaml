@@ -4,6 +4,7 @@ diagram StandardDoc_List {
 
   include ../models/basic_document/block/BasicBlockNoNotes.lutaml
   include ../models/standard_document/block/StandardBlockNoNotes.lutaml
+  include ../models/standard_document/block/DisplayDirective.lutaml
 
   include ../models/basic_document/list/List.lutaml
   include ../models/basic_document/list/OrderedList.lutaml
@@ -57,6 +58,16 @@ diagram StandardDoc_List {
   association {
     owner StandardUnorderedList
     member UnorderedCheckableListItem
+    owner_type direct
+  }
+  association {
+    owner StandardUnorderedList
+    member DisplayDirective
+    owner_type direct
+  }
+  association {
+    owner StandardOrderedList
+    member DisplayDirective
     owner_type direct
   }
   association {
