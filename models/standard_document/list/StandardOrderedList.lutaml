@@ -7,4 +7,9 @@ class StandardUnorderedList {
       Caption of the list.
     }
   }
+  +display: DisplayDirective[0..1] {
+    definition {
+      Directives on how to render this block.
+    }
+  }
 }
