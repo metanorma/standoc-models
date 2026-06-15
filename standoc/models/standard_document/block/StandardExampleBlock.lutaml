@@ -4,4 +4,9 @@ class StandardExampleBlock {
       Override the numbering of this block in numbering.
     }
   }
+  +collapsible: Boolean[0..1] {
+    definition {
+      Indicate that the specific example instance is to be rendered as collapsible.
+    }
+  }
 }
