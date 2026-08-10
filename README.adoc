@@ -1,0 +1,45 @@
+= Metanorma standoc document models
+
+Consolidated repository of the document models and grammars for the Metanorma
+standoc document family. This monorepo replaces the former per-flavour
+`metanorma-model-*` repositories; their commit history is preserved here.
+
+Tracking issue:
+https://github.com/metanorma/metanorma-core/issues/16[metanorma-core#16].
+
+== Layout
+
+`grammars/`::
+The shared RNC/RNG grammar hub (formerly `metanorma-model-iso`), from which every
+flavour's validation schemas are built. It aggregates external bibliographic and
+base models as git submodules — see <<submodules>>.
+
+`<flavour>/`::
+Per-flavour information models (LutaML) and documentation, one directory per former
+`metanorma-model-<flavour>` repository: `bipm`, `bsi`, `cc`, `csa`, `gb`, `ieee`,
+`iho`, `iso`, `itu`, `m3aawg`, `mpfa`, `nist`, `ogc`, `ribose`, `standoc`, `un`.
+
+[[submodules]]
+== Submodules
+
+`grammars/` references external bibliographic and base models as git submodules —
+the `relaton/relaton-model-*` set, plus `metanorma/relaton-models`,
+`metanorma/basicdoc-models`, and `metanorma/metanorma-requirements-models`. These
+remain their own repositories and are not vendored into this one. Clone with:
+
+[source,sh]
+----
+git clone --recurse-submodules https://github.com/metanorma/standoc-models.git
+----
+
+== Consumption
+
+Flavour gems vendor the compiled RNG built from `grammars/`; they do not depend on
+this repository at runtime. The build source path is the only consumer-facing change
+from the previous per-repo layout.
+
+== History
+
+Consolidated from the source repositories with
+`git filter-repo --to-subdirectory-filter`, preserving authorship and per-file
+`git blame`.
