@@ -1,0 +1,13 @@
+= Metanorma-CSA Models
+
+image:https://github.com/metanorma/metanorma-model-csa/workflows/make/badge.svg["Build Status", link="https://github.com/metanorma/metanorma-model-csa/actions?query=workflow%3Amake"]
+
+This is where we keep the Metanorma-CSA model definitions.
+
+The Metanorma CSA format is an instance of the
+https://github.com/metanorma/metanorma-model-standoc[Metanorma StandardDocument model].
+Details of the general model can be found on its page.
+
+== CSA Document Model
+
+image::images/Csand_NormalDocument.png[]
