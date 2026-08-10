@@ -1,0 +1,15 @@
+class ReferenceToTerm {
+   definition {
+     Cross-reference to a term.
+   }
+   +source: ReferenceToTermSource {
+     definition {
+       Identifier of the source where the term is defined.
+     }
+   }
+   +term: String[0..*] {
+     definition {
+       Text to display for the cross-reference to the term.
+     }
+   }
+}

@@ -1,0 +1,16 @@
+class SvgMapBlock {
+  definition {
+    Wrapper around an SVG file, to update its hyperlinks with potentially document-specific
+    links, so that the SVG file can hyperlink to anchors within the document.
+  }
+  +figure: StandardfigureBlock {
+    definition {
+      The SVG file to be updated.
+    }
+  }
+  +target: SvgTargetType[0..*] {
+    definition {
+      Specification of the cross-references to update the SVG file with.
+    }
+  }
+}

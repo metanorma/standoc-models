@@ -1,0 +1,22 @@
+class StandardFigureBlock {
+  +width: String[0..1] {
+    definition {
+      Width of the figure block in rendering.
+    }
+  }
+  +number: String[0..1] {
+    definition {
+      Override the numbering of this block in numbering.
+    }
+  }
+  +source: BlockSource[0..*] {
+    definition {
+      A URI or other reference intended to link to an externally hosted image (or equivalent).
+    }
+  }
+  +key: Key[0..1] {
+    definition {
+      Overrides definition list, definition of symbols used
+    }
+  }
+}

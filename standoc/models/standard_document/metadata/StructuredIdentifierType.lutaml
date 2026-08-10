@@ -1,0 +1,73 @@
+class StructuredIdentifierType {
+  definition {
+    Representation of the identifier for a _StandardDocument_, giving its individual semantic components.
+  }
+  +type: String[0..1] {
+    definition {
+      Representation in the identifier of the type of standard document, corresponds to bibitem/ext/doctype.
+    }
+  }
+  +agency: String[1..*] {
+    definition {
+      Representation in the identifier of the agency responsible for the standard document.
+    }
+  }
+  +class: String[0..1] {
+    definition {
+      Representation in the identifier of the class of standard document (as a subclass of the document type),
+      corresponds to bibitem/item/docsubtype.
+    }
+  }
+  +docnumber: String {
+    definition {
+      Representation in the identifier of the (typically numeric) component uniquely identifying the document
+      or standard. If a document includes parts or supplements, the docnumber identifies the document as whole,
+      and not those document components.
+    }
+  }
+  +partnumber: String[0..1] {
+    definition {
+      Representation in the identifier of the document part, if this is a document part. May be compound
+    }
+  }
+  +edition: String[0..1] {
+    definition {
+      Representation in the identifier of the document edition, if this is a published document.
+    }
+  }
+  +version: String[0..1] {
+    definition {
+      Representation in the identifier of the document version, which can include document drafts.
+    }
+  }
+  +supplementtype: String[0..1] {
+    definition {
+      Representation in the identifier of the type of document supplement, if this is a document supplement.
+    }
+  }
+  +supplementnumber: String[0..1] {
+    definition {
+      Representation in the identifier of the document supplement, if this is a document supplement.
+    }
+  }
+  +amendment: String[0..1] {
+    definition {
+      Representation in the identifier of the document amendment, if this is a document amendment.
+    }
+  }
+  +corrigendum: String[0..1] {
+    definition {
+      Representation in the identifier of the document corrigendum, if this is a document corrigendum.
+    }
+  }
+  +year: String[0..1] {
+    definition {
+      Representation in the identifier of the year of publication or issuance of the document.
+    }
+  }
+  +language: String[0..1] {
+    definition {
+      Representation in the identifier of the language of the document.
+    }
+  }
+}

@@ -1,0 +1,15 @@
+class StandardUnorderedList {
+  definition {
+    Unordered list for standards documents.
+  }
+  +name: String[0..1] {
+    definition {
+      Caption of the list.
+    }
+  }
+  +display: DisplayDirective[0..1] {
+    definition {
+      Directives on how to render this block.
+    }
+  }
+}

@@ -1,0 +1,10 @@
+class DefinitionCollection{
+  definition {
+    Collection of definitions, constituting the core content of a DefinitionSection.
+  }
+  +definitions: Definition[0..*] {
+    definition {
+      Individual definition.
+    }
+  }
+}

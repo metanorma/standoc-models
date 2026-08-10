@@ -1,0 +1,15 @@
+class DisplayDirective {
+  definition {
+    Directive on how to render a block in Presentation XML
+  }
+  +display: String[0..1] {
+    definition {
+      Display style for block
+    }
+  }
+  +display-directives: String[0..1] {
+    definition {
+      Key-value set of directives for how to apply the display style
+    }
+  }
+}

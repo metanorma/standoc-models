@@ -1,0 +1,42 @@
+class StandardBibDataExtensionType {
+  definition {
+    The extension point of the bibliographic description of a _StandardDocument_.
+  }
+  +schema-version: String[0..1] {
+    definition {
+      The version of the flavour-specific schema that this extension point conforms to.
+    }
+  }
+  +doctype: String {
+    definition {
+      Classification of the _StandardDocument_ that is treated as a distinct series by the
+      standards defining organization, and that is rendered in a distinct manner.
+    }
+  }
+  +doctypeAbbreviation: String[0..1] {
+    definition {
+      Standard abbreviation for the doctype value used by the standards defining organization.
+    }
+  }
+  +subdoctype: String[0..1] {
+    definition {
+      Subclass of the _StandardDocument_, that is treated or processed differently.
+    }
+  }
+  +editorialGroup: EditorialGroupType[0..1] {
+    definition {
+      Groups associated with the production of the standards document, typically within
+      a standards definition organization.
+    }
+  }
+  +ics: IcsType[0..*] {
+    definition {
+      Classifications of the document contents taken from the International Classification of Standards.
+    }
+  }
+  +structuredidentifier: StructuredIdentifierType[0..*] {
+    definition {
+      Representation of the identifier for the _StandardDocument_, giving its individual semantic components.
+    }
+  }
+}

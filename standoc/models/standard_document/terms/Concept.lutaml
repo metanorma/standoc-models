@@ -1,0 +1,57 @@
+class Concept{
+  definition {
+    Formally defined concept used in a _StandardDocument_, aligned to a definition.
+    That concept may be defined as a term within the current document, or it may
+    be defined externally. 
+  }
+  +ital: Boolean[0..1] {
+    definition {
+      Render the term in the concept in italics.
+    }
+  }
+  +bold: Boolean[0..1] {
+    definition {
+      Render the term in the concept in boldface.
+    }
+  }
+  +ref: Boolean[0..1] {
+    definition {
+      Render a reference to a definition for the concept.
+    }
+  }
+  +linkmention: Boolean[0..1] {
+    definition {
+      Hyperlink the mention of the term to the definition for the concept.
+    }
+  }
+  +linkref: Boolean[0..1] {
+    definition {
+      Hyperlink the reference for the term to the definition for the concept.
+    }
+  }
+  +refterm: PureTextElement[0..1] {
+    definition {
+      The canonical name of the concept being defined. 
+    }
+  }
+  +renderterm: PureTextElement[0..1] {
+    definition {
+      The rendering to be used for the concept.
+    }
+  }
+  +xref: ReferenceToIdElement[0..1] {
+    definition {
+      Link to a definition of the term in an element of the current document.
+    }
+  }
+  +eref: ReferenceToCitationElement[0..1] {
+    definition {
+      Link to a definition of the term in a bibliographic entry.
+    }
+  }
+  +termref: ReferenceToTermbase[0..1] {
+    definition {
+      Link to a definition of the term in a termbase.
+    }
+  }
+}

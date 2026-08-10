@@ -1,0 +1,16 @@
+class ImageMapBlock {
+  definition {
+    Wrapper around an image file, to specify an image map, with areas of an image being hyperlinked.
+  }
+  +source: StandardFigureBlock {
+    definition {
+      The image to be hyperlinked.
+    }
+  }
+  +area: ImageMapAreaType[0..*] {
+    definition {
+      Areas of the image to be hyperlinked.
+    }
+  }
+}
+

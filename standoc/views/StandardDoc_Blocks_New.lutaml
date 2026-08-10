@@ -1,0 +1,124 @@
+
+diagram StandardDoc_Blocks_New {
+  title 'StandardDocument Blocks'
+  caption 'Block elements of StandardDocument new to BasicDocument'
+
+  include ../models/basic_document/refs/ReferenceElement.lutaml
+  include ../models/basic_document/block/BasicBlockNoNotes.lutaml
+  include ../models/metanorma_requirements/block/Provision.lutaml
+  include ../models/standard_document/block/StandardBlockNoNotes.lutaml
+  include ../models/standard_document/block/ImageMapBlock.lutaml
+  include ../models/standard_document/block/StandardFigureBlock.lutaml
+  include ../models/standard_document/block/ToC.lutaml
+  include ../models/standard_document/block/Form.lutaml
+  include ../models/standard_document/block/ElementName.lutaml
+  include ../models/standard_document/block/SvgMapBlock.lutaml
+  include ../models/standard_document/block/Passthrough.lutaml
+  include ../models/standard_document/block/SvgTargetType.lutaml
+  include ../models/standard_document/block/ImageMapAreaType.lutaml
+  include ../models/standard_document/block/ImageMapAreaTypeType.lutaml
+  include ../models/standard_document/block/ImageMapCoords.lutaml
+  include ../models/standard_document/block/ImageMapRadius.lutaml
+
+  association {
+    owner BasicBlockNoNotes
+    member StandardBlockNoNotes
+    owner_type inheritance
+  }
+  association {
+    owner StandardBlockNoNotes
+    member ToC
+    owner_type inheritance
+  }
+  association {
+    owner StandardBlockNoNotes
+    member Provision
+    owner_type inheritance
+  }
+  association {
+    owner StandardBlockNoNotes
+    member Form
+    owner_type inheritance
+  }
+  association {
+    owner ToC
+    member StandardUnorderedList
+    owner_type direct
+  }
+  association {
+    owner AmendBlock
+    member BibItemLocality
+    owner_type direct
+  }
+  association {
+    owner AmendBlock
+    member LocalityStack
+    owner_type direct
+  }
+  association {
+    owner AmendBlock
+    member ElementName
+    owner_type direct
+  }
+  association {
+    owner StandardBlockNoNotes
+    member Passthrough
+    owner_type inheritance
+  }
+  association {
+    owner StandardBlockNoNotes
+    member SvgMapBlock
+    owner_type inheritance
+  }
+  association {
+    owner SvgMapBlock
+    member StandardFigureBlock
+    owner_type direct
+  }
+  association {
+    owner SvgMapBlock
+    member SvgTargetType
+    owner_type direct
+  }
+  association {
+    owner SvgTargetType
+    member ReferenceElement
+    owner_type direct
+  }
+  association {
+    owner StandardBlockNoNotes
+    member ImageMapBlock
+    owner_type inheritance
+  }
+  association {
+    owner ImageMapBlock
+    member StandardFigureBlock
+    owner_type direct
+  }
+  association {
+    owner ImageMapBlock
+    member ImageMapAreaType
+    owner_type direct
+  }
+  association {
+    owner ImageMapAreaType
+    member ImageMapAreaTypeType
+    owner_type direct
+  }
+  association {
+    owner ImageMapAreaType
+    member ImageMapCoords
+    owner_type direct
+  }
+  association {
+    owner ImageMapAreaType
+    member ImageMapRadius
+    owner_type direct
+  }
+  association {
+    owner ImageMapAreaType
+    member ReferenceElement
+    owner_type direct
+  }
+
+}

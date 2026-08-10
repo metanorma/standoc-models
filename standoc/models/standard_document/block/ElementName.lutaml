@@ -1,0 +1,17 @@
+enum ElementName {
+
+  definition {
+    The classes of block subject to autonumbering within an `AmendBlock` `newContent` element.
+  }
+
+  requirement
+  recommendation
+  permission
+  table
+  figure
+  admonition
+  formula
+  sourcecode
+  example
+  note
+}

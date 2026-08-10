@@ -1,0 +1,17 @@
+class GraphicalSymbolDesignation {
+  definition {
+    A designation realised as a graphical symbol.
+  }
+  +figure: <<BasicDocument>> FigureBlock {
+    definition {
+      The graphical form of the designation.
+    }
+  }
+  +isInternational: Boolean[0..1] {
+    definition {
+      Whether the designation is the same across languages, or language-specific.
+    }
+  }
+}
+
+

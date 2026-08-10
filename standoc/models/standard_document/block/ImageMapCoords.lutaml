@@ -1,0 +1,15 @@
+class ImageMapCoords {
+  definition {
+    Coordinate point to be used within an image map.
+  }
+  +x: Float {
+    definition {
+      X-coordinate of the coordinate point.
+    }
+  }
+  +y: Float {
+    definition {
+      Y-coordinate of the coordinate point.
+    }
+  }
+}

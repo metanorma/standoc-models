@@ -1,0 +1,95 @@
+class Term <<Term>> {
+  definition {
+    A term (`Term`) represents a terminology entry with
+    its definition.
+
+    NOTE: The `Term` definition fully aligns with the structure
+    and requirements of terms in ISO/IEC DIR 2, 16.6.
+  }
+  +language: <<BasicDocument>> Iso639Code[0..1] {
+    definition {
+      The language of the term entry, as an ISO-639 3-letter code.
+    }
+  }
+  +script: <<BasicDocument>> Iso15924Code [0..1] {
+    definition {
+      The script of the term entry, as an ISO-15924 code.
+    }
+  }
+  +locale: String[0..1] {
+    definition {
+      The locale of the term entry
+    }
+  }
+  +tag: String[0..1] {
+    definition {
+      Non-unique identifier within document. Used to align two blocks in different languages in a multilingual document.
+    }
+  }
+  +multilingual-rendering: MultilingualRenderingType[0..1] {
+    definition {
+      Specification of how a block element may be rendered in a multilingual document.
+    }
+  }
+  +id: String[0..1] {
+    definition {
+      An optional identifier for the term, to be used in
+      cross-references.
+    }
+  }
+  +preferred: Designation[1..*] {
+    definition {
+      One or more names under which the term being defined
+      is canonically known.
+    }
+  }
+  +admitted: Designation[0..*] {
+    definition {
+      Zero or more names which are acceptable synonyms for
+      the term being defined.
+    }
+  }
+  +related: RelatedTerm[0..*] {
+    definition {
+      Zero or more names which are related to the term being defined. 
+    }
+  }
+  +deprecates: Designation[0..*] {
+    definition {
+      Zero or more names which are deprecated synonyms for
+      the term being defined.
+    }
+  }
+  +domain: <<BasicDocument>> LocalizedString[0..1] {
+    definition {
+      An optional semantic domain for the term being defined,
+      in case the term is ambiguous between several semantic domains.
+    }
+  }
+  +subject: <<BasicDocument>> LocalizedString[0..1] {
+    definition {
+      Subject of the term.
+    }
+  }
+  +definition: TermDefinition[1..*] {
+    definition {
+      The definition of the term applied in the current
+      document.
+    }
+  }
+  +note: StandardNoteBlock[0..*] {
+    definition {
+      Zero or more notes about the term.
+    }
+  }
+  +example: StandardExampleBlock[0..*] {
+    definition {
+      Zero or more examples of how the term is to be used.
+    }
+  }
+  +source: TermSource[0..*] {
+    definition {
+      Zero or more bibliographical sources for the term.
+    }
+  }
+}
