@@ -38,6 +38,31 @@ Flavour gems vendor the compiled RNG built from `grammars/`; they do not depend 
 this repository at runtime. The build source path is the only consumer-facing change
 from the previous per-repo layout.
 
+== Building and vendoring the grammars
+
+The RNG schemas are built and vendored into the flavour gems **manually**, from
+`grammars/`:
+
+`grammars/make.sh`::
+Updates the submodules, assembles the `.rnc` sources, and compiles them to `.rng`
+with trang (jing-trang).
+
+`grammars/copy.sh`::
+Copies the built `.rng` into each flavour gem at
+`../../metanorma-<flavour>/lib/metanorma/<flavour>/`, applying the namespace and
+version stamps.
+
+Because `copy.sh` writes to sibling paths (`../../metanorma-<flavour>/`), clone this
+repository **alongside** the flavour gems (`metanorma-iso`, `metanorma-bsi`, …):
+
+[source,sh]
+----
+git clone --recurse-submodules https://github.com/metanorma/standoc-models.git
+cd standoc-models/grammars
+sh make.sh    # build the RNG
+sh copy.sh    # vendor into the sibling flavour gems
+----
+
 == History
 
 Consolidated from the source repositories with
