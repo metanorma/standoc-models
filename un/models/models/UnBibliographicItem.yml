@@ -1,0 +1,48 @@
+# The language attribute of BibliographicItem refers to the language of issued documents
+name: UnBibliographicItem
+modelType: class
+definition: |
+
+attributes:
+  committee:
+    definition:
+    type: UnTechnicalCommittee
+    cardinality:
+      min: 1
+      max: "*"
+  type:
+    definition:
+    type: UnDocumentType
+  title:
+    definition:
+    type: FormattedString
+  submissionlanguage:
+    definition:
+    type: Iso639Code
+    cardinality:
+      min: 0
+      max: "*"
+  distribution:
+    definition:
+    type: UnDistributionType
+    cardinality:
+      min: 0
+      max: 1
+  session:
+    definition:
+    type: UnSessionType
+    cardinality:
+      min: 0
+      max: 1
+relations:
+  - target: BibliographicItem
+    relationship:
+      target:
+        type: inheritance
+    direction: up
+  - target: UnStandardDocument
+    relationship:
+      target:
+        type: direct
+    direction: up
+    

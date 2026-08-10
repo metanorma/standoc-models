@@ -1,0 +1,26 @@
+name: UnDocumentType
+modelType: enum
+type: enumeration
+values:
+  plenary:
+    definition: 
+  recommendation:
+    definition: 
+  addendum:
+    definition: 
+  communication:
+    definition: 
+  corrigendum:
+    definition: 
+  reissue:
+    definition: 
+  agenda:
+    definition: 
+  budgetary:
+    definition: 
+  sec-gen-notes:
+    definition: 
+  expert-report:
+    definition: 
+  resolution:
+    definition: 

@@ -1,0 +1,17 @@
+name: UnTechnicalCommittee
+modelType: class
+definition: |
+
+attributes:
+  type:
+    definition:
+    type: UnCommitteeType
+  name:
+    definition:
+    type: String
+relations:
+  - target: UnBibliographicItem
+    relationship:
+      target:
+        type: direct
+    direction: up    
