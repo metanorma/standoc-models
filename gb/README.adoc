@@ -1,0 +1,23 @@
+= Metanorma GbDoc Models
+
+image:https://github.com/metanorma/metanorma-model-gb/workflows/make/badge.svg["Ubuntu Build Status", link="https://github.com/metanorma/metanorma-model-gb/actions?query=workflow=make"]
+This is where we keep the Metanorma GbDoc model definitions.
+
+The GbDoc format is an instance of the
+https://github.com/metanorma/isodoc-models[Metanorma IsoDoc model].
+
+Details of the parent model can be found on its page.
+
+
+== GB Document
+
+image::images/document.png[]
+
+== GB Metadata
+
+image::images/metadata.png[]
+
+
+== GB cover page elements
+
+image::images/gb-standard-coverpage-elements.png[]
