@@ -1,0 +1,49 @@
+# Document types include:
+# * OGC Policy Document
+# * OGC Standard
+# * OGC Standard with compliance suite
+# * OGC Community Standard
+# * Abstract Specification
+# * Profile / Application Profile
+# * Discussion Papers
+# * Public Engineering Reports
+# * OGC Reference Model
+# * Best Practices Documents
+# * User Guide
+# * Internal administrative documents
+# * 9.12 "Technical Amendment"
+# * 9.11 "Corrigendum (errata) Changes to OGC Standards"
+name: OgcDocumentType
+modelType: enum
+type: enumeration
+values:
+  policy:
+    definition: 
+  standard:
+    definition: 
+  standard-with-suite:
+    definition: 
+  community-standard:
+    definition: 
+  abstract-specification:
+    definition: 
+  profile:
+    definition: 
+  discussion-paper:
+    definition: 
+  engineering-report:
+    definition: 
+  reference-model:
+    definition: 
+  best-practice:
+    definition: 
+  user-guide:
+    definition: 
+  guide:
+    definition: 
+  amendment:
+    definition: 
+  technical-corrigendum:
+    definition: 
+  administrative:
+    definition: 

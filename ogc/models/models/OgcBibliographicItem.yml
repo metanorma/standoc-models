@@ -1,0 +1,23 @@
+name: OgcBibliographicItem
+modelType: class
+definition: |
+
+attributes:
+  projectGroup:
+    definition: 
+    type: OgcProjectGroup
+    cardinality:
+      min: 1
+      max: "*"
+  type:
+    definition: 
+    type: OgcDocumentType
+  title:
+    definition: 
+    type: FormattedString
+relations:
+  - target: BibliographicItem
+    relationship:
+      target:
+        type: inheritance
+    direction: up
