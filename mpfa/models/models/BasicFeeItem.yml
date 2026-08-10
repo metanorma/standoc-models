@@ -1,0 +1,23 @@
+name: BasicFeeItem
+modelType: class
+definition: |
+
+attributes:
+  description:
+    definition:
+    type: String
+  value:
+    definition:
+    type: FeeValue
+  class:
+    definition:
+    type: FeeClass
+    cardinality:
+      min: 0
+      max: "*"
+relations:
+  - target: FeeTable
+    relationship:
+      target:
+        type: direct
+    direction: up

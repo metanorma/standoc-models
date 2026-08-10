@@ -1,0 +1,22 @@
+name: PayableEntity
+modelType: class
+definition: |
+
+attributes:
+
+relations:
+  - target: TransactionFee
+    relationship:
+      target:
+        type: direct
+    direction: up
+  - target: ConstituentFundFee
+    relationship:
+      target:
+        type: direct
+    direction: up
+  - target: UpfrontFee
+    relationship:
+      target:
+        type: direct
+    direction: left

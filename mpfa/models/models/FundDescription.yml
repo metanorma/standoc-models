@@ -1,0 +1,40 @@
+name: FundDescription
+modelType: class
+definition: |
+
+attributes:
+  # G2.1(f)(i)
+  name:
+    definition:
+    type: String
+  # G2.1(f)(ii)
+  managerProfile:
+    definition:
+    type: PersonalProfile
+  # G2.1(f)(iii)
+  structure:
+    definition:
+    type: ClauseSection
+  # G2.1(f)(iv)
+  descriptor:
+    definition:
+    type: ClauseSection
+  # G2.1(f)(v)
+  investmentFocus:
+    definition:
+    type: ClauseSection
+  risks:
+    definition:
+    type: FundRisk
+  objectives:
+    definition:
+    type: ClauseSection
+  policies:
+    definition:
+    type: ClauseSection
+relations:
+  - target: InvestmentSection
+    relationship:
+      target:
+        type: direct
+    direction: up

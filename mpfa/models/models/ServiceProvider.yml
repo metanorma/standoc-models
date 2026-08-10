@@ -1,0 +1,17 @@
+name: ServiceProvider
+modelType: class
+definition: |
+
+attributes:
+  profile:
+    definition:
+    type: OrganizationProfile
+  type:
+    definition:
+    type: ServiceProviderType
+relations:
+  - target: SchemeOfferBody
+    relationship:
+      target:
+        type: direct
+    direction: up

@@ -1,0 +1,17 @@
+name: RiskSection
+modelType: class
+definition: |
+
+attributes:
+  name:
+    definition:
+    type: String
+  description:
+    definition:
+    type: ClauseSection
+relations:
+  - target: InvestmentSection
+    relationship:
+      target:
+        type: direct
+    direction: up

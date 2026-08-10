@@ -1,0 +1,17 @@
+name: FeeValue
+modelType: class
+definition: |
+
+attributes:
+  float:
+    definition:
+    type: Float
+  percentage:
+    definition:
+    type: Float
+relations:
+  - target: BasicFeeItem
+    relationship:
+      target:
+        type: direct
+    direction: up

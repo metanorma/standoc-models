@@ -1,0 +1,13 @@
+name: TransactionFeeType
+modelType: enum
+type: enumeration
+values:
+  contribution_charge:
+    definition:
+  offer_spread:
+    definition:
+  bid_spread:
+    definition:
+  withdrawal_charge:
+    definition:
+
