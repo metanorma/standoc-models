@@ -1,0 +1,22 @@
+name: M3DBibliographicItem
+modelType: class
+definition: |
+
+attributes:
+  committee:
+    definition:
+    type: M3Committee
+  type:
+    definition:
+    type: M3DocumentType
+relations:
+  - target: BibliographicItem
+    relationship:
+      target:
+        type: inheritance
+    direction: up
+  - target: M3Document
+    relationship:
+      target:
+        type: direct
+    direction: up
