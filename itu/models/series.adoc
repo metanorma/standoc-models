@@ -1,0 +1,30 @@
+= Series of ITU-T Recommendations
+
+[cols="a,a"]
+|===
+
+| Series A | Organization of the work of ITU-T
+| Series D | Tariff and accounting principles and international telecommunication/ICT economic and policy issues
+| Series E | Overall network operation, telephone service, service operation and human factors
+| Series F | Non-telephone telecommunication services
+| Series G | Transmission systems and media, digital systems and networks
+| Series H | Audiovisual and multimedia systems
+| Series I | Integrated services digital network
+| Series J | Cable networks and transmission of television, sound programme and other multimedia signals
+| Series K | Protection against interference
+| Series L | Environment and ICTs, climate change, e-waste, energy efficiency; construction, installation and protection of cables and other elements of outside plant
+| Series M | Telecommunication management, including TMN and network maintenance
+| Series N | Maintenance: international sound programme and television transmission circuits
+| Series O | Specifications of measuring equipment
+| Series P | Telephone transmission quality, telephone installations, local line networks
+| Series Q | Switching and signalling, and associated measurements and tests
+| Series R | Telegraph transmission
+| Series S | Telegraph services terminal equipment
+| Series T | Terminals for telematic services
+| Series U | Telegraph switching
+| Series V | Data communication over the telephone network
+| Series X | Data networks, open system communications and security
+| Series Y | Global information infrastructure, Internet protocol aspects, next-generation networks, Internet of Things and smart cities
+| Series Z | Languages and general software aspects for telecommunication systems
+
+|===
