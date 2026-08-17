@@ -1,62 +1,9 @@
-= Metanorma StandardDocument Models
+# This repository has been consolidated
 
-image:https://github.com/metanorma/metanorma-model-standoc/workflows/make/badge.svg["Build Status", link="https://github.com/metanorma/metanorma-model-standoc/actions?query=workflow%3Amake"]
+This repository is now part of **[metanorma/standoc-models](https://github.com/metanorma/standoc-models)** — the consolidated monorepo for the Metanorma document models (Basicdoc + Standoc + all flavours), per [metanorma-core#16](https://github.com/metanorma/metanorma-core/issues/16).
 
-Metanorma `StandardDocument` (abbreviated as `StanDoc`) is a harmonized core
-set of standardization document models that forms the basis for Metanorma
-document models. It is an instantiation of
-https://github.com/metanorma/basicdoc-models[`BasicDocument` (`BasicDoc`)]
+- Grammar sources and builds live in [`standoc-models/grammars/`](https://github.com/metanorma/standoc-models/tree/main/grammars).
+- This repository's full commit history is preserved there (imported via `git filter-repo --to-subdirectory-filter`).
+- Open issues were transferred to `standoc-models`; this repository's issue and PR history remains readable.
 
-NOTE: It is one of the document models that Selagraph operates on.
-
-Metanorma StandardDocument is a document model can form the basis of multiple
-standard document types, including deliverables from:
-
-* https://github.com/metanorma/metanorma-model-iso[ISO and IEC]
-* https://github.com/metanorma/metanorma-model-itu[ITU-T / ITU-D]
-* https://github.com/metanorma/metanorma-model-ieee[IEEE SA]
-* https://github.com/metanorma/metanorma-model-bipm[BIPM]
-* https://github.com/metanorma/metanorma-model-ogc[OGC]
-* https://github.com/metanorma/metanorma-model-iho[IHO]
-* https://github.com/metanorma/metanorma-model-bsi[BSI]
-* https://github.com/metanorma/metanorma-model-nist[NIST]
-* https://github.com/metanorma/metanorma-model-csa[CSA]
-* https://github.com/metanorma/metanorma-model-cc[CalConnect]
-* https://github.com/metanorma/metanorma-model-m3aawg[M3AAWG]
-* https://github.com/metanorma/metanorma-model-gb[GB and family]
-
-The Relaton Bibliography UML models used within these models are located here:
-
-* https://github.com/metanorma/relaton-models[Relaton BibModels]
-
-
-== Standard Document UML Models
-
-=== StandardDocument
-
-image::images/StandardDoc_StandardDocument.png[]
-
-=== Metadata
-
-image::images/StandardDoc_Metadata.png[]
-
-=== Sections
-
-image::images/StandardDoc_Sections.png[]
-
-=== Terms
-
-image::images/StandardDoc_Terms.png[]
-
-=== Blocks
-
-image::images/StandardDoc_Blocks.png[]
-image::images/StandardDoc_List.png[]
-image::images/StandardDoc_Blocks_New.png[]
-
-=== Inline
-
-image::images/StandardDoc_Inline.png[]
-image::images/StandardDoc_Form.png[]
-
-
+This repository is archived read-only. All new work happens in `standoc-models`.
