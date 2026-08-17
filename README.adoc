@@ -1,18 +1,9 @@
-= Metanorma OGC Models
+# This repository has been consolidated
 
-image:https://github.com/metanorma/metanorma-model-ogc/workflows/make/badge.svg["Build Status", link="https://github.com/metanorma/metanorma-model-ogc/actions?query=workflow%3Amake"]
+This repository is now part of **[metanorma/standoc-models](https://github.com/metanorma/standoc-models)** — the consolidated monorepo for the Metanorma document models (Basicdoc + Standoc + all flavours), per [metanorma-core#16](https://github.com/metanorma/metanorma-core/issues/16).
 
-This is where we keep the Metanorma OGC model definitions.
+- Grammar sources and builds live in [`standoc-models/grammars/`](https://github.com/metanorma/standoc-models/tree/main/grammars).
+- This repository's full commit history is preserved there (imported via `git filter-repo --to-subdirectory-filter`).
+- Open issues were transferred to `standoc-models`; this repository's issue and PR history remains readable.
 
-The OGC Standard Document format is an instance of the
-https://github.com/riboseinc/metanorma-model-standoc[Metanorma StandardDocument model].
-Details of the general model can be found on its page.
-
-== OGC Standard Document Model
-
-image::images/OGC_StandardDocument.png[]
-
-== OGC Bibliographic Item Model
-
-image::images/OGC_BibliographicItem.png[]
-
+This repository is archived read-only. All new work happens in `standoc-models`.
