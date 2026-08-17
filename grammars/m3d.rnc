@@ -1,5 +1,5 @@
 include "relaton-m3aawg.rnc" { }
-include "isodoc.rnc" {
+include "standoc.rnc" {
 
 start = m3d-standard
 

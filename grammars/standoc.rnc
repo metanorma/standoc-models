@@ -187,7 +187,7 @@ ExampleAttributes =
     ## Render the example as collapsible (HTML5 details/summary)
     attribute collapsible { xsd:boolean }?
 
-## Content alternatives of an example in the isodoc context: as basicdoc,
+## Content alternatives of an example in the standoc context: as basicdoc,
 ## with figure admitted, and note admitted only trailing the example body
 ## rather than interleaved. The content hook is overridden rather than
 ## ExampleBody itself, so that the extension seam survives: additive
