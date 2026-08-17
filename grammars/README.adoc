@@ -2,7 +2,7 @@
 
 This directory contains RelaxNG Compact and RelaxNG grammars for:
 
-* the base Metanorma Standard Document model (`isodoc*`),
+* the base Metanorma Standard Document model (`standoc*`),
 * Various Metanorma gramars
 * Various Relaton gramars
 
@@ -23,8 +23,8 @@ The grammars are generated using `make.sh`. The grammars are validated using `bu
 
 == Presentation XML contract
 
-The grammars `isodoc-presentation.rnc` and `biblio-presentation.rnc` (composed by
-`isodoc-presentation-compile.rnc`) define the Presentation XML overlay on the Semantic
+The grammars `standoc-presentation.rnc` and `biblio-presentation.rnc` (composed by
+`standoc-presentation-compile.rnc`) define the Presentation XML overlay on the Semantic
 XML grammar: the semantic document, with rendering channels (`fmt-*` elements) tagged
 alongside the semantic elements they were derived from, and `semx` provenance links
 pointing back to the semantic source of each rendered fragment.

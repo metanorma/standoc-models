@@ -1,5 +1,5 @@
 include "relaton-itu.rnc" { }
-include "isodoc.rnc" {
+include "standoc.rnc" {
 
 Clause-Section =
     Section-Attributes,

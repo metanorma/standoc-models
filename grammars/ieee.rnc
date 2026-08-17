@@ -1,5 +1,5 @@
 include "relaton-ieee.rnc" { }
-include "isodoc.rnc" { 
+include "standoc.rnc" { 
 
 sections =
   element sections {

@@ -1,4 +1,4 @@
-include "isodoc.rnc" {
+include "standoc.rnc" {
 # ALERT: cannot have root comments, because of https://github.com/metanorma/metanorma/issues/437
 
 # In the following, unaltered fields are uncommented. Changes in cardinality are still commented.

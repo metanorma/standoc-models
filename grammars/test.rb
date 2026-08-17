@@ -42,7 +42,7 @@ end
 
 ret = ""
 GRAMMARS =
-  %w(biblio-compile isodoc-compile isodoc-presentation-compile
+  %w(biblio-compile standoc-compile standoc-presentation-compile
      isostandard-compile isostandard-amd
      iec generic csd csa gbstandard m3d rsd ieee un ogc nist itu ietf
      iho bipm bsi jis plateau

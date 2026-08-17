@@ -1,5 +1,5 @@
 include "relaton-ietf.rnc" { }
-include "isodoc.rnc" {
+include "standoc.rnc" {
 
 ParagraphAttributes =
     attribute align { Alignments }?,

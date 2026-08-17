@@ -1,6 +1,6 @@
 grammar {
 
-include "isodoc.rnc" { }
+include "standoc.rnc" { }
 
   Root-Attributes |=
     ## Every document contained in a Metanorma collection has all its anchors and references to anchors

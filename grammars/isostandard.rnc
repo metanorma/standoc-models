@@ -1,4 +1,4 @@
-include "isodoc.rnc" { 
+include "standoc.rnc" { 
 
 sections =
   element sections {

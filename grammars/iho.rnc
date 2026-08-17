@@ -1,5 +1,5 @@
 include "relaton-iho.rnc" {}
-include "isodoc.rnc" {
+include "standoc.rnc" {
 
 annex =
   element annex {
