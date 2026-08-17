@@ -1,23 +1,9 @@
-= Metanorma GbDoc Models
+# This repository has been consolidated
 
-image:https://github.com/metanorma/metanorma-model-gb/workflows/make/badge.svg["Ubuntu Build Status", link="https://github.com/metanorma/metanorma-model-gb/actions?query=workflow=make"]
-This is where we keep the Metanorma GbDoc model definitions.
+This repository is now part of **[metanorma/standoc-models](https://github.com/metanorma/standoc-models)** — the consolidated monorepo for the Metanorma document models (Basicdoc + Standoc + all flavours), per [metanorma-core#16](https://github.com/metanorma/metanorma-core/issues/16).
 
-The GbDoc format is an instance of the
-https://github.com/metanorma/isodoc-models[Metanorma IsoDoc model].
+- Grammar sources and builds live in [`standoc-models/grammars/`](https://github.com/metanorma/standoc-models/tree/main/grammars).
+- This repository's full commit history is preserved there (imported via `git filter-repo --to-subdirectory-filter`).
+- Open issues were transferred to `standoc-models`; this repository's issue and PR history remains readable.
 
-Details of the parent model can be found on its page.
-
-
-== GB Document
-
-image::images/document.png[]
-
-== GB Metadata
-
-image::images/metadata.png[]
-
-
-== GB cover page elements
-
-image::images/gb-standard-coverpage-elements.png[]
+This repository is archived read-only. All new work happens in `standoc-models`.
