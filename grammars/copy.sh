@@ -2,15 +2,15 @@ echo "Copying..."
 
 metanorma_version=`git tag --sort=committerdate | tail -1`
 
-cat standoc.rng | ruby -pe "\$_.gsub!(/(<grammar[^>]+>)/, %{\\\\1\n<!-- VERSION ${metanorma_version} -->\n}) " > ../../metanorma-standoc/lib/metanorma/validate/isodoc.rng
-# NOTE: vendored destinations keep their legacy `isodoc*.rng` filenames —
-# gem code loads those paths. Sources are `standoc*.rng` (renamed 2026-08);
-# the bridge retires when gems switch to generated-schema loading (#181).
+cat standoc.rng | ruby -pe "\$_.gsub!(/(<grammar[^>]+>)/, %{\\\\1\n<!-- VERSION ${metanorma_version} -->\n}) " > ../../metanorma-standoc/lib/metanorma/validate/standoc.rng
+# NOTE: vendored destinations use the standoc.* names (the rename completed
+# through the vendoring layer 2026-08-18: isodoc-compile.rng internally
+# includes the renamed sibling, so legacy names are inconsistent).
 cp basicdoc.rng metanorma-mathml.rng mathml4*.rng reqt.rng biblio.rng biblio-standoc.rng ../../metanorma-standoc/lib/metanorma/validate
 
 for i in iso iec bsi jis plateau cc ribose generic ieee ogc nist ietf itu iho bipm
 do
-  cat standoc.rng | ruby -pe "\$_.gsub!(/(<grammar[^>]+>)/, %{\\\\1\n<!-- VERSION ${metanorma_version} -->\n}) " > ../../metanorma-$i/lib/metanorma/$i/isodoc.rng
+  cat standoc.rng | ruby -pe "\$_.gsub!(/(<grammar[^>]+>)/, %{\\\\1\n<!-- VERSION ${metanorma_version} -->\n}) " > ../../metanorma-$i/lib/metanorma/$i/standoc.rng
   cp basicdoc.rng metanorma-mathml.rng mathml4*.rng reqt.rng biblio.rng biblio-standoc.rng ../../metanorma-$i/lib/metanorma/$i
 done
 
@@ -32,7 +32,7 @@ do
 cat $i.rng | ruby -pe "\$_.gsub!(/<grammar /, %{<grammar ns='https://www.metanorma.org/ns/standoc' }) ">  ../../metanorma-$i/lib/metanorma/$i/$i.rng
 done
 
-cat standoc-compile.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/standoc" }) '> ../../metanorma-standoc/lib/metanorma/validate/isodoc-compile.rng
+cat standoc-compile.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/standoc" }) '> ../../metanorma-standoc/lib/metanorma/validate/standoc-compile.rng
 cat isostandard-compile.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/standoc" }) '>  ../../metanorma-iso/lib/metanorma/iso/isostandard-compile.rng
 cat isostandard-amd.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/standoc" }) '>  ../../metanorma-iso/lib/metanorma/iso/isostandard-amd.rng
 
