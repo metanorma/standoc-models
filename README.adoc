@@ -1,13 +1,9 @@
-= Metanorma M3AAWG Document ("M3D") Models
+# This repository has been consolidated
 
-image:https://github.com/metanorma/metanorma-model-m3d/workflows/make/badge.svg["Build Status", link="https://github.com/metanorma/metanorma-model-m3d/actions?query=workflow%3Amake"]
+This repository is now part of **[metanorma/standoc-models](https://github.com/metanorma/standoc-models)** — the consolidated monorepo for the Metanorma document models (Basicdoc + Standoc + all flavours), per [metanorma-core#16](https://github.com/metanorma/metanorma-core/issues/16).
 
-This is where we keep the Metanorma M3D model definitions.
+- Grammar sources and builds live in [`standoc-models/grammars/`](https://github.com/metanorma/standoc-models/tree/main/grammars).
+- This repository's full commit history is preserved there (imported via `git filter-repo --to-subdirectory-filter`).
+- Open issues were transferred to `standoc-models`; this repository's issue and PR history remains readable.
 
-The M3AAWG Document ("`M3D`") format is an instance of the
-https://github.com/metanorma/metanorma-model-standoc[Metanorma StandardDocument model].
-Details of the general model can be found on its page.
-
-== M3AAWG Document Model
-
-image::images/M3aawg_M3aawgDocument.png[]
+This repository is archived read-only. All new work happens in `standoc-models`.
