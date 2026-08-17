@@ -1,5 +1,5 @@
 include "relaton-nist.rnc" {}
-include "isodoc.rnc" {
+include "standoc.rnc" {
 
 # TitleType = ( "alternative" | "original" | "unofficial" | "subtitle" | "main" )
 

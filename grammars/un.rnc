@@ -1,5 +1,5 @@
 include "relaton-un.rnc" { }
-include "isodoc.rnc" {
+include "standoc.rnc" {
 
   start = un-standard
 

@@ -1,5 +1,5 @@
 include "relaton-ribose.rnc" { }
-include "isodoc.rnc" {
+include "standoc.rnc" {
 
 
 }
