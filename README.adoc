@@ -1,70 +1,58 @@
 = Metanorma standoc document models
 
-Consolidated repository of the document models and grammars for the Metanorma
-standoc document family. This monorepo replaces the former per-flavour
-`metanorma-model-*` repositories; their commit history is preserved here.
-
-Tracking issue:
+Consolidated monorepo of the document models and grammars for the Metanorma
+standoc document family — Basicdoc, Standoc, and every flavour — per
 https://github.com/metanorma/metanorma-core/issues/16[metanorma-core#16].
+This repository replaced the former per-flavour `metanorma-model-*`
+repositories; their commit histories are preserved here.
 
 == Layout
 
 `grammars/`::
-The shared RNC/RNG grammar hub (formerly `metanorma-model-iso`), from which every
-flavour's validation schemas are built. It aggregates external bibliographic and
-base models as git submodules — see <<submodules>>.
+The shared RNC/RNG grammar hub (formerly `metanorma-model-iso`). The
+shared-layer grammars are named after their layer — `standoc.rnc`,
+`standoc-presentation.rnc` — with per-flavour grammars alongside. It
+aggregates external bibliographic and base models as git submodules.
 
 `<flavour>/`::
-Per-flavour information models (LutaML) and documentation, one directory per former
-`metanorma-model-<flavour>` repository: `bipm`, `bsi`, `cc`, `csa`, `gb`, `ieee`,
-`iho`, `iso`, `itu`, `m3aawg`, `mpfa`, `nist`, `ogc`, `ribose`, `standoc`, `un`.
+Per-flavour information models (LutaML) and documentation, one directory
+per former `metanorma-model-<flavour>` repository: `bipm`, `bsi`, `cc`,
+`csa`, `gb`, `ieee`, `iho`, `iso`, `itu`, `m3aawg`, `mpfa`, `nist`,
+`ogc`, `ribose`, `standoc`, `un`.
 
-[[submodules]]
-== Submodules
+== Building the grammars
 
-`grammars/` references external bibliographic and base models as git submodules —
-the `relaton/relaton-model-*` set, plus `metanorma/relaton-models`,
-`metanorma/basicdoc-models`, and `metanorma/metanorma-requirements-models`. These
-remain their own repositories and are not vendored into this one. Clone with:
+Two modes (`grammars/make.sh`):
 
-[source,sh]
-----
-git clone --recurse-submodules https://github.com/metanorma/standoc-models.git
-----
+* `./make.sh` — refresh mode: updates submodules to their remotes
+  (`--remote`), writes `versions.json`, builds all grammars with trang,
+  runs the validation suite, and vendors to sibling gem checkouts via
+  `copy.sh` when present.
+* `GRAMMARS_PINNED=1 ./make.sh` — deterministic mode: builds strictly
+  from the checked-out submodule pins, no network operations. This is
+  what CI uses.
 
-== Consumption
+CI enforces a **regeneration parity gate**: the committed `.rng`
+artifacts must be byte-identical to regeneration output from the pinned
+sources. Hand-edits to generated artifacts, or source changes committed
+without regenerating, fail the build.
 
-Flavour gems vendor the compiled RNG built from `grammars/`; they do not depend on
-this repository at runtime. The build source path is the only consumer-facing change
-from the previous per-repo layout.
+== Vendoring
 
-== Building and vendoring the grammars
+Flavour gems vendor the compiled RNG (`grammars/copy.sh`, run from a
+workspace with gem checkouts as siblings). Vendored copies keep their
+legacy `isodoc*.rng` filenames because gem code loads those paths; the
+bridge retires with generated-schema loading (issue #181).
 
-The RNG schemas are built and vendored into the flavour gems **manually**, from
-`grammars/`:
+== Where work happens
 
-`grammars/make.sh`::
-Updates the submodules, assembles the `.rnc` sources, and compiles them to `.rng`
-with trang (jing-trang).
+* Grammar work: PRs against `grammars/` here. Grammar issues live in
+  this repository's tracker (open issues from the former
+  `metanorma-model-iso` and flavour model repositories were transferred
+  here at consolidation).
+* Model-driven architecture (LML as single source of truth, generated
+  schemas and classes, retiring hand-maintained RNC and Trang/Jing):
+  see issue #181 — the follow-on programme to this consolidation.
 
-`grammars/copy.sh`::
-Copies the built `.rng` into each flavour gem at
-`../../metanorma-<flavour>/lib/metanorma/<flavour>/`, applying the namespace and
-version stamps.
-
-Because `copy.sh` writes to sibling paths (`../../metanorma-<flavour>/`), clone this
-repository **alongside** the flavour gems (`metanorma-iso`, `metanorma-bsi`, …):
-
-[source,sh]
-----
-git clone --recurse-submodules https://github.com/metanorma/standoc-models.git
-cd standoc-models/grammars
-sh make.sh    # build the RNG
-sh copy.sh    # vendor into the sibling flavour gems
-----
-
-== History
-
-Consolidated from the source repositories with
-`git filter-repo --to-subdirectory-filter`, preserving authorship and per-file
-`git blame`.
+The `semx`/`fmt` Presentation XML contract is documented in
+`grammars/README.adoc`.
