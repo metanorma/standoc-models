@@ -1,0 +1,10 @@
+# RNG Configuration
+
+files:
+  - ../grammars/basicdoc.rnc
+  - ../grammars/biblio.rnc
+  - ../grammars/biblio-standdoc.rnc
+  - ../grammars/biblio-presentation.rnc
+  - ../grammars/standoc.rnc
+  - ../grammars/bsi.rnc
+  - ../grammars/relaton-bsi-compile.rnc
