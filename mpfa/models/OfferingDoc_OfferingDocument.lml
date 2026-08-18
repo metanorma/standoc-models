@@ -50,7 +50,7 @@ diagram OfferingDoc_OfferingDocument {
   }
   
   class ServiceProvider {
-    +profile: <<BasicProfile>> OrganizationProfile
+    +profile: OrganizationProfile
     +type: ServiceProviderType
   }
   
@@ -74,7 +74,7 @@ diagram OfferingDoc_OfferingDocument {
   **  G2.1(f)(i)
     +name: String
   **  G2.1(f)(ii)
-    +managerProfile: <<BasicProfile>> PersonalProfile
+    +managerProfile: PersonalProfile
   **  G2.1(f)(iii)
     +structure: ClauseSection
   **  G2.1(f)(iv)
@@ -90,9 +90,9 @@ diagram OfferingDoc_OfferingDocument {
   ** G3.4 (b)
     +description: ClauseSection
   ** G3.2 & G3.4(c)
-    +riskClass: <<enumeration>> Integer (0..7)[0..1]
+    +riskClass: Integer[0..1] // enumeration 0..7 (G3.2, G3.4(c))
   ** G3.4(c)
-    +referTo: <<BasicProfile>> OrganizationProfile
+    +referTo: OrganizationProfile
   }
   
   class FeesAndChargesSection {
