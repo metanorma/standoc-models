@@ -12,7 +12,9 @@ repositories; their commit histories are preserved here.
 The shared RNC/RNG grammar hub (formerly `metanorma-model-iso`). The
 shared-layer grammars are named after their layer — `standoc.rnc`,
 `standoc-presentation.rnc` — with per-flavour grammars alongside. It
-aggregates external bibliographic and base models as git submodules.
+aggregates the unified relaton-models repository (all former
+per-flavour relaton-model-* repos, merged 2026-08) plus basicdoc and
+requirements models as git submodules.
 
 `<flavour>/`::
 Per-flavour information models (LutaML) and documentation, one directory
