@@ -18,9 +18,13 @@ cp basicdoc-models/grammars/basicdoc.rnc .
 cp -r basicdoc-models/grammars/mathml .
 cp metanorma-requirements-models/grammars/reqt.rnc .
 
-# relaton-<flavor>.rnc flavour overlays are tracked here (absorbed from the
-# former per-flavour relaton-model-* repositories, now unified upstream in
-# relaton/relaton-models).
+# relaton-<flavour>.rnc flavour overlays come from the unified
+# relaton-models repository (each former relaton-model-<flavour> repo lives
+# under <flavour>/ there since the 2026-08 unification).
+for f in relaton-models/*/grammars/relaton-*.rnc
+do
+  cp "$f" .
+done
 
 # a failed copy above would otherwise surface only as an unrelated trang
 # "file not found" error at compile time

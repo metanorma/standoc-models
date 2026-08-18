@@ -5,6 +5,7 @@
 /grammars/basicdoc.rnc
 /grammars/reqt.rnc
 /grammars/mathml/
+/grammars/relaton-*.rnc
 
 # Generated artifacts (committed ones stay tracked; the index wins over ignore)
 /grammars/*.rng
