@@ -6,7 +6,7 @@
 
 require "fileutils"
 
-repo_root = File.expand_path("../..", __dir__) # scripts -> repo root
+repo_root = File.expand_path("..", __dir__) # scripts -> repo root
 grammars = File.join(repo_root, "grammars")
 
 Dir.glob(File.join(grammars, "*", "grammars", "*.rnc")).each do |file|
