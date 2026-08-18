@@ -1,0 +1,124 @@
+
+diagram StandardDoc_Blocks_New {
+  title 'StandardDocument Blocks'
+  caption 'Block elements of StandardDocument new to BasicDocument'
+
+  include basic_document/refs/ReferenceElement.lml
+  include basic_document/block/BasicBlockNoNotes.lml
+  include metanorma_requirements/block/Provision.lml
+  include standard_document/block/StandardBlockNoNotes.lml
+  include standard_document/block/ImageMapBlock.lml
+  include standard_document/block/StandardFigureBlock.lml
+  include standard_document/block/ToC.lml
+  include standard_document/block/Form.lml
+  include standard_document/block/ElementName.lml
+  include standard_document/block/SvgMapBlock.lml
+  include standard_document/block/Passthrough.lml
+  include standard_document/block/SvgTargetType.lml
+  include standard_document/block/ImageMapAreaType.lml
+  include standard_document/block/ImageMapAreaTypeType.lml
+  include standard_document/block/ImageMapCoords.lml
+  include standard_document/block/ImageMapRadius.lml
+
+  association {
+    owner BasicBlockNoNotes
+    member StandardBlockNoNotes
+    owner_type inheritance
+  }
+  association {
+    owner StandardBlockNoNotes
+    member ToC
+    owner_type inheritance
+  }
+  association {
+    owner StandardBlockNoNotes
+    member Provision
+    owner_type inheritance
+  }
+  association {
+    owner StandardBlockNoNotes
+    member Form
+    owner_type inheritance
+  }
+  association {
+    owner ToC
+    member StandardUnorderedList
+    owner_type direct
+  }
+  association {
+    owner AmendBlock
+    member BibItemLocality
+    owner_type direct
+  }
+  association {
+    owner AmendBlock
+    member LocalityStack
+    owner_type direct
+  }
+  association {
+    owner AmendBlock
+    member ElementName
+    owner_type direct
+  }
+  association {
+    owner StandardBlockNoNotes
+    member Passthrough
+    owner_type inheritance
+  }
+  association {
+    owner StandardBlockNoNotes
+    member SvgMapBlock
+    owner_type inheritance
+  }
+  association {
+    owner SvgMapBlock
+    member StandardFigureBlock
+    owner_type direct
+  }
+  association {
+    owner SvgMapBlock
+    member SvgTargetType
+    owner_type direct
+  }
+  association {
+    owner SvgTargetType
+    member ReferenceElement
+    owner_type direct
+  }
+  association {
+    owner StandardBlockNoNotes
+    member ImageMapBlock
+    owner_type inheritance
+  }
+  association {
+    owner ImageMapBlock
+    member StandardFigureBlock
+    owner_type direct
+  }
+  association {
+    owner ImageMapBlock
+    member ImageMapAreaType
+    owner_type direct
+  }
+  association {
+    owner ImageMapAreaType
+    member ImageMapAreaTypeType
+    owner_type direct
+  }
+  association {
+    owner ImageMapAreaType
+    member ImageMapCoords
+    owner_type direct
+  }
+  association {
+    owner ImageMapAreaType
+    member ImageMapRadius
+    owner_type direct
+  }
+  association {
+    owner ImageMapAreaType
+    member ReferenceElement
+    owner_type direct
+  }
+
+}

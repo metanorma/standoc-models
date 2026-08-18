@@ -1,0 +1,33 @@
+diagram StandardDoc_StandardDocument {
+  title 'StandardDocument relationships'
+  caption 'Elements of the StandardDocument model'
+
+  include basic_document/BasicDocument.lml
+
+  include standard_document/StandardDocument.lml
+  include standard_document/StandardDocumentType.lml
+
+  include standard_document/sections/MiscContainer.lml
+  include standard_document/sections/BoilerplateType.lml
+
+  association {
+    owner BasicDocument
+    member StandardDocument
+    owner_type inheritance
+  }
+  association {
+    owner StandardDocument
+    member StandardDocumentType
+    owner_type direct
+  }
+  association {
+    owner StandardDocument
+    member BoilerplateType
+    owner_type direct
+  }
+  association {
+    owner StandardDocument
+    member MiscContainer
+    owner_type direct
+  }
+}

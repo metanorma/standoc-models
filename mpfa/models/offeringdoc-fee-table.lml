@@ -1,0 +1,167 @@
+diagram offeringdoc-fee-table {
+  
+  
+  
+  
+  class FeeTable {
+    +partA: UpfrontFee[0..2]
+    +partB: TransactionFee[0..*]
+    +partC: ConstituentFundFee[0..*]
+    +partD: BasicFeeItem[0..*]
+    +partE: BasicFeeItem[0..*]
+    +terminology: <<Terms>> Terms
+    +guidance: <<StandardDocument>> ClauseSection
+  }
+  
+  association {
+    owner FeeTable
+    member UpfrontFee
+    owner_type direct
+  }
+  association {
+    owner FeeTable
+    member TransactionFee
+    owner_type direct
+  }
+  association {
+    owner FeeTable
+    member ConstituentFundFee
+    owner_type direct
+  }
+  association {
+    owner FeeTable
+    member BasicFeeItem
+    owner_type direct
+  }
+  
+  class FeeValue {
+    +float: Float
+    +percentage: Float
+    +baseAsset
+  }
+  
+  class FeeClass {
+    +audiences: FeeAudience[1..*]
+  }
+  enum FeeAudience <<enumeration>>{
+    employeeOrPersonalMember
+    selfEmployedPerson
+    individualEmployeeMember
+  }
+  association {
+    owner FeeClass
+    member FeeAudience
+    owner_type direct
+  }
+  
+  class BasicFeeItem {
+    +description: String
+    +value: FeeValue
+    +class: FeeClass[0..*]
+  }
+  
+  association {
+    owner BasicFeeItem
+    member FeeValue
+    owner_type direct
+  }
+  association {
+    owner BasicFeeItem
+    member FeeClass
+    owner_type direct
+  }
+  
+  **  Part A
+  class UpfrontFee {
+    +type: UpfrontFeeType
+  	+payableBy: PayableEntity[0..1]
+  }
+  
+  association {
+    owner BasicFeeItem
+    member UpfrontFee
+    owner_type inheritance
+  }
+  association {
+    owner UpfrontFee
+    member PayableEntity
+    owner_type direct
+  }
+  
+  enum UpfrontFeeType <<enumeration>>{
+  	joiningFee
+  	annualFee
+  }
+  
+  association {
+    owner UpfrontFee
+    member UpfrontFeeType
+    owner_type direct
+  }
+  
+  **  Part B
+  class TransactionFee {
+  	+fundName: String
+    +type: TransactionFeeType
+  	+payableBy: PayableEntity[0..1]
+  }
+  association {
+    owner TransactionFee
+    member PayableEntity
+    owner_type direct
+  }
+  association {
+    owner BasicFeeItem
+    member TransactionFee
+    owner_type inheritance
+  }
+  
+  enum TransactionFeeType <<enumeration>>{
+  	contribution_charge
+  	offer_spread
+  	bid_spread
+  	withdrawal_charge
+  }
+  
+  association {
+    owner TransactionFee
+    member TransactionFeeType
+    owner_type direct
+  }
+  
+  **  Part C
+  class ConstituentFundFee {
+  ** Disclosure Code "Other expenses" allow fees not bound to funds
+  	+fundName: String[0..*]
+    +type: ConstituentFundFeeType
+  	+payableBy: PayableEntity[0..1]
+  }
+  
+  association {
+    owner BasicFeeItem
+    member ConstituentFundFee
+    owner_type inheritance
+  }
+  association {
+    owner ConstituentFundFee
+    member PayableEntity
+    owner_type direct
+  }
+  
+  enum ConstituentFundFeeType <<enumeration>>{
+  	managementFees
+  	guaranteeCharge
+  	other
+  }
+  association {
+    owner ConstituentFundFee
+    member ConstituentFundFeeType
+    owner_type direct
+  }
+  
+  class PayableEntity {
+  }
+  
+  
+  
+}

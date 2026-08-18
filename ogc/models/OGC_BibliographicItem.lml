@@ -1,0 +1,132 @@
+diagram OGC_BibliographicItem {
+  
+  
+  
+  class BibliographicItem <<StandardDocument>>{
+  
+  }
+  
+  class OgcBibliographicItem {
+      +projectGroup: OgcProjectGroup[1..*]
+      +type: OgcDocumentType
+      +subtype: OgcDocumentSubType[0..1]
+      +title: FormattedString
+  }
+  
+  class OgcProjectGroup{
+      +committee: OgcCommittee
+      +subcommittee: OgcSubGroup[0..1]
+      +workgroup: OgcSubGroup[0..1]
+  }
+  
+  enum OgcCommittee <<enumeration>>{
+      technical
+      planning
+      strategic-member-advisory
+  }
+  
+  class OgcSubGroup{
+      +type: String[0..1]
+      +number: Integer[0..1]
+      +name: String
+  }
+  
+  class DocumentStatus{
+      +status: OgcStatusType
+  }
+  
+  enum OgcStatusType <<enumeration>>{
+      swg-draft
+      oab-review
+      public-rfc
+      tc-vote
+      published
+      deprecated
+      retired
+  }
+  
+  
+  enum OgcDocumentType <<enumeration>>{
+  abstract-specification-topic
+  best-practice
+  change-request-supporting-document
+  community-practice
+  community-standard
+  discussion-paper
+  engineering-report
+  other
+  policy
+  reference-model
+  release-notes
+  standard
+  user-guide
+  white-paper
+  }
+  
+  enum OgcDocumentSubType <<enumeration>> {
+  conceptual-model
+  conceptual-model-and-encoding
+  conceptual-model-and-implementation
+  encoding
+  extension
+  implementation
+  profile
+  profile-with-extension
+  general
+  encoding
+  extension
+  profile
+  profile-with-extension
+  test-suite
+  }
+  
+  
+  
+  
+  
+  
+  association {
+    owner BibliographicItem
+    member OgcBibliographicItem
+    owner_type inheritance
+  }
+  
+  association {
+    owner OgcBibliographicItem
+    member OgcProjectGroup
+    owner_type direct
+  }
+  association {
+    owner OgcBibliographicItem
+    member OgcDocumentType
+    owner_type direct
+  }
+  association {
+    owner OgcBibliographicItem
+    member OgcDocumentSubType
+    owner_type direct
+  }
+  association {
+    owner OgcBibliographicItem
+    member DocumentStatus
+    owner_type direct
+  }
+  
+  association {
+    owner OgcProjectGroup
+    member OgcCommittee
+    owner_type direct
+  }
+  association {
+    owner OgcProjectGroup
+    member OgcSubGroup
+    owner_type direct
+  }
+  
+  association {
+    owner DocumentStatus
+    member OgcStatusType
+    owner_type direct
+  }
+  
+}

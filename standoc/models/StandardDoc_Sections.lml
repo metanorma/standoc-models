@@ -1,0 +1,117 @@
+diagram StandardDoc_Sections {
+  title 'StandardDocument Sections'
+  caption 'Section elements of StandardDocument'
+
+
+  include basic_document/sections/BasicSection.lml
+  include standard_document/block/StandardBlockNoNotes.lml
+  include basic_document/sections/HierarchicalSection.lml
+  include relaton/ReducedBibliographicItem.lml
+  include standard_document/sections/StandardSection.lml
+  include standard_document/sections/StandardHierarchicalSection.lml
+  include standard_document/sections/Abstract.lml
+  include standard_document/sections/Foreword.lml
+  include standard_document/sections/Introduction.lml
+  include standard_document/sections/Acknowledgements.lml
+  include standard_document/sections/StandardContentSection.lml
+  include standard_document/sections/ClauseSection.lml
+  include standard_document/sections/ClauseHierarchicalSection.lml
+  include standard_document/sections/AnnexSection.lml
+  include standard_document/sections/StandardReferencesSection.lml
+  include standard_document/sections/NormativeType.lml
+  include standard_document/sections/FloatingTitle.lml
+  include standard_document/block/StandardBibliographicItem.lml
+
+  association {
+    owner BasicSection
+    member StandardSection
+    owner_type inheritance
+  }
+  association {
+    owner BasicSection
+    member HierarchicalSection
+    owner_type inheritance
+  }
+  association {
+    owner ReducedBibliographicItem
+    member StandardBibliographicItem
+    owner_type inheritance
+  }
+  association {
+    owner StandardSection
+    member NormativeType
+    owner_type direct
+  }
+  association {
+    owner StandardSection
+    member StandardHierarchicalSection
+    owner_type inheritance
+  }
+  association {
+    owner HierarchicalSection
+    member StandardHierarchicalSection
+    owner_type inheritance
+  }
+  association {
+    owner StandardSection
+    member ClauseSection
+    owner_type inheritance
+  }
+  association {
+    owner StandardSection
+    member AnnexSection
+    owner_type inheritance
+  }
+  association {
+    owner StandardSection
+    member StandardReferencesSection
+    owner_type inheritance
+  }
+  association {
+    owner StandardReferencesSection
+    member StandardBibliographicItem
+    owner_type direct
+  }
+
+  association {
+    owner StandardHierarchicalSection
+    member StandardContentSection
+    owner_type inheritance
+  }
+
+  association {
+    owner StandardContentSection
+    member Abstract
+    owner_type inheritance
+  }
+  association {
+    owner StandardContentSection
+    member Foreword
+    owner_type inheritance
+  }
+  association {
+    owner StandardContentSection
+    member Introduction
+    owner_type inheritance
+  }
+  association {
+    owner StandardContentSection
+    member Acknowledgements
+    owner_type inheritance
+  }
+  association {
+    owner ClauseSection
+    member ClauseHierarchicalSection
+    owner_type inheritance
+  }
+  association {
+    owner StandardBlockNoNotes
+    member FloatingTitle
+    owner_type inheritance
+  }
+  association {
+    owner StandardSection
+    member FloatingTitle
+    owner_type inheritance
+  }
+}

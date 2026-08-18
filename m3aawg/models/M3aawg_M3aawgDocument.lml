@@ -1,0 +1,83 @@
+diagram M3aawg_M3aawgDocument {
+  
+  
+  
+  class StandardDocument <<StandardDocument>> {
+  
+  }
+  
+  class M3Document{
+      +bibdata: M3DBibliographicItem
+      +foreword: HiererchicalSection[0..1]
+      +introduction: HiererchicalSection[0..1]
+      +sections: ClauseSection[1..*]
+      +annex: AnnexSection[0..*]
+  }
+  
+  class BibliographicItem <<StandardDocument>>{
+  
+  }
+  
+  class M3DBibliographicItem{
+      +committee: M3Committee
+      +type: M3DocumentType
+  }
+  
+  class M3Committee{
+      +type: M3CommitteeType
+      +name: String
+  }
+  
+  enum M3CommitteeType <<enumeration>>{
+      technical
+      provisional
+  }
+  
+  enum M3DocumentType <<enumeration>>{
+      guidance
+      proposal
+      standard
+      report
+      whitepaper
+      charter
+      policy
+      glossary
+      case_study
+  }
+  
+  
+  
+  association {
+    owner StandardDocument
+    member M3Document
+    owner_type inheritance
+  }
+  association {
+    owner BibliographicItem
+    member M3DBibliographicItem
+    owner_type inheritance
+  }
+  association {
+    owner M3Document
+    member M3DBibliographicItem
+    owner_type direct
+  }
+  
+  association {
+    owner M3DBibliographicItem
+    member M3Committee
+    owner_type direct
+  }
+  association {
+    owner M3DBibliographicItem
+    member M3DocumentType
+    owner_type direct
+  }
+  
+  association {
+    owner M3Committee
+    member M3CommitteeType
+    owner_type direct
+  }
+  
+}

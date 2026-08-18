@@ -1,0 +1,32 @@
+diagram offeringdoc-bibliography {
+  
+  
+  
+  class MpfaBibliographicItem <<Bibliography>>{
+   +schemeName: String
+   +status: MpfaDocStatus
+  }
+  
+  enum MpfaDocStatus <<enumeration>>{
+    internal_draft
+    working_draft
+    committee_draft
+    approval_draft
+    final_draft
+    published
+    withdrawn
+  }
+  
+  
+  association {
+    owner BibliographicItem
+    member MpfaBibliographicItem
+    owner_type inheritance
+  }
+  association {
+    owner MpfaBibliographicItem
+    member MpfaDocStatus
+    owner_type direct
+  }
+  
+}

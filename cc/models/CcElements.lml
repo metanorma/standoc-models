@@ -1,0 +1,22 @@
+diagram CcElements {
+  title 'CalConnect Elements'
+  caption 'Elements of CalConnect Standard Model'
+
+
+  include basic_document/TextElement.lml
+  include basic_document/IdElement.lml
+  include cc_document/elements/CcKeyword.lml
+  include cc_document/elements/CcFigure.lml
+
+  association {
+    owner TextElement
+    member CcKeyword
+    owner_type inheritance
+  }
+
+  association {
+    owner IdElement
+    member CcFigure
+    owner_type inheritance
+  }
+}
