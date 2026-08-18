@@ -3,7 +3,7 @@
 files:
   - ../grammars/basicdoc.rnc
   - ../grammars/biblio.rnc
-  - ../grammars/biblio-standdoc.rnc
+  - ../grammars/biblio-standoc.rnc
   - ../grammars/biblio-presentation.rnc
   - ../grammars/standoc.rnc
   - ../grammars/gbstandard.rnc
