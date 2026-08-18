@@ -22,9 +22,5 @@ diagram offeringdoc-data-types {
   
   
   
-  Uri -[hidden]- String
-  String -[hidden]- Iso8601DateTime
-  Iso8601DateTime -[hidden]- Iso15924Code
-  Iso15924Code -[hidden]- Iso639Code
   
 }
