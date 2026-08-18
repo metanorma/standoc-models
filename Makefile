@@ -3,7 +3,9 @@
 # One Makefile for the whole monorepo. Per-flavour phony targets exist for
 # CI parallelism: `make bipm`, or `make all` for everything.
 
-FLAVORS := bipm bsi cc csa gb ieee iho iso itu m3aawg mpfa nist ogc ribose standoc un
+# Single source of truth for the flavour list — also read by deploy.yml
+# and the metanorma/ci path-filter job.
+FLAVORS := $(shell cat flavors.txt)
 
 .PHONY: all clean verify $(FLAVORS)
 
