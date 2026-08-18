@@ -22,6 +22,12 @@ $(foreach f,$(FLAVORS),$(eval $(call FLAVOR_RULES,$(f))))
 
 # Defensive content-type check: lutaml writes Graphviz dot source into .png
 # paths when misflagged; assert PNG magic bytes (metanorma/ci#302/#303).
+# Skipped on Windows: git-bash file(1) misreports Windows-Graphviz output
+# ("data"), so the gate would be false-red there.
+ifeq ($(OS),Windows_NT)
+verify:
+	@echo "verify: skipped on Windows"
+else
 verify:
 	@count=0; bad=0; \
 	for f in $(FLAVORS); do \
@@ -36,6 +42,7 @@ verify:
 	done; \
 	if [ $$bad -gt 0 ]; then echo "verify: $$bad of $$count PNG(s) invalid" >&2; exit 1; fi; \
 	echo "verify: $$count PNG file(s) OK"
+endif
 
 clean:
 	rm -f $(FLAVORS:%=%/images/*.png)
