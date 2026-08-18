@@ -1,0 +1,69 @@
+diagram ItuStandardDocument {
+  
+  
+  
+  class StandardDocument <<StandardDocument>> {
+  
+  }
+  
+  class OrderedList <<BasicDocument>> {
+  }
+  
+  class ItuOrderedList {
+    +class: ItuOrderedListClass[0..*]
+  }
+  
+  enum ItuOrderedListClass <<enumeration>> {
+    steps
+  }
+  
+  
+  class ItuStandardDocument {
+      +bibdata: ItuBibliographicItem
+      +foreword: HierarchicalSection[0..1]
+      +introduction: HierarchicalSection[0..1]
+      +sections: ClauseSection[1..*]
+      +annex: AnnexSection[0..*]
+  }
+  
+  
+  class IdElement <<BasicDocument>>{
+  
+  }
+  
+  class Figure{
+      +source: String[0..1]
+      +name: LocalizedString[0..1]
+      +note: ParagraphWithFootnote[0..*]
+      +figure: Figure[0..*]
+      +definitions: DefinitionList[0..1]
+      +pre: String[0..1]
+      +content: TextElement[0..*]
+  }
+  
+  
+  
+  
+  association {
+    owner StandardDocument
+    member ItuStandardDocument
+    owner_type inheritance
+  }
+  
+  association {
+    owner IdElement
+    member Figure
+    owner_type inheritance
+  }
+  association {
+    owner OrderedList
+    member ItuOrderedList
+    owner_type inheritance
+  }
+  association {
+    owner ItuOrderedList
+    member ItuOrderedListClass
+    owner_type direct
+  }
+  
+}

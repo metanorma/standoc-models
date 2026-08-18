@@ -1,0 +1,242 @@
+diagram StandardDoc_Terms {
+  title 'StandardDocument Terms and Definitions'
+  caption 'Terms and Definitions elements of StandardDocument'
+
+
+  include standard_document/sections/ClauseSection.lml
+  include standard_document/sections/DefinitionSection.lml
+  include standard_document/sections/TermsSection.lml
+  include standard_document/terms/TermCollection.lml
+  include standard_document/terms/Term.lml
+  include standard_document/terms/Designation.lml
+  include standard_document/terms/NonVerbalRepresentation.lml
+  include standard_document/terms/VerbalExpression.lml
+  include standard_document/terms/ExpressionDesignation.lml
+  include standard_document/terms/ExpressionType.lml
+  include standard_document/terms/LetterSymbolDesignation.lml
+  include standard_document/terms/LetterSymbolType.lml
+  include standard_document/terms/TermDefinition.lml
+  include standard_document/terms/RelatedTerm.lml
+  include standard_document/terms/RelatedTermType.lml
+  include standard_document/terms/TermSource.lml
+  include standard_document/terms/TermSourceStatus.lml
+  include standard_document/terms/TermSourceType.lml
+  include standard_document/terms/DefinitionCollection.lml
+  include standard_document/terms/AbbreviationType.lml
+  include standard_document/terms/GrammarInfo.lml
+  include standard_document/terms/GrammarGender.lml
+  include standard_document/terms/GrammarNumber.lml
+  include standard_document/block/MultilingualRenderingType.lml
+  include standard_document/block/StandardNoteBlock.lml
+  include standard_document/block/StandardExampleBlock.lml
+  include standard_document/elements/StandardStemElement.lml
+  include basic_document/block/BasicBlock.lml
+  include basic_document/block/FigureBlock.lml
+  include basic_document/block/FormulaBlock.lml
+  include basic_document/block/TableBlock.lml
+  include basic_document/block/ParagraphBlock.lml
+  include basic_document/list/Definition.lml
+  include basic_document/list/DefinitionList.lml
+  include basic_document/list/OrderedList.lml
+  include basic_document/list/UnorderedList.lml
+  include basic_document/datatypes/Iso15924Code.lml
+  include basic_document/datatypes/Iso639Code.lml
+  include basic_document/datatypes/Iso3166Code.lml
+
+  association {
+    owner ClauseSection
+    member TermsSection
+    owner_type inheritance
+  }
+  association {
+    owner ClauseSection
+    member DefinitionSection
+    owner_type inheritance
+  }
+  association {
+    owner TermsSection
+    member TermCollection
+    owner_type direct
+  }
+  association {
+    owner DefinitionSection
+    member DefinitionCollection
+    owner_type direct
+  }
+  association {
+    owner TermCollection
+    member Term
+    owner_type direct
+  }
+  association {
+    owner Term
+    member BasicBlock
+    owner_type direct
+  }
+  association {
+    owner Term
+    member StandardNoteBlock
+    owner_type direct
+  }
+  association {
+    owner Term
+    member StandardExampleBlock
+    owner_type direct
+  }
+  association {
+    owner Term
+    member MultilingualRenderingType
+    owner_type direct
+  }
+  association {
+    owner Term
+    member TermDefinition
+    owner_type direct
+  }
+  association {
+    owner Term
+    member Designation
+    owner_type direct
+  }
+  association {
+    owner Designation
+    member Iso3166Code
+    owner_type direct
+  }
+  association {
+    owner Designation
+    member ExpressionDesignation
+    owner_type direct
+  }
+  association {
+    owner Designation
+    member LetterSymbolDesignation
+    owner_type direct
+  }
+  association {
+    owner LetterSymbolDesignation
+    member LetterSymbolType
+    owner_type direct
+  }
+  association {
+    owner Designation
+    member GraphicalSymbolDesignation
+    owner_type direct
+  }
+  association {
+    owner LetterSymbolDesignation
+    member StandardStemElement
+    owner_type direct
+  }
+  association {
+    owner ExpressionDesignation
+    member AbbreviationType
+    owner_type direct
+  }
+  association {
+    owner ExpressionDesignation
+    member ExpressionType
+    owner_type direct
+  }
+  association {
+    owner ExpressionDesignation
+    member Iso15924Code
+    owner_type direct
+  }
+  association {
+    owner ExpressionDesignation
+    member Iso639Code
+    owner_type direct
+  }
+  association {
+    owner ExpressionDesignation
+    member GrammarInfo
+    owner_type direct
+  }
+  association {
+    owner GrammarInfo
+    member GrammarGender
+    owner_type direct
+  }
+  association {
+    owner GrammarInfo
+    member GrammarNumber
+    owner_type direct
+  }
+  association {
+    owner TermDefinition
+    member VerbalExpression
+    owner_type direct
+  }
+  association {
+    owner VerbalExpression
+    member ParagraphBlock
+    owner_type direct
+  }
+  association {
+    owner VerbalExpression
+    member UnorderedList
+    owner_type direct
+  }
+  association {
+    owner VerbalExpression
+    member OrderedList
+    owner_type direct
+  }
+  association {
+    owner VerbalExpression
+    member DefinitionList
+    owner_type direct
+  }
+  association {
+    owner TermDefinition
+    member NonVerbalRepresentation
+    owner_type direct
+  }
+  association {
+    owner NonVerbalRepresentation
+    member FigureBlock
+    owner_type direct
+  }
+  association {
+    owner NonVerbalRepresentation
+    member FormulaBlock
+    owner_type direct
+  }
+  association {
+    owner NonVerbalRepresentation
+    member TableBlock
+    owner_type direct
+  }
+  association {
+    owner Term
+    member TermSource
+    owner_type direct
+  }
+  association {
+    owner TermSource
+    member TermSourceStatus
+    owner_type direct
+  }
+  association {
+    owner TermSource
+    member TermSourceType
+    owner_type direct
+  }
+  association {
+    owner Term
+    member RelatedTerm
+    owner_type direct
+  }
+  association {
+    owner RelatedTerm
+    member RelatedTermType
+    owner_type direct
+  }
+
+  association {
+    owner DefinitionCollection
+    member Definition
+    owner_type direct
+  }
+}

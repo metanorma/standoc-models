@@ -1,0 +1,54 @@
+diagram StandardDoc_Terms {
+
+  include standard_document/terms/TermCollection.lml
+  include standard_document/terms/Term.lml
+  include standard_document/terms/TermDefinition.lml
+  include standard_document/terms/RelatedTerm.lml
+  include standard_document/terms/RelatedTermType.lml
+  include standard_document/terms/TermSource.lml
+  include standard_document/terms/TermSourceStatus.lml
+  include standard_document/terms/DefinitionCollection.lml
+  include basic_document/list/Definition.lml
+
+  association {
+    owner TermCollection
+    member Term
+    owner_type direct
+  }
+  association {
+    owner Term
+    member TermDefinition
+    owner_type direct
+  }
+  association {
+    owner TermDefinition
+    member Definition
+    owner_type direct
+  }
+  association {
+    owner Term
+    member TermSource
+    owner_type direct
+  }
+  association {
+    owner TermSource
+    member TermSourceStatus
+    owner_type direct
+  }
+  association {
+    owner Term
+    member RelatedTerm
+    owner_type direct
+  }
+  association {
+    owner RelatedTerm
+    member RelatedTermType
+    owner_type direct
+  }
+
+  association {
+    owner DefinitionCollection
+    member Definition
+    owner_type direct
+  }
+}

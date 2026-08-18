@@ -1,0 +1,85 @@
+diagram StandardDoc_Metadata {
+  title 'StandardDocument Metadata'
+  caption 'Metadata elements of StandardDocument'
+
+  include standard_document/block/StandardAmendBlock.lml
+  include basic_document/metadata/BibDataExtensionType.lml
+  include basic_document/metadata/BibData.lml
+  include relaton/DocumentRelation.lml
+  include relaton/ReducedBibliographicItem.lml
+  include standard_document/metadata/StandardReducedBibliographicItem.lml
+  include standard_document/metadata/StandardBibData.lml
+  include standard_document/metadata/StandardDocumentRelation.lml
+  include standard_document/metadata/StandardBibDataExtensionType.lml
+  include standard_document/metadata/EditorialGroupType.lml
+  include standard_document/metadata/TechnicalCommitteeType.lml
+  include standard_document/metadata/IcsType.lml
+  include standard_document/metadata/StructuredIdentifierType.lml
+
+  association {
+    owner BibData
+    member StandardBibData
+    owner_type inheritance
+  }
+  association {
+    owner DocumentRelation
+    member StandardDocumentRelation
+    owner_type inheritance
+  }
+  association {
+    owner ReducedBibliographicItem
+    member StandardReducedBibliographicItem
+    owner_type inheritance
+  }
+  association {
+    owner StandardBibData
+    member StandardAmendBlock
+    owner_type direct
+  }
+  association {
+    owner StandardReducedBibliographicItem
+    member StandardAmendBlock
+    owner_type direct
+  }
+  association {
+    owner StandardBibData
+    member StandardDocumentRelation
+    owner_type direct
+  }
+  association {
+    owner StandardDocumentRelation
+    member StandardReducedBibliographicItem
+    owner_type direct
+  }
+  association {
+    owner BibDataExtensionType
+    member StandardBibDataExtensionType
+    owner_type inheritance
+  }
+  association {
+    owner StandardBibData
+    member StandardBibDataExtensionType
+    owner_type direct
+  }
+  association {
+    owner StandardBibDataExtensionType
+    member StructuredIdentifierType
+    owner_type direct
+  }
+  association {
+    owner StandardBibDataExtensionType
+    member IcsType
+    owner_type direct
+  }
+  association {
+    owner StandardBibDataExtensionType
+    member EditorialGroupType
+    owner_type direct
+  }
+  association {
+    owner EditorialGroupType
+    member TechnicalCommitteeType
+    owner_type direct
+  }
+
+}

@@ -1,0 +1,71 @@
+diagram Rsd_StandardDocument {
+  
+  
+  class StandardDocument <<StandardDocument>> {
+  
+  }
+  
+  class RiboseStandardDocument{
+      +bibdata: RiboseBibliographicItem
+      +foreword: HierarchicalSection[0..1]
+      +introduction: HierarchicalSection[0..1]
+      +sections: ClauseSection[1..*]
+      +annex: AnnexSection[0..*]
+  }
+  
+  class BibliographicItem <<StandardDocument>>{
+  
+  }
+  
+  class RiboseBibliographicItem{
+      +type: RiboseDocumentType
+      +security: String[0..1]
+  }
+  
+  class TextElement <<Basicdoc>>{
+  
+  }
+  
+  class Keyword{
+  
+  }
+  
+  enum RiboseDocumentType <<enumeration>>{
+      code
+      presentation
+      proposal
+      standard
+      report
+      specification
+  }
+  
+  
+  
+  association {
+    owner StandardDocument
+    member RiboseStandardDocument
+    owner_type inheritance
+  }
+  association {
+    owner BibliographicItem
+    member RiboseBibliographicItem
+    owner_type inheritance
+  }
+  association {
+    owner RiboseStandardDocument
+    member RiboseBibliographicItem
+    owner_type direct
+  }
+  association {
+    owner RiboseBibliographicItem
+    member RiboseDocumentType
+    owner_type direct
+  }
+  
+  association {
+    owner TextElement
+    member Keyword
+    owner_type inheritance
+  }
+  
+}

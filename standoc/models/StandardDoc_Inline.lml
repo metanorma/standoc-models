@@ -1,0 +1,225 @@
+diagram StandardDoc_Inline {
+  title 'StandardDocument Inline'
+  caption 'Inline elements of StandardDocument'
+
+  include standard_document/terms/Concept.lml
+  include basic_document/refs/ReferenceElement.lml
+  include basic_document/refs/ReferenceToIdElement.lml
+  include basic_document/refs/ReferenceToLinkElement.lml
+  include basic_document/refs/ReferenceToCitationElement.lml
+  include basic_document/elements/PageBreakElement.lml
+  include basic_document/elements/TextElement.lml
+  include basic_document/elements/StemElement.lml
+  include basic_document/elements/BasicElement.lml
+  include basic_document/refs/Footnote.lml
+  include relaton/LocalityStack.lml
+  include standard_document/refs/ReferenceToTermbase.lml
+  include standard_document/refs/ReferenceToTerm.lml
+  include standard_document/refs/StandocReferenceToIdElement.lml
+  include standard_document/refs/StandocReferenceToLinkElement.lml
+  include standard_document/refs/StandocReferenceToCitationElement.lml
+  include standard_document/refs/StandocReferenceToCitationElementWithConnective.lml
+  include standard_document/refs/StandocReferenceToCitationElementStack.lml
+  include standard_document/refs/StandocFootnote.lml
+  include standard_document/refs/XrefCaseType.lml
+  include standard_document/refs/XrefStyleType.lml
+  include standard_document/refs/ErefStyleType.lml
+  include standard_document/refs/XrefConnectiveType.lml
+  include standard_document/refs/XrefTargetType.lml
+  include standard_document/refs/StandocLocalityStack.lml
+  include standard_document/elements/StandardPageBreakElement.lml
+  include standard_document/elements/OrientationType.lml
+  include standard_document/elements/Add.lml
+  include standard_document/elements/Date.lml
+  include standard_document/elements/Del.lml
+  include standard_document/elements/Span.lml
+  include standard_document/elements/StandardStemElement.lml
+  include standard_document/elements/ColumnBreak.lml
+  include standard_document/elements/Passthrough.lml
+
+  association {
+    owner ReferenceElement
+    member ReferenceToIdElement
+    owner_type inheritance
+  }
+  association {
+    owner ReferenceToIdElement
+    member Footnote
+    owner_type inheritance
+  }
+  association {
+    owner ReferenceElement
+    member ReferenceToLinkElement
+    owner_type inheritance
+  }
+  association {
+    owner LocalityStack
+    member StandocLocalityStack
+    owner_type inheritance
+  }
+  association {
+    owner ReferenceElement
+    member ReferenceToCitationElement
+    owner_type inheritance
+  }
+  association {
+    owner ReferenceToIdElement
+    member ReferenceToTermSource
+    owner_type inheritance
+  }
+  association {
+    owner ReferenceToTerm
+    member ReferenceToTermSource
+    owner_type direct
+  }
+  association {
+    owner ReferenceToTermSource
+    member ReferenceToTermbase
+    owner_type inheritance
+  }
+  association {
+    owner ReferenceToTermSource
+    member ReferenceToCitationElement
+    owner_type inheritance
+  }
+  association {
+    owner StandocReferenceToIdElement
+    member XrefTargetType
+    owner_type direct
+  }
+  association {
+    owner XrefTargetType
+    member XrefConnectiveType
+    owner_type direct
+  }
+  association {
+    owner StandocReferenceToIdElement
+    member Concept
+    owner_type direct
+  }
+  association {
+    owner StandocReferenceToCitationElement
+    member Concept
+    owner_type direct
+  }
+  association {
+    owner Footnote
+    member StandocFootnote
+    owner_type inheritance
+  }
+  association {
+    owner StandocReferenceToCitationElement
+    member StandocReferenceToCitationElementWithConnective
+    owner_type inheritance
+  }
+  association {
+    owner StandocReferenceToCitationElementStack
+    member StandocReferenceToCitationElement
+    owner_type direct
+  }
+  association {
+    owner StandocReferenceToCitationElement
+    member StandocLocalityStack
+    owner_type direct
+  }
+  association {
+    owner ReferenceElement
+    member ReferenceToTermbase
+    owner_type inheritance
+  }
+  association {
+    owner ReferenceToTermbase
+    member Concept
+    owner_type direct
+  }
+  association {
+    owner ReferenceElement
+    member ReferenceToTerm
+    owner_type inheritance
+  }
+  association {
+    owner ReferenceToIdElement
+    member StandocReferenceToIdElement
+    owner_type inheritance
+  }
+  association {
+    owner ReferenceToLinkElement
+    member StandocReferenceToLinkElement
+    owner_type inheritance
+  }
+  association {
+    owner ReferenceToCitationElement
+    member StandocReferenceToCitationElement
+    owner_type inheritance
+  }
+  association {
+    owner StandocReferenceToIdElement
+    member XrefCaseType
+    owner_type direct
+  }
+  association {
+    owner StandocReferenceToIdElement
+    member XrefStyleType
+    owner_type direct
+  }
+  association {
+    owner StandocReferenceToCitationElement
+    member ErefStyleType
+    owner_type direct
+  }
+  association {
+    owner BasicElement
+    member PageBreakElement
+    owner_type inheritance
+  } 
+  association {
+    owner BasicElement
+    member ColumnBreak
+    owner_type inheritance
+  } 
+  association {
+    owner PageBreakElement
+    member StandardPageBreakElement
+    owner_type inheritance
+  }
+  association {
+    owner StandardPageBreakElement
+    member OrientationType
+    owner_type direct
+  }
+  association {
+    owner TextElement
+    member Span
+    owner_type inheritance
+  }
+  association {
+    owner TextElement
+    member Add
+    owner_type inheritance
+  }
+  association {
+    owner TextElement
+    member Date
+    owner_type inheritance
+  }
+  association {
+    owner TextElement
+    member Passthrough
+    owner_type inheritance
+  }
+  association {
+    owner TextElement
+    member Del
+    owner_type inheritance
+  }
+  association {
+    owner TextElement
+    member StemElement
+    owner_type inheritance
+  }
+  association {
+    owner StemElement
+    member StandardStemElement
+    owner_type inheritance
+  }
+}
