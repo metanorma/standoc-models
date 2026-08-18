@@ -1,13 +1,19 @@
-= Metanorma M3AAWG Document ("M3D") Models
+= Metanorma M3AAWG document models
 
-image:https://github.com/metanorma/metanorma-model-m3d/workflows/make/badge.svg["Build Status", link="https://github.com/metanorma/metanorma-model-m3d/actions?query=workflow%3Amake"]
+Information models for Messaging, Malware and Mobile Anti-Abuse Working Group (M3AAWG) best practices, based on the Metanorma StandardDocument ("StanDoc") model.
 
-This is where we keep the Metanorma M3D model definitions.
 
-The M3AAWG Document ("`M3D`") format is an instance of the
-https://github.com/metanorma/metanorma-model-standoc[Metanorma StandardDocument model].
-Details of the general model can be found on its page.
+This directory is the `m3aawg` flavour of the
+https://github.com/metanorma/standoc-models[standoc-models] monorepo (formerly
+the standalone `metanorma-model-m3d` repository).
 
-== M3AAWG Document Model
+== Layout
 
-image::images/M3aawg_M3aawgDocument.png[]
+* `models/` — LML (`.lml`) model sources
+* `images/` — generated model diagrams, committed
+* `build-config.yml` — the flavour's schema set for LXR grammar-package
+  generation
+
+Diagrams regenerate from `models/` via the root `Makefile` (`make m3aawg`).
+Grammar sources live in `grammars/` at the monorepo root — see the root
+README.

@@ -1,23 +1,19 @@
-= Metanorma NIST Models
+= Metanorma NIST document models
 
-image:https://github.com/metanorma/metanorma-model-nist/workflows/make/badge.svg["Build Status", link="https://github.com/metanorma/metanorma-model-nist/actions?query=workflow%3Amake"]
-
-This is where we keep the Metanorma NIST model definitions.
-
-The NIST Standard Document format is an instance of the
-https://github.com/riboseinc/metanorma-model-standoc[Metanorma StandardDocument model].
-Details of the general model can be found on its page.
+Information models for NIST publications, based on the Metanorma StandardDocument ("StanDoc") model.
 
 
-== NIST Standard Document Model
+This directory is the `nist` flavour of the
+https://github.com/metanorma/standoc-models[standoc-models] monorepo (formerly
+the standalone `metanorma-model-nist` repository).
 
-image::images/nist-standard-document.png[]
+== Layout
 
-== NIST Bibliographic Item Model
+* `models/` — LML (`.lml`) model sources
+* `images/` — generated model diagrams, committed
+* `build-config.yml` — the flavour's schema set for LXR grammar-package
+  generation
 
-image::images/nist-bibliographic-item.png[]
-
-== Notes
-
-
-
+Diagrams regenerate from `models/` via the root `Makefile` (`make nist`).
+Grammar sources live in `grammars/` at the monorepo root — see the root
+README.

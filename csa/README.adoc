@@ -1,13 +1,19 @@
-= Metanorma-CSA Models
+= Metanorma CSA document models
 
-image:https://github.com/metanorma/metanorma-model-csa/workflows/make/badge.svg["Build Status", link="https://github.com/metanorma/metanorma-model-csa/actions?query=workflow%3Amake"]
+Information models for Cloud Security Alliance (CSA) documents, based on the Metanorma StandardDocument ("StanDoc") model.
 
-This is where we keep the Metanorma-CSA model definitions.
 
-The Metanorma CSA format is an instance of the
-https://github.com/metanorma/metanorma-model-standoc[Metanorma StandardDocument model].
-Details of the general model can be found on its page.
+This directory is the `csa` flavour of the
+https://github.com/metanorma/standoc-models[standoc-models] monorepo (formerly
+the standalone `metanorma-model-csa` repository).
 
-== CSA Document Model
+== Layout
 
-image::images/Csand_NormalDocument.png[]
+* `models/` — LML (`.lml`) model sources
+* `images/` — generated model diagrams, committed
+* `build-config.yml` — the flavour's schema set for LXR grammar-package
+  generation
+
+Diagrams regenerate from `models/` via the root `Makefile` (`make csa`).
+Grammar sources live in `grammars/` at the monorepo root — see the root
+README.

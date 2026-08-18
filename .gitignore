@@ -1,0 +1,23 @@
+# Vendored grammar inputs copied from submodule pins by grammars/make.sh
+/grammars/biblio.rnc
+/grammars/biblio-standoc.rnc
+/grammars/biblio-compile.rnc
+/grammars/basicdoc.rnc
+/grammars/reqt.rnc
+/grammars/mathml/
+
+# Generated artifacts (committed ones stay tracked; the index wins over ignore)
+/grammars/*.rng
+/grammars/versions.json
+
+# Local jing-trang checkouts/builds
+/grammars/jing-trang/
+/grammars/vendor/
+
+# Bundler
+Gemfile.lock
+
+# LXR / site build outputs
+*.lxr
+*.spa
+/_site/
