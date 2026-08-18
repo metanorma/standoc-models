@@ -21,4 +21,5 @@ Gemfile.lock
 # LXR / site build outputs
 *.lxr
 *.spa
+*.xsd
 /_site/
