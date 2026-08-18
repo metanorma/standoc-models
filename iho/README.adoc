@@ -1,18 +1,19 @@
-= Metanorma IHO Models
+= Metanorma IHO document models
 
-image:https://github.com/metanorma/metanorma-model-iho/workflows/make/badge.svg["Build Status", link="https://github.com/metanorma/metanorma-model-iho/actions?query=workflow%3Amake"]
+Information models for International Hydrographic Organization (IHO) publications, based on the Metanorma StandardDocument ("StanDoc") model.
 
-This is where we keep the Metanorma IHO model definitions.
 
-The IHO Standard Document format is an instance of the
-https://github.com/metanorma/metanorma-model-standoc[Metanorma StandardDocument model].
-Details of the general model can be found on its page.
+This directory is the `iho` flavour of the
+https://github.com/metanorma/standoc-models[standoc-models] monorepo (formerly
+the standalone `metanorma-model-iho` repository).
 
-== IHO Standard Document Model
+== Layout
 
-image::images/IhoStandardDocument.png[]
+* `models/` — LML (`.lml`) model sources
+* `images/` — generated model diagrams, committed
+* `build-config.yml` — the flavour's schema set for LXR grammar-package
+  generation
 
-== IHO Bibliographic Item Model
-
-image::images/IhoBibliographicItem.png[]
-
+Diagrams regenerate from `models/` via the root `Makefile` (`make iho`).
+Grammar sources live in `grammars/` at the monorepo root — see the root
+README.

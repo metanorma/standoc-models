@@ -1,19 +1,19 @@
-= Metanorma BSI Models
+= Metanorma BSI document models
 
-image:https://github.com/metanorma/metanorma-model-bsi/workflows/make/badge.svg["Build Status", link="https://github.com/metanorma/metanorma-model-bsi/actions?query=workflows%3Amake"]
-
-This is where we keep the Metanorma BSI model definitions.
-
-The BSI Standard Document format is an instance of the
-https://github.com/riboseinc/metanorma-model-iso[Metanorma ISO model].
-Details of the general model can be found on its page.
+Information models for British Standards Institution (BSI) standards, based on the Metanorma StandardDocument ("StanDoc") model.
 
 
-== BSI Standard Document Model
+This directory is the `bsi` flavour of the
+https://github.com/metanorma/standoc-models[standoc-models] monorepo (formerly
+the standalone `metanorma-model-bsi` repository).
 
-image::images/BsiStandardDocument.png[]
+== Layout
 
-== BSI Bibliographic Item Model
+* `models/` — LML (`.lml`) model sources
+* `images/` — generated model diagrams, committed
+* `build-config.yml` — the flavour's schema set for LXR grammar-package
+  generation
 
-image::images/BsiBibliographicItem.png[]
-
+Diagrams regenerate from `models/` via the root `Makefile` (`make bsi`).
+Grammar sources live in `grammars/` at the monorepo root — see the root
+README.

@@ -1,23 +1,19 @@
-= Metanorma GbDoc Models
+= Metanorma GB document models
 
-image:https://github.com/metanorma/metanorma-model-gb/workflows/make/badge.svg["Ubuntu Build Status", link="https://github.com/metanorma/metanorma-model-gb/actions?query=workflow=make"]
-This is where we keep the Metanorma GbDoc model definitions.
-
-The GbDoc format is an instance of the
-https://github.com/metanorma/isodoc-models[Metanorma IsoDoc model].
-
-Details of the parent model can be found on its page.
+Information models for Guobiao (GB) Chinese national standards, based on the Metanorma StandardDocument ("StanDoc") model.
 
 
-== GB Document
+This directory is the `gb` flavour of the
+https://github.com/metanorma/standoc-models[standoc-models] monorepo (formerly
+the standalone `metanorma-model-gb` repository).
 
-image::images/document.png[]
+== Layout
 
-== GB Metadata
+* `models/` — LML (`.lml`) model sources
+* `images/` — generated model diagrams, committed
+* `build-config.yml` — the flavour's schema set for LXR grammar-package
+  generation
 
-image::images/metadata.png[]
-
-
-== GB cover page elements
-
-image::images/gb-standard-coverpage-elements.png[]
+Diagrams regenerate from `models/` via the root `Makefile` (`make gb`).
+Grammar sources live in `grammars/` at the monorepo root — see the root
+README.

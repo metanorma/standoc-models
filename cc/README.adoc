@@ -1,25 +1,19 @@
-= Metanorma CalConnect Models
+= Metanorma CC document models
 
-image:https://github.com/metanorma/metanorma-model-cc/workflows/make/badge.svg["Build Status", link="https://github.com/metanorma/metanorma-model-cc/actions?workflow=make"]
+Information models for Ceremony and Culture documents, based on the Metanorma StandardDocument ("StanDoc") model.
 
 
-This is where we keep the Metanorma CalConnect model definitions.
+This directory is the `cc` flavour of the
+https://github.com/metanorma/standoc-models[standoc-models] monorepo (formerly
+the standalone `metanorma-model-cc` repository).
 
-The CalConnect Standard Document format is an instance of the
-https://github.com/metanorma/metanorma-model-standoc[Metanorma StandardDocument model].
-Details of the general model can be found on its page.
+== Layout
 
-== CalConnect Standard Document Model
+* `models/` — LML (`.lml`) model sources
+* `images/` — generated model diagrams, committed
+* `build-config.yml` — the flavour's schema set for LXR grammar-package
+  generation
 
-=== Document
-
-image::images/CcDocument.png[]
-
-=== Metadata
-
-image::images/CcMetadata.png[]
-
-=== Elements
-
-image::images/CcElements.png[]
-
+Diagrams regenerate from `models/` via the root `Makefile` (`make cc`).
+Grammar sources live in `grammars/` at the monorepo root — see the root
+README.

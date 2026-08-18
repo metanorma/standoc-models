@@ -1,87 +1,58 @@
-# GRAMMARS_PINNED=1: deterministic build from the checked-out submodule pins.
-# Skips all network updates and versions.json writing; requires submodules to
-# be initialized (CI checks out with submodules: recursive). Used by the CI
-# regeneration-parity gate.
-PINNED="${GRAMMARS_PINNED:-0}"
-maybe() { [ "$PINNED" = "1" ] || "$@"; }
+#!/usr/bin/env bash
+# Deterministic grammar build: vendor .rnc from the checked-out submodule
+# pins, compile RNC -> RNG with trang, validate with test.rb.
+#
+# This script never updates submodules and never writes versions.json;
+# run refresh-submodules.sh for that. Requires submodules to be initialized:
+#   git submodule update --init --recursive
+set -euo pipefail
+cd "$(dirname "$0")"
 
-# update tags...
-maybe git pull
-
-echo "Updating submodules..."
-
-maybe rm -f relaton-models/grammars/biblio.rng
-maybe rm -f basicdoc-models/grammars/basicdoc.rng
-maybe git submodule update --remote
-
-maybe sh -c 'echo "{" > versions.json'
-
-cd relaton-models/grammars
-maybe git checkout main
-maybe git pull
-maybe sh -c 'var=$(git tag --sort=committerdate | tail -1); echo "\"relaton-models\": \"$var\"," >> ../../versions.json'
-cd ../..
+# --- vendor grammar inputs from the submodule pins -------------------------
 cp relaton-models/grammars/biblio.rnc .
 cp relaton-models/grammars/biblio-standoc.rnc .
 cp relaton-models/grammars/biblio-compile.rnc .
-
-cd basicdoc-models/grammars
-maybe git checkout main
-maybe git pull
-maybe sh -c 'var=$(git tag --sort=committerdate | tail -1); echo "\"basicdoc-models\": \"$var\"," >> ../../versions.json'
-cd ../..
 cp basicdoc-models/grammars/basicdoc.rnc .
 # basicdoc.rnc references the W3C MathML grammar via `external "mathml/..."`;
 # vendor those sources so trang can resolve them at compile time.
 cp -r basicdoc-models/grammars/mathml .
-
-cd metanorma-requirements-models/grammars
-maybe git checkout main
-maybe git pull
-maybe sh -c 'var=$(git tag --sort=committerdate | tail -1); echo "\"metanorma-requirements-models\": \"$var\"," >> ../../versions.json'
-cd ../..
 cp metanorma-requirements-models/grammars/reqt.rnc .
 
-relaton_models="ieee iso iec bsi gb mpfa bipm w3c 3gpp csa cc ietf iho itu m3aawg nist ribose ogc cen ecma cie iana omg oasis jis etsi plateau ccsds un"
+# relaton-<flavor>.rnc flavour overlays are tracked here (absorbed from the
+# former per-flavour relaton-model-* repositories, now unified upstream in
+# relaton/relaton-models).
 
-for i in $relaton_models
-do
-  cd relaton-model-$i/grammars
-  maybe git checkout main
-  maybe git pull
-  maybe sh -c "var=\$(git tag --sort=committerdate | tail -1); echo \"\\\"relaton-model-$i\\\": \\\"\$var\\\",\" >> ../../versions.json"
-  cd ../..
-  cp relaton-model-$i/grammars/relaton-$i.rnc .
-done
-
-# a failed pull or copy above would otherwise surface only as an unrelated
-# trang "file not found" error at compile time
-for f in biblio.rnc biblio-standoc.rnc biblio-compile.rnc basicdoc.rnc reqt.rnc \
-  $(for i in $relaton_models; do echo relaton-$i.rnc; done)
+# a failed copy above would otherwise surface only as an unrelated trang
+# "file not found" error at compile time
+for f in biblio.rnc biblio-standoc.rnc biblio-compile.rnc basicdoc.rnc reqt.rnc
 do
   if [[ ! -s $f ]]; then
-    echo "ERROR: $f is missing or empty after submodule update; aborting." >&2
+    echo "ERROR: $f is missing or empty; run 'git submodule update --init --recursive' and retry." >&2
     exit 1
   fi
 done
 if [[ ! -d mathml ]]; then
-  echo "ERROR: mathml/ directory is missing after submodule update; aborting." >&2
+  echo "ERROR: mathml/ directory is missing; run 'git submodule update --init --recursive' and retry." >&2
   exit 1
 fi
 
-maybe sh -c 'var=$(git tag --sort=committerdate | tail -1); echo "\"metanorma-model\": \"$var\"," >> versions.json'
+# --- trang: pinned, no drifting-main clones --------------------------------
+# Resolution order: TRANG_JAR env -> trang on PATH (e.g. Homebrew) ->
+# one-time build of the pinned ref under vendor/ (cacheable in CI).
+JING_TRANG_REF="V20241231"
 
-maybe sh -c 'date=$(TZ=GMT date +"%Y-%m-%dT%H:%M:%SZ"); echo "\"date\": \"$date\"" >> versions.json; echo "}" >> versions.json'
-
-gem list | grep rsec
-if [[ $? -ne 0 ]]; then
-  gem install rsec
-fi
-if [[ ! -d jing-trang ]]; then
-  git clone https://github.com/relaxng/jing-trang.git
-  cd jing-trang
-  ./ant
-  cd ..
+if [[ -n "${TRANG_JAR:-}" ]]; then
+  trang() { java -jar "$TRANG_JAR" "$@"; }
+elif command -v trang >/dev/null 2>&1; then
+  trang() { command trang "$@"; }
+else
+  TRANG_BUILD="vendor/jing-trang-$JING_TRANG_REF/build/trang.jar"
+  if [[ ! -f "$TRANG_BUILD" ]]; then
+    rm -rf "vendor/jing-trang-$JING_TRANG_REF" # partial build from an interrupted run
+    git clone --depth 1 --branch "$JING_TRANG_REF" https://github.com/relaxng/jing-trang.git "vendor/jing-trang-$JING_TRANG_REF"
+    (cd "vendor/jing-trang-$JING_TRANG_REF" && ./ant)
+  fi
+  trang() { java -jar "$TRANG_BUILD" "$@"; }
 fi
 
 echo "Compiling..."
@@ -89,10 +60,9 @@ echo "Compiling..."
 for i in biblio biblio-compile biblio-standoc basicdoc reqt relaton-ieee relaton-iso relaton-iec relaton-bsi relaton-gb relaton-mpfa relaton-bipm relaton-w3c relaton-3gpp relaton-csa relaton-cc relaton-ietf relaton-iho relaton-itu relaton-m3aawg relaton-nist relaton-ribose relaton-ogc relaton-un relaton-cen relaton-ecma relaton-etsi relaton-plateau relaton-cie relaton-iana relaton-omg relaton-oasis relaton-jis relaton-ccsds standoc standoc-presentation biblio-presentation standoc-collection standoc-compile standoc-presentation-compile isostandard isostandard-compile isostandard-amd iec cc gbstandard ribose ieee ogc nist itu ietf generic iho bipm bsi jis plateau relaton-ieee-compile relaton-iso-compile relaton-iec-compile relaton-bsi-compile relaton-gb-compile relaton-mpfa-compile relaton-bipm-compile relaton-w3c-compile relaton-3gpp-compile relaton-csa-compile relaton-cc-compile relaton-ietf-compile relaton-iho-compile relaton-itu-compile relaton-m3aawg-compile relaton-nist-compile relaton-ribose-compile relaton-ogc-compile relaton-un-compile relaton-cen-compile relaton-ecma-compile relaton-etsi-compile relaton-cie-compile relaton-iana-compile relaton-omg-compile relaton-oasis-compile relaton-jis-compile relaton-plateau-compile relaton-ccsds-compile
 do
   echo $i
-  java -jar jing-trang/build/trang.jar -I rnc -O rng $i.rnc $i.rng
+  trang -I rnc -O rng $i.rnc $i.rng
 done
 
-bundle install
 bundle exec ruby test.rb
 
 if [ -e ../../metanorma-standoc/lib/metanorma/standoc ]

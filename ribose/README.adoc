@@ -1,13 +1,19 @@
-= Metanorma RSD Models
+= Metanorma Ribose document models
 
-image:https://github.com/metanorma/metanorma-model-rsd/workflows/make/badge.svg["Build Status", link="https://github.com/metanorma/metanorma-model-rsd/actions?query=workflow%3Amake"]
+Information models for Ribose documents, based on the Metanorma StandardDocument ("StanDoc") model.
 
-This is where we keep the Metanorma RSD model definitions.
 
-The RSD Standard Document format is an instance of the
-https://github.com/metanorma/metanorma-model-iso[Metanorma IsoDoc model].
-Details of the general model can be found on its page.
+This directory is the `ribose` flavour of the
+https://github.com/metanorma/standoc-models[standoc-models] monorepo (formerly
+the standalone `metanorma-model-rsd` repository).
 
-== RSD Standard Document Model
+== Layout
 
-image::images/Rsd_StandardDocument.png[]
+* `models/` — LML (`.lml`) model sources
+* `images/` — generated model diagrams, committed
+* `build-config.yml` — the flavour's schema set for LXR grammar-package
+  generation
+
+Diagrams regenerate from `models/` via the root `Makefile` (`make ribose`).
+Grammar sources live in `grammars/` at the monorepo root — see the root
+README.
