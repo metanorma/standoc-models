@@ -5,3 +5,4 @@ source "https://rubygems.org"
 # lutaml-lml >= 0.1.2 accepts namespace-qualified types (xsd:date) and
 # ships the lutaml-lml executable the Makefile invokes.
 gem "lutaml-lml", ">= 0.1.2"
+gem "lutaml-xsd"
