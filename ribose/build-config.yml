@@ -5,6 +5,6 @@ files:
   - ../grammars/biblio.rnc
   - ../grammars/biblio-standdoc.rnc
   - ../grammars/biblio-presentation.rnc
-  - ../grammars/relaton-iso-compile.rnc
-  - ../grammars/standoc-compile.rnc
-  - ../grammars/standoc-presentation-compile.rnc
+  - ../grammars/standoc.rnc
+  - ../grammars/ribose.rnc
+  - ../grammars/relaton-ribose-compile.rnc
