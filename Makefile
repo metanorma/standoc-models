@@ -7,6 +7,10 @@
 # and the metanorma/ci path-filter job.
 FLAVORS := $(shell cat flavors.txt)
 
+# <flavour>/models/*.lml (top level only) are the rendered diagram views;
+# <flavour>/models/<package>/*.lml subdirectories are definition modules
+# included by the views. The wildcard is deliberately non-recursive.
+
 .PHONY: all clean verify $(FLAVORS)
 
 all: $(FLAVORS)
