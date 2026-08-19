@@ -1,9 +1,0 @@
-name: UpfrontFeeType
-modelType: enum
-type: enumeration
-values:
-  joiningFee:
-    definition:
-  annualFee:
-    definition:
-
