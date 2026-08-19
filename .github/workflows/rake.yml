@@ -1,0 +1,40 @@
+name: rake
+
+permissions:
+  contents: read
+
+on:
+  push:
+    branches: [main]
+    tags: [v*]
+  pull_request:
+
+jobs:
+  rake:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - run: sudo apt-get install -y graphviz
+      - run: bundle exec rake
+      - run: bundle exec rake verify
+
+  # Regeneration parity gate: committed .rng must be byte-identical to
+  # regeneration from the pinned submodule sources.
+  grammar-parity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: actions/setup-java@v4
+        with:
+          java-version: "21"
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - run: sudo apt-get install -y jing-trang || true
+      - run: cd grammars && ./make.sh
+      - run: git diff --exit-code -- grammars

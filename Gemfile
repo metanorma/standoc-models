@@ -2,6 +2,7 @@
 # See https://github.com/metanorma/cimas
 source "https://rubygems.org"
 
+gem "rake"
 gem "lutaml-lml", ">= 0.1.2"
 gem "lutaml-xsd"
 gem "ruby-jing"
