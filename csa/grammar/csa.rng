@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grammar ns="http://riboseinc.com/isoxml" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+<grammar ns="http://riboseinc.com/csand" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
   <start>
-    <ref name="iso-standard"/>
+    <ref name="csand"/>
   </start>
-  <define name="iso-standard">
-    <element name="iso-standard">
-      <oneOrMore>
-        <ref name="title"/>
-      </oneOrMore>
+  <define name="csand">
+    <element name="csand">
+      <ref name="title"/>
       <ref name="documentstatus"/>
       <ref name="creator"/>
       <ref name="language"/>
@@ -23,10 +21,7 @@
   </define>
   <define name="language">
     <element name="language">
-      <choice>
-        <value>en</value>
-        <value>fr</value>
-      </choice>
+      <value>en</value>
     </element>
   </define>
   <define name="script">
@@ -68,122 +63,34 @@
   <define name="id">
     <element name="id">
       <ref name="documentnumber"/>
-      <optional>
-        <ref name="tc-documentnumber"/>
-      </optional>
     </element>
   </define>
   <define name="creator">
     <element name="creator">
       <attribute name="role"/>
       <ref name="technical-committee"/>
-      <optional>
-        <ref name="subcommittee"/>
-      </optional>
-      <optional>
-        <ref name="workgroup"/>
-      </optional>
-      <optional>
-        <ref name="secretariat"/>
-      </optional>
     </element>
   </define>
   <define name="documenttype">
     <element name="type">
       <choice>
-        <value>international-standard</value>
-        <value>technical-specification</value>
-        <value>technical-report</value>
-        <value>publicly-available-specification</value>
-        <value>international-workshop-agreement</value>
-        <value>guide</value>
+        <value>standard</value>
+        <value>governance</value>
       </choice>
     </element>
   </define>
   <define name="documentstatus">
     <element name="status">
-      <ref name="stage"/>
-      <optional>
-        <ref name="substage"/>
-      </optional>
-    </element>
-  </define>
-  <define name="stage">
-    <element name="stage">
-      <choice>
-        <value>00</value>
-        <value>10</value>
-        <value>20</value>
-        <value>30</value>
-        <value>40</value>
-        <value>50</value>
-        <value>60</value>
-        <value>90</value>
-        <value>95</value>
-      </choice>
-    </element>
-  </define>
-  <define name="substage">
-    <element name="substage">
-      <choice>
-        <value>00</value>
-        <value>20</value>
-        <value>60</value>
-        <value>90</value>
-        <value>92</value>
-        <value>93</value>
-        <value>98</value>
-        <value>99</value>
-      </choice>
+      <text/>
     </element>
   </define>
   <define name="documentnumber">
     <element name="projectnumber">
-      <optional>
-        <attribute name="part">
-          <data type="int"/>
-        </attribute>
-      </optional>
-      <data type="int"/>
-    </element>
-  </define>
-  <define name="tc-documentnumber">
-    <element name="tc-documentnumber">
       <data type="int"/>
     </element>
   </define>
   <define name="technical-committee">
     <element name="technical-committee">
-      <optional>
-        <attribute name="number">
-          <data type="int"/>
-        </attribute>
-      </optional>
-      <text/>
-    </element>
-  </define>
-  <define name="subcommittee">
-    <element name="subcommittee">
-      <optional>
-        <attribute name="number">
-          <data type="int"/>
-        </attribute>
-      </optional>
-      <text/>
-    </element>
-  </define>
-  <define name="workgroup">
-    <element name="workgroup">
-      <optional>
-        <attribute name="number">
-          <data type="int"/>
-        </attribute>
-      </optional>
-      <text/>
-    </element>
-  </define>
-  <define name="secretariat">
-    <element name="secretariat">
       <text/>
     </element>
   </define>
@@ -200,13 +107,7 @@
   <define name="title">
     <element name="title">
       <attribute name="language"/>
-      <optional>
-        <ref name="title-intro"/>
-      </optional>
-      <ref name="title-main"/>
-      <optional>
-        <ref name="title-part"/>
-      </optional>
+      <text/>
     </element>
   </define>
   <define name="title-intro">

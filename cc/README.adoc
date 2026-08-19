@@ -1,6 +1,6 @@
 = Metanorma CC document models
 
-Information models for Ceremony and Culture documents, based on the Metanorma StandardDocument ("StanDoc") model.
+Information models for CalConnect (The Calendaring and Scheduling Consortium) documents, based on the Metanorma StandardDocument ("StanDoc") model.
 
 
 This directory is the `cc` flavour of the

@@ -1,4 +1,4 @@
-diagram Csand_NormalDocument {
+diagram Csa_NormalDocument {
   
   
   class StandardDocument <<StandardDocument>> {

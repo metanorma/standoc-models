@@ -46,13 +46,13 @@ owner-affiliation = element affiliation { "ISO" }
 
 id =
   element id {
-    documentnumber,
+    documentnumber
   }
 
 creator =
   element creator { 
     attribute role { text },
-    technical-committee,
+    technical-committee
   }
 
 documenttype =
@@ -62,9 +62,8 @@ documenttype =
 
 documentstatus =
   element status { text }
-  }
 
-documentnumber = 
+documentnumber =
   element projectnumber { 
     xsd:int 
    }
