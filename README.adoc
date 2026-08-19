@@ -6,6 +6,24 @@ https://github.com/metanorma/metanorma-core/issues/16[metanorma-core#16].
 This repository replaced the former per-flavour `metanorma-model-*`
 repositories; their commit histories are preserved here.
 
+[IMPORTANT]
+.Prime directive — the models are the LML files
+====
+The information models of this repository are the **LML files**:
+`<flavour>/models/*.lml` and the LutaML definition modules they include.
+They are the single source of truth for the document models.
+
+The RNC/RNG grammars in `grammars/` are **implementation files that
+accompany the models** — hand-maintained artifacts, slated for retirement
+by the model-driven programme (issue #181: schemas and classes generated
+from the LML models).
+
+This MUST NOT be violated: never treat RNC grammars as the model
+definitions; never describe, edit, or restructure this repository as if
+the grammars were the models. When a model changes, the LML changes
+first; the grammars follow.
+====
+
 == Layout
 
 `grammars/`::
@@ -22,9 +40,9 @@ per former `metanorma-model-<flavour>` repository: `bipm`, `bsi`, `cc`,
 `csa`, `gb`, `ieee`, `iho`, `iso`, `itu`, `m3aawg`, `mpfa`, `nist`,
 `ogc`, `ribose`, `standoc`, `un`.
 
-The repository has a single root `Gemfile` (lutaml-lml, lutaml-xsd,
-ruby-jing) and a single root `Makefile` — per-flavour Gemfiles and
-Makefiles are deliberately not a thing.
+The repository has a single root `Gemfile` (rake, lutaml-lml, lutaml-xsd,
+ruby-jing) and a single root `Rakefile` — per-flavour Gemfiles and build
+scripts are deliberately not a thing.
 
 == Building the grammars
 
@@ -56,10 +74,10 @@ without regenerating, fail the build.
 `<flavour>/images/*.png` are committed generated output. From the repo
 root:
 
-  make            # all flavours
-  make iso        # one flavour
-  make verify     # assert every committed .png really is a PNG
-  make clean
+  rake            # all flavours
+  rake iso        # one flavour
+  rake verify     # assert every committed .png really is a PNG
+  rake clean
 
 == LXR schema packages
 
