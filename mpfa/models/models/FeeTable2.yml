@@ -1,0 +1,12 @@
+name: FeeTable
+modelType: class
+definition: |
+
+attributes:
+
+relations:
+  - target: FeesAndChargesSection
+    relationship:
+      target:
+        type: direct
+    direction: up

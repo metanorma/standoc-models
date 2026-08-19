@@ -1,0 +1,76 @@
+@startuml M3aawg_M3aawgDocument
+/'
+Diagram:        M3aawg_M3aawgDocument
+DateCreate:     23/08/2018
+Description:    This is where we keep the Metanorma M3D model definitions.
+                The M3AAWG Document ("M3D") format is an instance of the Metanorma StandardDocument model.
+                Details of the general model can be found on its page.
+
+Hystory of changes:
+> DD/MM/YYYY
+    -
+    -
+'/
+
+'******* CONFIGURATION ************************************************
+!include style.uml.inc
+
+
+'******* CLASS DEFINITION *********************************************
+class StandardDocument <<StandardDocument>> {
+
+}
+
+class M3Document{
+    +bibdata: M3DBibliographicItem
+    +foreword: HiererchicalSection[0..1]
+    +introduction: HiererchicalSection[0..1]
+    +sections: ClauseSection[1..*]
+    +annex: AnnexSection[0..*]
+}
+
+class BibliographicItem <<StandardDocument>>{
+
+}
+
+class M3DBibliographicItem{
+    +committee: M3Committee
+    +type: M3DocumentType
+}
+
+class M3Committee{
+    +type: M3CommitteeType
+    +name: String
+}
+
+enum M3CommitteeType <<enumeration>>{
+    technical
+    provisional
+}
+
+enum M3DocumentType <<enumeration>>{
+    guidance
+    proposal
+    standard
+    report
+    whitepaper
+    charter
+    policy
+    glossary
+    case_study
+}
+
+'******* NOTES ********************************************************
+
+
+'******* CLASS RELATIONS **********************************************
+StandardDocument <|-- M3Document
+BibliographicItem <|-- M3DBibliographicItem
+M3Document <-- M3DBibliographicItem
+
+M3DBibliographicItem <-- M3Committee
+M3DBibliographicItem <-- M3DocumentType
+
+M3Committee <-right- M3CommitteeType
+
+@enduml

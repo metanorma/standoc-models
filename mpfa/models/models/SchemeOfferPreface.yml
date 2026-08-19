@@ -1,0 +1,19 @@
+name: SchemeOfferPreface
+modelType: class
+definition: |
+
+attributes:
+  # G2.1 (c)(i)
+  riskDisclosure:
+    definition:
+    type: BasicSection
+  # G2.1 (c)(iii)
+  introduction:
+    definition:
+    type: BasicSection
+relations:
+  - target: SchemeOfferingDocument
+    relationship:
+      target:
+        type: direct
+    direction: up

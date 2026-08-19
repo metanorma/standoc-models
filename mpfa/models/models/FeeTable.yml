@@ -1,0 +1,41 @@
+name: FeeTable
+modelType: class
+definition: |
+
+attributes:
+  partA:
+    definition:
+    type: UpfrontFee
+    cardinality:
+      min: 0
+      max: 1
+  partB:
+    definition:
+    type: TransactionFee
+    cardinality:
+      min: 0
+      max: "*"
+  partC:
+    definition:
+    type: ConstituentFundFee
+    cardinality:
+      min: 0
+      max: "*"
+  partD:
+    definition:
+    type: BasicFeeItem
+    cardinality:
+      min: 0
+      max: "*"
+  partE:
+    definition:
+    type: BasicFeeItem
+    cardinality:
+      min: 0
+      max: "*"
+  terminology:
+    definition:
+    type: Terms
+  guidance:
+    definition:
+    type: ClauseSection

@@ -1,0 +1,51 @@
+diagram IsoDoc_IsoStandardDocument {
+  title 'ISO model'
+  caption 'Elements of the ISO Standard Model'
+
+
+  include ../models/standard_document/StandardDocument.lml
+  include ../models/standard_document/sections/AnnexSection.lml
+  include ../models/standard_document/sections/ClauseSection.lml
+
+  include ../models/iso_document/IsoStandardDocument.lml
+  include ../models/iso_document/IsoAmendmentDocument.lml
+  include ../models/iso_document/sections/IsoSections.lml
+  include ../models/iso_document/sections/IsoPreface.lml
+  include ../models/iso_document/sections/IsoAnnexSection.lml
+  include ../models/iso_document/sections/IsoAmendmentClause.lml
+
+  association {
+    owner StandardDocument
+    member IsoStandardDocument
+    owner_type inheritance
+  }
+  association {
+    owner ClauseSection
+    member IsoAmendmentClause
+    owner_type inheritance
+  }
+  association {
+    owner StandardDocument
+    member IsoAmendmentDocument
+    owner_type inheritance
+  }
+
+  association {
+    owner IsoStandardDocument
+    member IsoPreface
+    owner_type direct
+  }
+
+  association {
+    owner IsoStandardDocument
+    member IsoSections
+    owner_type direct
+  }
+
+  association {
+    owner AnnexSection
+    member IsoAnnexSection
+    owner_type inheritance
+  }
+
+}

@@ -1,0 +1,113 @@
+diagram StandardDoc_List {
+  title 'StandardDocument List Blocks'
+  caption 'List Block elements of StandardDocument adapted from BasicDocument'
+
+  include ../models/basic_document/block/BasicBlockNoNotes.lml
+  include ../models/standard_document/block/StandardBlockNoNotes.lml
+  include ../models/standard_document/block/DisplayDirective.lml
+
+  include ../models/basic_document/list/List.lml
+  include ../models/basic_document/list/OrderedList.lml
+  include ../models/basic_document/list/UnorderedList.lml
+  include ../models/basic_document/list/DefinitionList.lml
+  include ../models/basic_document/list/Definition.lml
+  include ../models/basic_document/list/ListItem.lml
+
+  include ../models/standard_document/list/StandardUnorderedList.lml
+  include ../models/standard_document/list/StandardOrderedList.lml
+  include ../models/standard_document/list/UnorderedCheckableListItem.lml
+  include ../models/standard_document/list/StandardDefinitionList.lml
+  include ../models/standard_document/list/StandardDefinition.lml
+  include ../models/standard_document/list/StandardDefinitionTerm.lml
+
+  association {
+    owner BasicBlockNoNotes
+    member List
+    owner_type inheritance
+  }
+  association {
+    owner List
+    member UnorderedList
+    owner_type inheritance
+  }
+  association {
+    owner List
+    member OrderedList
+    owner_type inheritance
+  }
+  association {
+    owner List
+    member ListItem
+    owner_type direct
+  }
+  association {
+    owner UnorderedList
+    member StandardUnorderedList
+    owner_type inheritance
+  }
+  association {
+    owner OrderedList
+    member StandardOrderedList
+    owner_type inheritance
+  }
+  association {
+    owner ListItem
+    member UnorderedCheckableListItem
+    owner_type inheritance
+  }
+  association {
+    owner StandardUnorderedList
+    member UnorderedCheckableListItem
+    owner_type direct
+  }
+  association {
+    owner StandardUnorderedList
+    member DisplayDirective
+    owner_type direct
+  }
+  association {
+    owner StandardOrderedList
+    member DisplayDirective
+    owner_type direct
+  }
+  association {
+    owner List
+    member DefinitionList
+    owner_type inheritance
+  }
+  association {
+    owner DefinitionList
+    member StandardDefinitionList
+    owner_type inheritance
+  }
+  association {
+    owner Definition
+    member StandardDefinition
+    owner_type inheritance
+  }
+  association {
+    owner StandardDefinition
+    member StandardDefinitionTerm
+    owner_type direct
+  }
+  association {
+    owner DefinitionList
+    member Definition
+    owner_type direct
+  }
+  association {
+    owner StandardBlockNoNotes
+    member StandardDefinitionList
+    owner_type inheritance
+  }
+  association {
+    owner StandardBlockNoNotes
+    member StandardUnorderedList
+    owner_type inheritance
+  }
+  association {
+    owner StandardBlockNoNotes
+    member StandardOrderedList
+    owner_type inheritance
+  }
+}

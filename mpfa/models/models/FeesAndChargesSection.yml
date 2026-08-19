@@ -1,0 +1,20 @@
+name: FeesAndChargesSection
+modelType: class
+definition: |
+
+attributes:
+  feeTables:
+    definition:
+    type: FeeTable
+    cardinality:
+      min: 1
+      max: "*"
+  definitions:
+    definition:
+    type: DefinitionSection
+relations:
+  - target: SchemeOfferBody
+    relationship:
+      target:
+        type: direct
+    direction: up

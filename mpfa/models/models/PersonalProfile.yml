@@ -1,0 +1,17 @@
+name: PersonalProfile
+modelType: class
+definition: |
+
+attributes:
+
+relations:
+  - target: FundRisk
+    relationship:
+      target:
+        type: direct
+    direction: up
+  - target: FundDescription
+    relationship:
+      target:
+        type: direct
+    direction: left

@@ -1,0 +1,35 @@
+@startuml offeringdoc-data-types
+
+'******* CONFIGURATION ************************************************
+!include style.uml.inc
+
+
+'******* CLASS DEFINITION *********************************************
+class Uri <<dataType>> {
+}
+
+class String <<primitiveType>> {
+}
+
+class Iso8601DateTime <<dataType>> {
+}
+
+class Iso15924Code <<dataType>> {
+}
+
+class Iso639Code <<dataType>> {
+}
+
+class LocalizedString <<StandardDocument>> {
+}
+
+'******* NOTES ********************************************************
+
+'******* CLASS RELATIONS **********************************************
+
+Uri -[hidden]- String
+String -[hidden]- Iso8601DateTime
+Iso8601DateTime -[hidden]- Iso15924Code
+Iso15924Code -[hidden]- Iso639Code
+
+@enduml

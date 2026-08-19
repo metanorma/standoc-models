@@ -1,0 +1,19 @@
+name: InvestmentSection
+modelType: class
+definition: |
+
+attributes:
+  # G2.1 (c)(v)
+  funds:
+    definition:
+    type: FundDescription
+  # G2.1 (c)(vi)
+  risks:
+    definition:
+    type: RiskSection
+relations:
+  - target: SchemeOfferBody
+    relationship:
+      target:
+        type: direct
+    direction: up

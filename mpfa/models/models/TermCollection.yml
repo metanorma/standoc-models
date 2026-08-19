@@ -1,0 +1,14 @@
+name: TermCollection
+modelType: class
+definition: |
+
+attributes:
+  type:
+    definition:
+    type: StandardDocument
+relations:
+  - target: SchemeOfferingDocument
+    relationship:
+      target:
+        type: direct
+    direction: right

@@ -1,0 +1,50 @@
+diagram StandardDoc_Metadata {
+  title 'StandardDocument Metadata'
+  caption 'Metadata elements of StandardDocument'
+
+  include ../models/basic_document/metadata/BibDataExtensionType.lml
+  include ../models/basic_document/metadata/BibData.lml
+  include ../models/standard_document/metadata/StandardBibData.lml
+  include ../models/standard_document/metadata/StandardBibDataExtensionType.lml
+  include ../models/standard_document/metadata/EditorialGroupType.lml
+  include ../models/standard_document/metadata/TechnicalCommitteeType.lml
+  include ../models/standard_document/metadata/IcsType.lml
+  include ../models/standard_document/metadata/StructuredIdentifierType.lml
+
+  association {
+    owner BibData
+    member StandardBibData
+    owner_type inheritance
+  }
+  association {
+    owner BibDataExtensionType
+    member StandardBibDataExtensionType
+    owner_type inheritance
+  }
+  association {
+    owner StandardBibData
+    member StandardBibDataExtensionType
+    owner_type direct
+  }
+  association {
+    owner StandardBibDataExtensionType
+    member StructuredIdentifierType
+    owner_type direct
+  }
+  association {
+    owner StandardBibDataExtensionType
+    member IcsType
+    owner_type direct
+  }
+  association {
+    owner StandardBibDataExtensionType
+    member EditorialGroupType
+    owner_type direct
+  }
+  association {
+    owner EditorialGroupType
+    member TechnicalCommitteeType
+    owner_type direct
+  }
+
+}

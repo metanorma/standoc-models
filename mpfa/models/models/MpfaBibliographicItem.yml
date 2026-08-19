@@ -1,0 +1,21 @@
+# version, edition, contributors(enquiry) are provided in BibliographicItem. OrganizationProfile includes contact methods and website information.
+name: MpfaBibliographicItem
+modelType: class
+definition: |
+
+attributes:
+  type:
+    definition:
+    type: Bibliography
+  schemeName:
+    definition:
+    type: String
+  status:
+    definition:
+    type: MpfaDocStatus
+relations:
+  - target: BibliographicItem
+    relationship:
+      target:
+        type: inheritance
+    direction: up
