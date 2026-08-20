@@ -24,13 +24,6 @@
         <ref name="bookmark"/>
       </choice>
     </define>
-    <define name="AdmonitionAttr" combine="interleave">
-      <optional>
-        <attribute name="unnumbered">
-          <data type="boolean"/>
-        </attribute>
-      </optional>
-    </define>
     <define name="AdmonitionType">
       <choice>
         <value>danger</value>
@@ -138,14 +131,21 @@
         </zeroOrMore>
       </group>
     </define>
-    <define name="Annex-Section" combine="interleave">
-      <optional>
-        <attribute name="unnumbered">
-          <data type="boolean"/>
-        </attribute>
-      </optional>
-    </define>
   </include>
+  <define name="AdmonitionAttr" combine="interleave">
+    <optional>
+      <attribute name="unnumbered">
+        <data type="boolean"/>
+      </attribute>
+    </optional>
+  </define>
+  <define name="Annex-Section" combine="interleave">
+    <optional>
+      <attribute name="unnumbered">
+        <data type="boolean"/>
+      </attribute>
+    </optional>
+  </define>
   <define name="un-standard">
     <element name="un-standard">
       <ref name="Root-Attributes"/>

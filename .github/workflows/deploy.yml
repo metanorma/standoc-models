@@ -4,7 +4,7 @@ name: Build and Deploy Grammars
 # GitHub Pages (one directory per flavour). One root Gemfile (lutaml-lml +
 # lutaml-xsd + ruby-jing); each flavour directory carries only its
 # build-config.yml schema set. The flavour matrix comes from flavors.txt —
-# the same single source the root Makefile and the metanorma/ci path-filter
+# the same single source the root Rakefile and the metanorma/ci path-filter
 # read.
 
 on:
@@ -53,7 +53,7 @@ jobs:
           bundler-cache: true
 
       - name: Vendor submodule grammars
-        run: ruby scripts/flatten-include-files.rb
+        run: ruby scripts/vendor-submodule-grammars.rb
 
       - name: Build LXR package
         working-directory: ${{ matrix.flavor }}

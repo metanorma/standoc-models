@@ -46,17 +46,21 @@ scripts are deliberately not a thing.
 
 == Building the grammars
 
-Two scripts in `grammars/` with strictly separated concerns:
+Two scripts in `grammars/` with strictly separated concerns, plus one
+shared vendoring helper:
 
 * `./make.sh` — deterministic build. Vendors the `.rnc` inputs from the
-  checked-out submodule pins, compiles everything to `.rng` with trang,
-  and runs the validation suite. Never updates submodules, never writes
-  `versions.json`. Requires submodules to be initialized
-  (`git submodule update --init --recursive`).
+  checked-out submodule pins (via `scripts/vendor-submodule-grammars.rb`),
+  compiles everything to `.rng` with trang, and runs the validation suite.
+  Never updates submodules, never writes `versions.json`. Requires
+  submodules to be initialized (`git submodule update --init --recursive`).
 * `./refresh-submodules.sh` — the only network path: updates submodules
   to their remotes, checks out `main` in each, and records versions in
   `versions.json`. Run manually when pulling in a new upstream release,
   then run `./make.sh`.
+* `scripts/vendor-submodule-grammars.rb` — the single implementation of
+  submodule → `grammars/` vendoring. Called by both `make.sh` and the
+  Pages deploy workflow.
 
 Trang is resolved in order: the `TRANG_JAR` environment variable, a
 `trang` on `PATH` (e.g. Homebrew), or a one-time build of the pinned

@@ -31,10 +31,15 @@ jobs:
           submodules: recursive
       - uses: actions/setup-java@v4
         with:
+          distribution: temurin
           java-version: "21"
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-      - run: sudo apt-get install -y jing-trang || true
+      # trang is resolved by make.sh: TRANG_JAR env -> PATH -> pinned
+      # jing-trang V20241231 build under grammars/vendor/ (needs ant).
+      - run: sudo apt-get update && sudo apt-get install -y ant
       - run: cd grammars && ./make.sh
-      - run: git diff --exit-code -- grammars
+      # Only committed artifacts are in the parity gate; vendored inputs and
+      # versions.json are gitignored.
+      - run: git diff --exit-code -- grammars/*.rng grammars/*.rnc

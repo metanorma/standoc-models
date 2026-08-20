@@ -14,6 +14,6 @@ the standalone `metanorma-model-cc` repository).
 * `build-config.yml` — the flavour's schema set for LXR grammar-package
   generation
 
-Diagrams regenerate from `models/` via the root `Makefile` (`make cc`).
+Diagrams regenerate from `models/` via the root `Rakefile` (`rake cc`).
 Grammar sources live in `grammars/` at the monorepo root — see the root
 README.
