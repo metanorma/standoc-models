@@ -92,9 +92,10 @@ HTML per flavour with `lutaml-xsd` and publishes them to GitHub Pages.
 == Vendoring
 
 Flavour gems vendor the compiled RNG (`grammars/copy.sh`, run from a
-workspace with gem checkouts as siblings). Vendored copies keep their
-legacy `isodoc*.rng` filenames because gem code loads those paths; the
-bridge retires with generated-schema loading (issue #181).
+workspace with gem checkouts as siblings). Destination filenames use the
+post-rename `standoc.*` names and gem-local legacy names (e.g.
+`isostandard.rng`) because gem code loads those paths; the bridge retires
+with generated-schema loading (issue #181).
 
 == Where work happens
 

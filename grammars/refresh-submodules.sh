@@ -8,8 +8,6 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 
-git pull
-
 echo "Updating submodules..."
 rm -f relaton-models/grammars/biblio.rng basicdoc-models/grammars/basicdoc.rng
 git submodule update --remote

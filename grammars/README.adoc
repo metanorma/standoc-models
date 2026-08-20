@@ -1,25 +1,23 @@
-= Grammars for IsoDoc documents
+= Grammars for Metanorma standoc documents
 
 This directory contains RelaxNG Compact and RelaxNG grammars for:
 
 * the base Metanorma Standard Document model (`standoc*`),
-* Various Metanorma gramars
-* Various Relaton gramars
+* the per-flavour document grammars,
+* the Relaton bibliographic layers (`relaton-*.rnc`, vendored from the
+  relaton-models submodule at build time).
 
-RelaxNG Compact is the source specification for grammars; RelaxNG is generated
-from the RelaxNG Compact source, and is used by the Ruby gems validating
-specifications against the models:
+These grammars are **implementation files accompanying the LML information
+models** (`<flavour>/models/*.lml`) — see the prime directive in the root
+README. RelaxNG Compact is the source; RelaxNG is generated from it and is
+what the Ruby gems (metanorma-iso, metanorma-cc, metanorma-gb, and so on)
+load to validate Metanorma XML.
 
-* https://github.com/metanorma/metanorma-iso
-* https://github.com/metanorma/metanorma-cc
-* https://github.com/metanorma/metanorma-gb
-* And so on
-
-RelaxNG schemas are generated from the RelaxNG Compact schemas, using the `jing-trang`
-gem. (The RelaxNG schemas are how documents are actually validated in the gems
-generating Metanorma XML.)
-
-The grammars are generated using `make.sh`. The grammars are validated using `bundle exec ruby test.rb`.
+Build: `./make.sh` — vendors the submodule inputs
+(`scripts/vendor-submodule-grammars.rb`), compiles RNC -> RNG with the
+pinned trang ref `V20241231`, and validates with `bundle exec ruby
+test.rb`. The committed `.rng` must stay byte-identical to `./make.sh`
+output (CI regeneration parity gate).
 
 == Presentation XML contract
 
