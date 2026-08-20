@@ -27,8 +27,7 @@ flavors.each do |flavor|
 end
 
 # lutaml writes Graphviz dot source into .png paths when misflagged, so
-# assert PNG magic bytes directly (metanorma/ci#302/#303). A pure-Ruby
-# check has no file(1) dependency, so it runs on every OS.
+# assert PNG magic bytes (metanorma/ci#302/#303).
 PNG_MAGIC = "\x89PNG\r\n\x1a\n".b
 
 desc "Assert every committed .png is a valid PNG"
