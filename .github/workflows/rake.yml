@@ -20,6 +20,7 @@ jobs:
       - run: sudo apt-get install -y graphviz
       - run: bundle exec rake
       - run: bundle exec rake verify
+      - run: bundle exec rake parity
 
   # Regeneration parity gate: committed .rng must be byte-identical to
   # regeneration from the pinned submodule sources.

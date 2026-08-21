@@ -84,7 +84,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Checkout (flavors.txt for the site index)
+      - name: Checkout (site generator + flavour metadata)
         uses: actions/checkout@v6
       - name: Download all flavour artifacts
         uses: actions/download-artifact@v5
@@ -94,13 +94,10 @@ jobs:
           merge-multiple: true
       - name: Assemble site
         run: |
-          mkdir -p _site
+          # Catalogue first (creates _site/ with committed diagrams), then
+          # overlay the per-flavour LXR SPA artifacts under <flavor>/.
+          ruby site/generate.rb
           cp -r _artifacts/*/* _site/
-          cat > _site/index.html <<HTML
-          <!doctype html><html><body><h1>Metanorma grammar packages</h1><ul>
-          $(while read -r f; do echo "<li><a href=\"$f/\">$f</a></li>"; done < flavors.txt)
-          </ul></body></html>
-          HTML
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v4
         with:

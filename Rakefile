@@ -43,3 +43,36 @@ desc "Remove generated diagrams"
 task :clean do
   flavors.each { |f| Dir["#{f}/images/*.png"].each { |p| rm_f(p) } }
 end
+
+desc "Assert layout parity: views, images, configs and module separation per flavour"
+task :parity do
+  errors = []
+
+  flavors.each do |f|
+    errors << "#{f}: not in flavors.txt order check" if f.strip.empty?
+    errors << "#{f}: missing README.adoc" unless File.file?("#{f}/README.adoc")
+    errors << "#{f}: missing build-config.yml" unless File.file?("#{f}/build-config.yml")
+
+    views = Dir["#{f}/models/*.lml"].sort
+    errors << "#{f}: no diagram views under models/*.lml" if views.empty?
+
+    pngs = Dir["#{f}/images/*.png"].sort.map { |p| File.basename(p, ".png") }
+    view_names = views.map { |v| File.basename(v, ".lml") }
+    (view_names - pngs).each { |n| errors << "#{f}: view #{n}.lml has no committed PNG" }
+    (pngs - view_names).each { |n| errors << "#{f}: orphan image #{n}.png (no view)" }
+
+    # Definition modules under models/<package>/ must stay view-free.
+    Dir["#{f}/models/*/*.lml"].each do |m|
+      errors << "#{m}: definition module contains diagram (belongs at models/ top level)" if File.read(m) =~ /^\s*diagram\b/
+    end
+  end
+
+  abort "parity: #{errors.size} issue(s):\n  #{errors.join("\n  ")}" unless errors.empty?
+  puts "parity: OK (#{flavors.size} flavours, #{flavors.sum { |f| Dir["#{f}/models/*.lml"].size }} views)"
+end
+
+desc "Build the model catalogue site into _site/ (deployed by deploy.yml)"
+task :site do
+  require_relative "site/generate"
+  StandocSite.build!
+end

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title><%= title %></title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to catalogue</a>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="wordmark" href="./"><span class="wm-stamp">SD</span> standoc&#8209;models</a>
+    <nav class="topnav">
+      <a href="https://github.com/metanorma/standoc-models">GitHub</a>
+      <a href="standoc/">StanDoc&nbsp;schemas</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<%= body %>
+</main>
+<footer class="footer">
+  <div class="wrap footer-in">
+    <p class="doctrine">
+      <strong>The models are the LML files.</strong>
+      Every diagram here is rendered from <code>&lt;flavour&gt;/models/*.lml</code> —
+      the single source of truth. The RNC grammars in <code>grammars/</code> are
+      implementation files that accompany the models.
+    </p>
+    <p class="colophon">
+      Metanorma StanDoc model family &middot; companion to CC/ISO&nbsp;36100
+      <span class="punct"> · </span>catalogue links each flavour to its LXR schema browser
+    </p>
+  </div>
+</footer>
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>

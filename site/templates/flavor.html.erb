@@ -1,0 +1,52 @@
+<nav class="crumbs wrap" aria-label="Breadcrumb">
+  <a href="./">Catalogue</a>
+  <span class="punct"> · </span>
+  <span><%= mod.clause %></span>
+  <span class="punct"> · </span>
+  <strong><%= mod.code %></strong>
+</nav>
+
+<header class="flavor-head wrap">
+  <span class="clause-figure small" aria-hidden="true"><%= mod.clause %></span>
+  <div class="flavor-head-copy">
+    <p class="eyebrow"><%= mod.kind == :base ? "Clause 2 — the StanDoc base layer" : "Clause #{mod.clause} — flavour overlay" %></p>
+    <h1><%= h(mod.description || mod.code) %></h1>
+    <p class="flavor-meta">
+      <% if mod.grammar %>
+        <span>grammar companion <code class="<%= "legacy" if mod.legacy_grammar %>"><%= mod.grammar %></code></span>
+        <span class="punct"> · </span>
+      <% end %>
+      <span><%= mod.model_files %> LML model files</span>
+      <span class="punct"> · </span>
+      <a href="<%= mod.name %>/">LXR schema browser</a>
+      <span class="punct"> · </span>
+      <a href="https://github.com/metanorma/standoc-models/tree/main/<%= mod.name %>">source</a>
+    </p>
+  </div>
+</header>
+
+<section class="wrap plates">
+  <% mod.cards.each do |card| %>
+    <figure class="plate" id="<%= card.name.downcase %>">
+      <figcaption class="plate-cap">
+        <span class="plate-no"><%= mod.clause %>.<%= mod.cards.index(card) + 1 %></span>
+        <span class="plate-title"><%= h card.title %></span>
+        <% if card.caption %><span class="plate-caption"><%= h card.caption %></span><% end %>
+        <a class="plate-src" href="<%= card.github_url %>">.lml source</a>
+      </figcaption>
+      <a href="<%= h card.image %>" class="plate-img">
+        <img src="<%= h card.image %>" alt="<%= h card.title %> — model diagram" loading="lazy">
+      </a>
+    </figure>
+  <% end %>
+</section>
+
+<% if mods.reject { |m| m.name == mod.name }.any? %>
+<nav class="wrap flavor-switch" aria-label="All flavours">
+  <span class="fs-label">Catalogue</span>
+  <% mods.each do |m| %>
+    <% next if m.cards.empty? %>
+    <a class="fs-link<%= " current" if m.name == mod.name %>" href="<%= m.name %>.html"><%= m.code %></a>
+  <% end %>
+</nav>
+<% end %>

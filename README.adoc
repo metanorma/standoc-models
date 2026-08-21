@@ -83,11 +83,24 @@ root:
   rake verify     # assert every committed .png really is a PNG
   rake clean
 
-== LXR schema packages
+== Model catalogue and LXR schema packages
 
-Each flavour carries a `build-config.yml` schema set; the Pages workflow
-(`.github/workflows/deploy.yml`) builds an `.lxr` grammar package and SPA
-HTML per flavour with `lutaml-xsd` and publishes them to GitHub Pages.
+The Pages workflow (`.github/workflows/deploy.yml`) publishes two layers to
+GitHub Pages from each flavour's `build-config.yml`:
+
+* the **model catalogue** — `rake site` renders `site/` (ERB templates) into
+  `_site/`: a clause-numbered index of the base layer and every flavour,
+  with per-flavour pages showing each diagram card, its grammar companion
+  and a link to its schema browser;
+* the **LXR schema packages** — one `.lxr` grammar package + SPA per flavour
+  built with `lutaml-xsd`, overlaid under `<flavour>/` alongside the
+  catalogue.
+
+Flavour diagrams are **fully encapsulated** (same convention as
+relaton-models#70): a flavour view includes only its own module's models;
+classes from other layers render as collapsed, name-only boxes. The
+`standoc/` base views are the exploded reference set. `rake parity` guards
+the layout invariants.
 
 == Vendoring
 

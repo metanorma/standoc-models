@@ -4,9 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repository is
 
-Consolidated monorepo of the Metanorma standoc document-model family (per metanorma-core#16). It replaced the per-flavour `metanorma-model-*` repositories; their git histories are grafted here via `Merge metanorma-model-<flavour> history (unification)` commits.
+Consolidated monorepo of the Metanorma standoc document-model family (per metanorma-core#16) — the machine-readable companion of CC/ISO 36100 "Standardization document — Document metamodel" (see the CalConnect consumer repos `cc-standard-doc` and `cc-citation-models`). It replaced the per-flavour `metanorma-model-*` repositories; their git histories are grafted here via `Merge metanorma-model-<flavour> history (unification)` commits.
 
 **The models are the LML files.** `<flavour>/models/*.lml` are the information models — the single source of truth. RNC grammars are implementation files accompanying the models, hand-maintained today and slated for retirement by the model-driven programme (issue #181: generate schemas/classes from LML). Never describe, structure, or refactor around RNC as if they were the model definitions.
+
+**Flavour views are fully encapsulated** (convention shared with relaton-models#70): a flavour view includes only its own module's models (`<flavour>/models/<package>/`); classes from other layers referenced in associations render as collapsed, name-only boxes. The `standoc/` base views are the exploded reference set. Do not add cross-module includes to flavour views.
 
 ## Layout
 
@@ -43,6 +45,8 @@ bundle install
 rake                        # all flavour diagrams
 rake iso                    # one flavour
 rake verify                 # assert every committed .png is a real PNG
+rake parity                 # layout invariants: views/images/configs/module separation
+rake site                   # build the model catalogue into _site/
 rake clean
 
 git submodule update --init --recursive
