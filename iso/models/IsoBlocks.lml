@@ -3,12 +3,9 @@ diagram IsoDoc_IsoBlocks {
   caption 'Block elements of ISO Standard Model'
 
 
-  include basic_document/multiparagraphs/AdmonitionBlock.lml
   include iso_document/blocks/IsoAdmonitionBlock.lml
   include iso_document/blocks/IsoAdmonitionType.lml
 
-  include standard_document/terms/TermCollection.lml
-  include standard_document/terms/Term.lml
   include iso_document/terms/IsoTermCollection.lml
   include iso_document/terms/IsoTerm.lml
 

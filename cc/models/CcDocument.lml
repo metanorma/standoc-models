@@ -2,7 +2,6 @@ diagram CcDocument {
   title 'CalConnect Model'
   caption 'Elements of the Calconnect Standard Model'
 
-  include standard_document/StandardDocument.lml
   include cc_document/CcStandardDocument.lml
 
   association {
