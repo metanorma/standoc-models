@@ -95,7 +95,9 @@ jobs:
       - name: Assemble site
         run: |
           mkdir -p _site
-          cp -r _artifacts/*/* _site/
+          # artifacts carry one directory per flavour (merge-multiple keeps
+          # the flavour level); copy directories, not their contents
+          cp -r _artifacts/* _site/
           cat > _site/index.html <<HTML
           <!doctype html><html><body><h1>Metanorma grammar packages</h1><ul>
           $(while read -r f; do echo "<li><a href=\"$f/\">$f</a></li>"; done < flavors.txt)
