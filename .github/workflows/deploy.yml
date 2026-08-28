@@ -95,9 +95,11 @@ jobs:
       - name: Assemble site
         run: |
           # Catalogue first (creates _site/ with committed diagrams), then
-          # overlay the per-flavour LXR SPA artifacts under <flavor>/.
+          # overlay the per-flavour LXR SPA artifacts. Artifacts carry one
+          # directory per flavour (merge-multiple keeps the flavour level);
+          # copy directories, not their contents.
           ruby site/generate.rb
-          cp -r _artifacts/*/* _site/
+          cp -r _artifacts/* _site/
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
