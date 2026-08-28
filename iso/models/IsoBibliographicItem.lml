@@ -3,6 +3,7 @@ diagram IsoDoc_IsoBibliographicItem {
   caption 'Bibliographic items of ISO Standard Model'
 
 
+  include standard_document/metadata/StandardBibDataExtensionType.lml
   include iso_document/metadata/IsoBibliographicItem.lml
   include iso_document/metadata/IsoDocumentId.lml
   include iso_document/metadata/IsoLocalizedTitle.lml

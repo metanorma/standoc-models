@@ -21,25 +21,6 @@ jobs:
       - run: sudo apt-get install -y graphviz
       - run: bundle exec rake
       - run: bundle exec rake verify
-      - name: Bisect iso render (TEMP)
-        if: failure()
-        run: |
-          W="$PWD"
-          mk() { sed "s|include iso_document/|include $W/iso/models/iso_document/|g" iso/models/IsoBibliographicItem.lml > /tmp/$1.lml; }
-          # v1: as-is (absolute includes)
-          mk v1
-          # v2: plus the StandardBibDataExtensionType include
-          mk v2; sed -i "s|include $W/iso/models/iso_document/metadata/IsoBibliographicItem.lml|include $W/iso/models/standard_document/metadata/StandardBibDataExtensionType.lml\n  include $W/iso/models/iso_document/metadata/IsoBibliographicItem.lml|" /tmp/v2.lml
-          # v3: TypeUri -> TypedUri
-          mk v3; sed -i 's|TypeUri|TypedUri|g' /tmp/v3.lml
-          # v4: no associations at all (parse classes only)
-          mk v4; sed -i '/association {/,/^  }$/d' /tmp/v4.lml
-          # v5: associations only (no includes)
-          mk v5; sed -i '/include /d' /tmp/v5.lml
-          for v in v1 v2 v3 v4 v5; do
-            bundle exec lutaml-lml generate /tmp/$v.lml -o /tmp/$v.dot -t dot 2>&1 | grep -v '^$' | tail -2
-            echo "== $v: $(wc -c < /tmp/$v.dot) bytes"
-          done
       - run: bundle exec rake parity
 
   # Regeneration parity gate: committed .rng must be byte-identical to
