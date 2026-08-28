@@ -20,6 +20,27 @@ jobs:
           bundler-cache: true
       - run: sudo apt-get install -y graphviz
       - run: bundle exec rake
+      - name: Bisect iso render (TEMP)
+        if: failure()
+        run: |
+          set -e
+          mkdir -p /tmp/bisect
+          # v1: as-is
+          cp iso/models/IsoBibliographicItem.lml /tmp/bisect/v1.lml
+          # v2: ../models-style include paths (relaton convention)
+          sed 's|include iso_document/|include iso/models/iso_document/|' iso/models/IsoBibliographicItem.lml > /tmp/bisect/v2.lml
+          # v3: add the StandardBibDataExtensionType include (relaton's extra node)
+          sed 's|include iso_document/metadata/IsoBibliographicItem.lml|include iso/models/standard_document/metadata/StandardBibDataExtensionType.lml\n  include iso_document/metadata/IsoBibliographicItem.lml|' iso/models/IsoBibliographicItem.lml > /tmp/bisect/v3.lml
+          # v4: TypeUri -> TypedUri
+          sed 's|TypeUri|TypedUri|g' iso/models/IsoBibliographicItem.lml > /tmp/bisect/v4.lml
+          # v5: rendered from inside iso/models (cwd variation)
+          cp iso/models/IsoBibliographicItem.lml /tmp/bisect/v5.lml
+          cd iso/models && bundle exec lutaml-lml generate /tmp/bisect/v5.lml -o /tmp/bisect/v5.dot -t dot; wc -c < /tmp/bisect/v5.dot; cd ../..
+          for v in v1 v2 v3 v4; do
+            cp -r iso/models/iso_document /tmp/bisect/iso_document 2>/dev/null || true
+            cp -r iso/models/standard_document /tmp/bisect/standard_document 2>/dev/null || true
+            ( cd /tmp/bisect && bundle exec --gemfile "$GITHUB_WORKSPACE/Gemfile" lutaml-lml generate $v.lml -o $v.dot -t dot 2>&1 | tail -1; echo "$v: $(wc -c < $v.dot) bytes" )
+          done
       - run: bundle exec rake verify
       - run: bundle exec rake parity
 
