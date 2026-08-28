@@ -16,11 +16,10 @@
 /grammars/jing-trang/
 /grammars/vendor/
 
-# Bundler
-Gemfile.lock
 
 # LXR / site build outputs
 *.lxr
 *.spa
 *.xsd
 /_site/
+/grammars/Gemfile.lock

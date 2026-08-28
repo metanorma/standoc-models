@@ -16,6 +16,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
         with:
+          ruby-version: "3.3"
           bundler-cache: true
       - run: sudo apt-get install -y graphviz
       - run: bundle exec rake
@@ -27,15 +28,18 @@ jobs:
   grammar-parity:
     runs-on: ubuntu-latest
     steps:
+      # Non-recursive: basicdoc-models and relaton-models submodule each
+      # other, so recursive checkout would chase the cycle. The build only
+      # needs the three direct pins.
       - uses: actions/checkout@v4
-        with:
-          submodules: recursive
+      - run: git submodule update --init grammars/relaton-models grammars/basicdoc-models grammars/metanorma-requirements-models
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: "21"
       - uses: ruby/setup-ruby@v1
         with:
+          ruby-version: "3.3"
           bundler-cache: true
       # trang is resolved by make.sh: TRANG_JAR env -> PATH -> pinned
       # jing-trang V20241231 build under grammars/vendor/ (needs ant).
