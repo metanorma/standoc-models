@@ -1,4 +1,4 @@
-class CcFigure{
+class CcFigure {
     +source: String[0..1]
     +name: LocalizedString[0..1]
     +note: ParagraphWithFootnote[0..*]

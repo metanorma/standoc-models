@@ -1,4 +1,4 @@
-class IsoProjectGroup{
+class IsoProjectGroup {
     definition {
        Editorial and Aproval groups associated with the production of an ISO/IEC document.
     }

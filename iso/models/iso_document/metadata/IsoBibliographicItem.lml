@@ -1,4 +1,4 @@
-class IsoBibliographicItem{
+class IsoBibliographicItem {
   definition {
     The bibliographical description of an ISO/IEC document.
   }

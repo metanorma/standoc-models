@@ -19,19 +19,8 @@ jobs:
           ruby-version: "3.3"
           bundler-cache: true
       - run: sudo apt-get install -y graphviz
-      - run: dot -V
       - run: bundle exec rake
       - run: bundle exec rake verify
-      - name: Diagnose iso render
-        if: failure()
-        run: |
-          set -x
-          file iso/images/IsoBibliographicItem*.png
-          head -3 iso/images/IsoBibliographicItem.png
-          bundle exec lutaml-lml generate iso/models/IsoBibliographicItem.lml -o /tmp/iso.dot -t dot
-          wc -c /tmp/iso.dot; head -5 /tmp/iso.dot; ls -la /tmp/iso*
-          dot -Tpng /tmp/iso.dot -o /tmp/iso-manual.png; echo "manual dot rc=$?"
-          file /tmp/iso-manual.png
       - run: bundle exec rake parity
 
   # Regeneration parity gate: committed .rng must be byte-identical to

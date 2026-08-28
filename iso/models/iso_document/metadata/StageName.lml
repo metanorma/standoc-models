@@ -1,4 +1,4 @@
-class StageName{
+class StageName {
     definition {
       Stage name for current document (specific to document type).
     }

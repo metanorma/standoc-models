@@ -1,4 +1,4 @@
-class BsiBibliographicItem{
+class BsiBibliographicItem {
   definition {
     The bibliographical description of an BSI document.
   }

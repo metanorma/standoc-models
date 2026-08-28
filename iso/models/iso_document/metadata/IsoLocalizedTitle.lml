@@ -1,4 +1,4 @@
-class IsoLocalizedTitle{
+class IsoLocalizedTitle {
     definition {
       Title of ISO/IEC document.
     }

@@ -1,4 +1,4 @@
-class IsoDocumentStatus{
+class IsoDocumentStatus {
     definition {
       Publication status of an ISO/IEC document.
     }
