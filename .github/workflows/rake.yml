@@ -29,12 +29,9 @@ jobs:
           file iso/images/IsoBibliographicItem*.png
           head -3 iso/images/IsoBibliographicItem.png
           bundle exec lutaml-lml generate iso/models/IsoBibliographicItem.lml -o /tmp/iso.dot -t dot
+          wc -c /tmp/iso.dot; head -5 /tmp/iso.dot; ls -la /tmp/iso*
           dot -Tpng /tmp/iso.dot -o /tmp/iso-manual.png; echo "manual dot rc=$?"
           file /tmp/iso-manual.png
-          dot -Tpng -Gsplines=polyline /tmp/iso.dot -o /tmp/iso-poly.png; echo "poly rc=$?"
-          file /tmp/iso-poly.png
-          dot -Tsvg /tmp/iso.dot -o /tmp/iso-manual.svg; echo "svg rc=$?"
-          file /tmp/iso-manual.svg
       - run: bundle exec rake parity
 
   # Regeneration parity gate: committed .rng must be byte-identical to
