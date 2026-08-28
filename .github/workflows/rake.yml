@@ -20,6 +20,7 @@ jobs:
           bundler-cache: true
       - run: sudo apt-get install -y graphviz
       - run: bundle exec rake
+      - run: bundle exec rake verify
       - name: Bisect iso render (TEMP)
         if: failure()
         run: |
@@ -41,7 +42,6 @@ jobs:
             cp -r iso/models/standard_document /tmp/bisect/standard_document 2>/dev/null || true
             ( cd /tmp/bisect && bundle exec --gemfile "$GITHUB_WORKSPACE/Gemfile" lutaml-lml generate $v.lml -o $v.dot -t dot 2>&1 | tail -1; echo "$v: $(wc -c < $v.dot) bytes" )
           done
-      - run: bundle exec rake verify
       - run: bundle exec rake parity
 
   # Regeneration parity gate: committed .rng must be byte-identical to
