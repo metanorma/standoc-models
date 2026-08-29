@@ -67,10 +67,11 @@ Trang is resolved in order: the `TRANG_JAR` environment variable, a
 upstream ref `V20241231` under `grammars/vendor/` (gitignored; cacheable
 in CI). No more clones of jing-trang's drifting `main`.
 
-CI enforces a **regeneration parity gate**: the committed `.rng`
-artifacts must be byte-identical to regeneration output from the pinned
-sources. Hand-edits to generated artifacts, or source changes committed
-without regenerating, fail the build.
+Grammar artifacts are **built on demand**: `.rng` are not committed —
+`make.sh` compiles every `.rnc` in the hub and the validation suite
+derives its set from the compiled grammars. The `grammar-parity` CI job
+rebuilds from the pinned sources and validates the instance fixtures
+against the fresh chain.
 
 == Model diagrams
 
@@ -91,7 +92,8 @@ GitHub Pages from each flavour's `build-config.yml`:
 * the **model catalogue** — `rake site` renders `site/` (ERB templates) into
   `_site/`: a clause-numbered index of the base layer and every flavour,
   with per-flavour pages showing each diagram card, its grammar companion
-  and a link to its schema browser;
+  and a link to its schema browser, plus the generated JSON Schema and the
+  twin instance fixtures as machine-readable downloads;
 * the **LXR schema packages** — one `.lxr` grammar package + SPA per flavour
   built with `lutaml-xsd`, overlaid under `<flavour>/` alongside the
   catalogue.

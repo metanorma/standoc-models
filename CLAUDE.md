@@ -63,10 +63,10 @@ cd grammars && ./refresh-submodules.sh  # ONLY network path; then ./make.sh
 ## Invariants
 
 - **Prime directive**: LML first. Model change = LML change; grammars follow.
-- **Regeneration parity gate**: committed `.rng` must be byte-identical to regeneration from the pinned sources. Hand-edits to generated artifacts, or `.rnc` changes committed without regenerating, fail CI (`grammar-parity` job).
+- **Grammar artifacts are generated on demand**: `.rng` are never committed — `make.sh` compiles every `.rnc` in the hub (the compile and validation sets are derived, not hand-listed) and `test.rb` validates composites + flavour grammars; the `grammar-parity` CI job rebuilds from the pinned sources and validates the XML fixture against the fresh chain.
 - `make.sh` never updates submodules and never writes `versions.json`; `refresh-submodules.sh` never runs as part of the build.
 - One root `Gemfile` + one root `Rakefile`. No per-flavour build scripts.
-- `.gitignore`: `grammars/*.rng` is ignored but committed artifacts stay tracked (the index wins); vendored inputs (`relaton-*.rnc`, `basicdoc.rnc`, `biblio*.rnc`, `reqt.rnc`, `mathml/`) are never committed.
+- `.gitignore`: all `.rng` outputs and vendored inputs (`relaton-*.rnc`, `basicdoc.rnc`, `biblio*.rnc`, `reqt.rnc`, `mathml/`) are never committed. Never vendor from the basicdoc copy nested inside relaton-models — only the direct submodule pins are recorded.
 - Vendoring of submodule `.rnc` has **one** implementation: `scripts/vendor-submodule-grammars.rb`. Both `grammars/make.sh` and `deploy.yml` call it.
 - `deploy.yml` builds an `.lxr` package + SPA per flavour from each `build-config.yml` with `lutaml-xsd` and publishes to GitHub Pages.
 - The `semx`/`fmt-*` Presentation XML contract lives in `grammars/README.adoc`; `fmt-*` vocabulary is closed by the grammars here.

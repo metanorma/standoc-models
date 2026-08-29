@@ -1,9 +1,9 @@
 name: Build and Deploy Grammars
 
-# LXR grammar-package + SPA HTML generation for EVERY flavour, deployed to
-# GitHub Pages (one directory per flavour). One root Gemfile (lutaml-lml +
-# lutaml-xsd + ruby-jing); each flavour directory carries only its
-# build-config.yml schema set. The flavour matrix comes from flavors.txt —
+# Model catalogue + LXR grammar-package/SPA generation for EVERY flavour,
+# deployed to GitHub Pages (one directory per flavour). One root Gemfile
+# (lutaml-lml + lutaml-xsd + ruby-jing); each flavour directory carries only
+# its build-config.yml schema set. The flavour list comes from flavors.txt —
 # the same single source the root Rakefile and the metanorma/ci path-filter
 # read.
 
@@ -24,22 +24,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  flavors:
-    runs-on: ubuntu-latest
-    outputs:
-      flavors: ${{ steps.list.outputs.flavors }}
-    steps:
-      - uses: actions/checkout@v6
-      - id: list
-        run: echo "flavors=$(jq -R -s -c 'split("\n") | map(select(length > 0))' flavors.txt)" >> "$GITHUB_OUTPUT"
-
   build:
-    needs: flavors
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        flavor: ${{ fromJson(needs.flavors.outputs.flavors) }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -55,26 +41,27 @@ jobs:
       - name: Vendor submodule grammars
         run: ruby scripts/vendor-submodule-grammars.rb
 
-      - name: Build LXR package
-        working-directory: ${{ matrix.flavor }}
-        run: bundle exec lutaml-xsd build from-config build-config.yml --output ${{ matrix.flavor }}.lxr
-
-      - name: Generate SPA documentation
-        working-directory: ${{ matrix.flavor }}
-        run: bundle exec lutaml-xsd spa ${{ matrix.flavor }}.lxr --mode inlined --output ${{ matrix.flavor }}.html
-
-      - name: Prepare artifact
-        working-directory: ${{ matrix.flavor }}
+      - name: Build LXR packages and SPA documentation
         run: |
-          mkdir -p _site/${{ matrix.flavor }}
-          cp ${{ matrix.flavor }}.html _site/${{ matrix.flavor }}/index.html
-          cp -r images _site/${{ matrix.flavor }}/ 2>/dev/null || true
+          set -e
+          while read -r flavor; do
+            [ -n "$flavor" ] || continue
+            echo "::group::LXR $flavor"
+            ( cd "$flavor"
+              bundle exec lutaml-xsd build from-config build-config.yml --output "$flavor.lxr"
+              bundle exec lutaml-xsd spa "$flavor.lxr" --mode inlined --output "$flavor.html"
+              mkdir -p "_site/$flavor"
+              cp "$flavor.html" "_site/$flavor/index.html"
+              cp -r images "_site/$flavor/" 2>/dev/null || true )
+            echo "::endgroup::"
+          done < flavors.txt
 
-      - name: Upload artifact
+      - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: lxr-${{ matrix.flavor }}
-          path: ${{ matrix.flavor }}/_site
+          name: lxr-sites
+          path: |
+            */_site
 
   deploy:
     environment:
@@ -86,20 +73,18 @@ jobs:
     steps:
       - name: Checkout (site generator + flavour metadata)
         uses: actions/checkout@v6
-      - name: Download all flavour artifacts
+      - name: Download flavour artifacts
         uses: actions/download-artifact@v5
         with:
           path: _artifacts
           pattern: lxr-*
-          merge-multiple: true
       - name: Assemble site
         run: |
-          # Catalogue first (creates _site/ with committed diagrams), then
-          # overlay the per-flavour LXR SPA artifacts. Artifacts carry one
-          # directory per flavour (merge-multiple keeps the flavour level);
-          # copy directories, not their contents.
+          # Catalogue first (creates _site/ with committed diagrams, the
+          # JSON Schema and the instance fixtures), then overlay the
+          # per-flavour LXR SPA directories.
           ruby site/generate.rb
-          cp -r _artifacts/* _site/
+          cp -r _artifacts/*/_site/* _site/
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v4
         with:

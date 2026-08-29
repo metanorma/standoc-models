@@ -135,6 +135,13 @@ module StandocSite
     end
 
     FileUtils.cp_r(SITE.join("assets"), OUT.join("assets"))
+
+    # Machine-readable companions: the generated JSON Schema and the twin
+    # instance fixtures.
+    schema_src = ROOT.join("schema")
+    FileUtils.cp_r(schema_src, OUT.join("schema")) if Dir.exist?(schema_src)
+    examples_src = ROOT.join("examples")
+    FileUtils.cp_r(examples_src, OUT.join("examples")) if Dir.exist?(examples_src)
     puts "site: #{mods.size} modules, #{total_cards} cards -> #{OUT}"
   end
 end
