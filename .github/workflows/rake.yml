@@ -26,7 +26,7 @@ jobs:
       - run: bundle exec rake verify
       - run: bundle exec rake parity
       - run: bundle exec rake lint
-      - run: bundle exec rake fixtures
+      - run: bundle exec rake fixtures:yaml
       - run: bundle exec rake schema
       # schema freshness: the committed schema must match the LML
       - run: git diff --exit-code -- schema/
@@ -53,6 +53,10 @@ jobs:
       # jing-trang V20241231 build under grammars/vendor/ (needs ant).
       - run: sudo apt-get update && sudo apt-get install -y ant
       - run: cd grammars && ./make.sh
-      # Only committed artifacts are in the parity gate; vendored inputs and
-      # versions.json are gitignored.
-      - run: git diff --exit-code -- grammars/*.rng grammars/*.rnc
+      # The XML fixture validates against the freshly compiled chain
+      # (standoc-compile.rng exists only after the build; .rng are not
+      # committed — main's generate-on-demand direction).
+      - run: ruby tools/validate_xml.rb
+      # Only tracked sources are in the parity gate; vendored inputs,
+      # versions.json and all .rng outputs are gitignored.
+      - run: git diff --exit-code -- grammars/*.rnc grammars/*.rng
