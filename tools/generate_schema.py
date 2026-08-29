@@ -21,6 +21,10 @@ def model_files():
     files = sorted(ROOT.glob("*/models/**/*.lml"))
     files += sorted(ROOT.glob("grammars/basicdoc-models/**/models/**/*.lml"))
     files += sorted(ROOT.glob("grammars/relaton-models/**/models/**/*.lml"))
+    # Exclude the basicdoc copy NESTED inside relaton-models (its own
+    # submodule): the direct basicdoc-models pin is canonical, and CI does
+    # not initialize nested submodules.
+    files = [f for f in files if "relaton-models/basicdoc" not in str(f)]
     def order(p):
         top = p.relative_to(ROOT).parts[0]
         return (0 if top == "standoc" else 1 if top == "grammars" else 2, str(p))

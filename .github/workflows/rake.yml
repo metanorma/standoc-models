@@ -56,7 +56,7 @@ jobs:
       # The XML fixture validates against the freshly compiled chain
       # (standoc-compile.rng exists only after the build; .rng are not
       # committed — main's generate-on-demand direction).
-      - run: ruby tools/validate_xml.rb
+      - run: bundle exec ruby tools/validate_xml.rb
       # Only tracked sources are in the parity gate; vendored inputs,
       # versions.json and all .rng outputs are gitignored.
       - run: git diff --exit-code -- grammars/*.rnc grammars/*.rng
