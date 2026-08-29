@@ -45,7 +45,10 @@ bundle install
 rake                        # all flavour diagrams
 rake iso                    # one flavour
 rake verify                 # assert every committed .png is a real PNG
-rake parity                 # layout invariants: views/images/configs/module separation
+rake parity                 # layout invariants + LML-enum/RNC vocabulary parity
+rake lint                   # semantic LML lint: names, duplicates, type resolution
+rake fixtures               # twin XML/YAML instances (examples/)
+rake schema                 # regenerate schema/standdoc-2020-12.json from the LML
 rake site                   # build the model catalogue into _site/
 rake clean
 
