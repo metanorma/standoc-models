@@ -35,7 +35,7 @@ diagram UnDocument {
   
   class UnSessionType{
       +number: String[0..1]
-      +session-date: xsd:date[0..1]
+      +session-date: Date[0..1]
       +item-number: String[0..*]
       +item-name: String[0..*]
       +subitem-name: String[0..*]

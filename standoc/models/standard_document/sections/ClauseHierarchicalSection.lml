@@ -1,4 +1,4 @@
-class ClauseHierarchicalSection{
+class ClauseHierarchicalSection {
   definition {
     Clauses in which all textual content belongs in a strict clause hierarchy. such that no blocks of text
     are siblings to subclauses.

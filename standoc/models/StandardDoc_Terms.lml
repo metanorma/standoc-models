@@ -120,7 +120,7 @@ diagram StandardDoc_Terms {
   }
   association {
     owner Designation
-    member GraphicalSymbolDesignation
+    member GraphicalDesignation
     owner_type direct
   }
   association {

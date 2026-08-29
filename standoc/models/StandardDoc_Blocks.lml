@@ -96,7 +96,7 @@ diagram StandardDoc_Blocks {
     owner_type direct
   }
   association {
-    owner StandardFormulalock
+    owner StandardFormulaBlock
     member Key
     owner_type direct
   }

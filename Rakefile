@@ -44,6 +44,86 @@ task :clean do
   flavors.each { |f| Dir["#{f}/images/*.png"].each { |p| rm_f(p) } }
 end
 
+# "Any" is the wildcard extension point (e.g. UnitsML in MiscContainer).
+BUILTIN_TYPES = %w[Integer Boolean Float Text String Date DateTime Any].freeze
+
+# Modelling debt lint can see, deferred to the #181 content review:
+# mpfa's profile types were modelled in the .wsd era but never as LML.
+KNOWN_MISSING_TYPES = %w[Terms OrganizationProfile PersonalProfile].freeze
+# Two distinct passthrough concepts (block wrapper vs inline span) have
+# shared this name since the .lutaml era; renaming one is a modelling call.
+KNOWN_DUPLICATE_TYPES = %w[Passthrough].freeze
+
+def lml_defined_types(path)
+  File.read(path).scan(/^\s*(?:class|enum|data_type|primitive)\s+(\w+)/).flatten
+end
+
+desc "Lint LML semantics: file/type match, duplicate types, type resolution, view references"
+task :lint do
+  errors = []
+  all_types = {}
+
+  flavors.each do |flavor|
+    defined = {}
+    Dir["#{flavor}/models/**/*.lml"].sort.each do |f|
+      types = lml_defined_types(f)
+      # Definition modules (models/<package>/) must define their own stem;
+      # top-level models/*.lml are views and may define anything.
+      if f.match?(%r{\A#{flavor}/models/[^/]+/})
+        stem = File.basename(f, ".lml")
+        errors << "#{f}: file name is not a type defined in this file (defines: #{types.join(', ')})" unless types.include?(stem)
+      end
+      types.each { |t| (defined[t] ||= []) << f }
+    end
+    defined.each do |t, files|
+      errors << "#{flavor}: duplicate type #{t}: #{files.join(', ')}" if files.size > 1 && !KNOWN_DUPLICATE_TYPES.include?(t)
+    end
+    all_types.merge!(defined) { |_k, a, _b| a }
+  end
+
+  # The basicdoc and relaton-models submodules close the type-resolution
+  # set: flavour bib views extend RelBib types (TypedUri, DocumentIdentifier,
+  # ...) and document views reference Basicdoc types (HierarchicalSection,
+  # Image, ...) via collapsed cross-module boxes.
+  %w[grammars/basicdoc-models grammars/relaton-models].each do |sub|
+    Dir["#{sub}/**/models/**/*.lml"].sort.each do |f|
+      lml_defined_types(f).each { |t| all_types[t] ||= [f] }
+    end
+  end
+
+  # Attribute types must resolve somewhere in the repo or be builtins.
+  flavors.each do |flavor|
+    Dir["#{flavor}/models/**/*.lml"].sort.each do |f|
+      File.foreach(f).with_index do |line, i|
+        m = line.match(/^\s*[+#-]([a-zA-Z][\w-]*)\s*:\s*(.+)$/)
+        next unless m
+
+        raw = m[2].split("[")[0].split("{")[0].gsub(/<<[^>]*>>/, "").strip
+        next if raw.empty? || raw.start_with?('"') || BUILTIN_TYPES.include?(raw)
+        unless all_types.key?(raw) || KNOWN_MISSING_TYPES.include?(raw)
+          errors << "#{f}:#{i + 1}: attribute '#{m[1]}' references undefined type '#{raw}'"
+        end
+      end
+    end
+  end
+
+  # View association endpoints must resolve (own include closure or a
+  # cross-module reference rendered as a collapsed box).
+  flavors.flat_map { |f| Dir["#{f}/models/*.lml"] }.sort.each do |v|
+    File.foreach(v).with_index do |line, i|
+      m = line.match(/^\s*(owner|member)\s+(\w+)/)
+      next unless m
+
+      unless all_types.key?(m[2]) || KNOWN_MISSING_TYPES.include?(m[2])
+        errors << "#{v}:#{i + 1}: association #{m[1]} '#{m[2]}' is not a known type"
+      end
+    end
+  end
+
+  abort "lint: #{errors.size} issue(s):\n  #{errors.join("\n  ")}" unless errors.empty?
+  puts "lint: OK (#{all_types.size} types across #{flavors.size} flavours + basicdoc)"
+end
+
 desc "Assert layout parity: views, images, configs and module separation per flavour"
 task :parity do
   errors = []

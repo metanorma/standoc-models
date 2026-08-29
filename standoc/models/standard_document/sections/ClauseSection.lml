@@ -1,4 +1,4 @@
-class ClauseSection{
+class ClauseSection {
   definition {
     A numbered clause constituting part of the main body of a _StandardDocument_.
   }

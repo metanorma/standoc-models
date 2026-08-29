@@ -52,7 +52,7 @@ diagram IhoBibliographicItem {
   }
   
   class IhoDocumentStatus{
-    +status: IhoStatusType
+    +status: IhoDocumentStatusType
   }
   
   enum IhoDocumentStatusType <<enumeration>>{

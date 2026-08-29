@@ -19,7 +19,7 @@ diagram ItuBibliographicItem {
     +keyword: FormattedString[0..*]
     +editorialGroup: ItuProjectGroup[1..*]
     +series: SeriesType[0..*]
-    +ipnoticereceived: boolean[0..*]
+    +ipnoticereceived: Boolean[0..*]
     +meeting: String[0..1]
     +meeting-date: BibliographicDate[0..1]
     +intended-type: ItuIntendedDate[0..1]
@@ -200,7 +200,7 @@ diagram ItuBibliographicItem {
   }
   association {
     owner ItuBibliographicItem
-    member ItuIntendedType
+    member ItuIntendedDate
     owner_type direct
   }
   

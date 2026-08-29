@@ -1,8 +1,7 @@
-class BsiFigureBlock {
+class BsiTableBlock {
     +border-under-row: String {
        definition {
          Comma-delimited indexes of rows under which to display border (horizontal rule).
        }
     }
 }
-
