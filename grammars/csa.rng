@@ -75,7 +75,14 @@
     <element name="type">
       <choice>
         <value>standard</value>
-        <value>governance</value>
+        <value>guidance</value>
+        <value>proposal</value>
+        <value>report</value>
+        <value>whitepaper</value>
+        <value>charter</value>
+        <value>policy</value>
+        <value>glossary</value>
+        <value>case-study</value>
       </choice>
     </element>
   </define>

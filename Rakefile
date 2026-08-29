@@ -147,8 +147,66 @@ task :parity do
     end
   end
 
+  # 02 — Vocabulary parity: every mapped LML enum must equal its RNC
+  # vocabulary (kebab-normalized). Adding a vocabulary = one entry here.
+  vocab_parity = {
+    "CSADocumentType" => ["documenttype", "grammars/csa.rnc"],
+    "InputType" => ["InputType", "grammars/standoc.rnc"],
+  }
+  vocab_parity.each do |lml_enum, (rnc_def, rnc_path)|
+    lml_vals = lml_enum_values(lml_enum)
+    if lml_vals.nil?
+      errors << "vocab parity: no LML enum #{lml_enum} found"
+      next
+    end
+    rnc_vals = rnc_vocabulary(rnc_def, rnc_path)
+    if rnc_vals.nil?
+      errors << "vocab parity: #{rnc_path} has no definition #{rnc_def}"
+      next
+    end
+    if lml_vals.uniq.sort != rnc_vals.uniq.sort
+      errors << "vocab parity #{lml_enum} vs #{rnc_def}: LML-only=#{(lml_vals - rnc_vals).inspect} RNC-only=#{(rnc_vals - lml_vals).inspect}"
+    end
+  end
+
   abort "parity: #{errors.size} issue(s):\n  #{errors.join("\n  ")}" unless errors.empty?
-  puts "parity: OK (#{flavors.size} flavours, #{flavors.sum { |f| Dir["#{f}/models/*.lml"].size }} views)"
+  puts "parity: OK (#{flavors.size} flavours, #{flavors.sum { |f| Dir["#{f}/models/*.lml"].size }} views, #{vocab_parity.size} vocabularies)"
+end
+
+def lml_enum_values(name)
+  Dir["*/models/**/*.lml"].sort.each do |path|
+    vals = []
+    depth = 0
+    inside = false
+    File.foreach(path) do |line|
+      if !inside
+        if line.match?(/^\s*enum #{name}\b/)
+          inside = true
+          depth = line.count("{") - line.count("}")
+        end
+        next
+      end
+      break if depth <= 0
+
+      m = line.match(/^\s+([A-Za-z][\w-]*)\s*\{?\s*$/)
+      vals << m[1] if m && m[1] != "definition"
+      depth += line.count("{") - line.count("}")
+    end
+    return vals.map { |v| v.gsub(/([a-z\d])([A-Z])/, '\1-\2').tr("_", "-").downcase } if inside
+  end
+  nil
+end
+
+def rnc_vocabulary(def_name, path)
+  body = File.readlines(path).reject { |l| l.lstrip.start_with?("##") }.join
+  m = body.match(/^#{Regexp.escape(def_name)} =/)
+  return nil unless m
+
+  region = body[m.begin(0)..]
+  rest = region[region.index("\n")..]
+  stop = rest.match(/^[A-Za-z-][\w-]* =/)
+  region = region[0, region.index("\n") + (stop ? stop.begin(0) : rest.size)] if stop
+  region.scan(/"([\w.-]+)"/).flatten
 end
 
 desc "Build the model catalogue site into _site/ (deployed by deploy.yml)"

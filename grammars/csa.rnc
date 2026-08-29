@@ -57,7 +57,8 @@ creator =
 
 documenttype =
   element type {
-     ( "standard" | "governance" )
+     ( "standard" | "guidance" | "proposal" | "report" | "whitepaper"
+       | "charter" | "policy" | "glossary" | "case-study" )
   }
 
 documentstatus =
