@@ -566,12 +566,22 @@
         },
         "content": {
           "type": "string"
+        },
+        "tag": {
+          "type": "string"
+        },
+        "multilingual-rendering": {
+          "$ref": "#/$defs/MultilingualRenderingType"
+        },
+        "columns": {
+          "type": "string"
         }
       },
       "additionalProperties": false,
       "required": [
         "formats",
-        "content"
+        "content",
+        "columns"
       ]
     },
     "StandardAdmonitionBlock": {

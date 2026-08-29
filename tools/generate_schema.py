@@ -34,7 +34,7 @@ def association_parents():
     # standoc expresses inheritance in view associations (owner/member
     # owner_type inheritance), not only in native `class X < Y` syntax.
     parents = {}
-    for v in ROOT.glob("*/models/*.lml"):
+    for v in sorted(ROOT.glob("*/models/*.lml")):
         for m in re.finditer(r"association\s*\{[^}]*?owner\s+(\w+)[^}]*?member\s+(\w+)[^}]*?owner_type\s+inheritance", v.read_text(), re.S):
             parents.setdefault(m.group(2), m.group(1))
     return parents
