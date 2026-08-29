@@ -10,13 +10,21 @@ require "fileutils"
 repo_root = File.expand_path("..", __dir__) # scripts -> repo root
 grammars = File.join(repo_root, "grammars")
 
-# Shared layers: relaton-models/grammars/*.rnc, basicdoc-models, requirements
+# Shared layers: relaton-models/grammars/*.rnc, basicdoc-models, requirements.
+# basicdoc-compile.rnc is basicdoc's internal wrapper (includes its own
+# vendor/ tree) and is not consumed here — skip it.
 Dir.glob(File.join(grammars, "*", "grammars", "*.rnc")).each do |file|
+  next if File.basename(file) == "basicdoc-compile.rnc"
+
   FileUtils.cp(file, File.join(grammars, File.basename(file)))
 end
 
-# Per-flavour relaton overlays: relaton-models/<flavour>/grammars/*.rnc
+# Per-flavour relaton overlays: relaton-models/<flavour>/grammars/*.rnc.
+# The basicdoc NESTED inside relaton-models is not one of our recorded
+# pins — never vendor from it (the direct basicdoc-models pin is canonical).
 Dir.glob(File.join(grammars, "*", "*", "grammars", "*.rnc")).each do |file|
+  next if file.include?("/relaton-models/basicdoc/")
+
   FileUtils.cp(file, File.join(grammars, File.basename(file)))
 end
 
