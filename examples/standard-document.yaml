@@ -1,0 +1,30 @@
+# Twin of examples/standard-document.xml, validated against the LML model
+# (rake fixtures:yaml). Convention: every typed node carries `class`; keys
+# are LML attribute names; `text` is a string leaf.
+#
+# The bibliographic side (title, docidentifier, contributor, ...) is modelled
+# in relaton-models — see its examples/ for those fixtures; basicdoc's BibData
+# is the deliberate shell that relaton extends. This twin exercises the
+# document-structure side that standoc-models owns.
+StandardDocument:
+  class: StandardDocument
+  type: semantic
+  version: 1.0.0
+  bibdata:
+    class: StandardBibData
+  boilerplate:
+    class: BoilerplateType
+    copyright:
+      - class: ClauseSection
+        number: "0"
+        variant-title:
+          - class: TypedTitleString
+            text: Copyright
+        text: "© Fixture Works 2026"
+  sections:
+    - class: ClauseSection
+      number: "1"
+      variant-title:
+        - class: TypedTitleString
+          text: Scope
+      text: This is a minimal fixture document exercising the core StanDoc model.

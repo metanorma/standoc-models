@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metanorma xmlns="https://www.metanorma.org/ns/standoc" type="semantic" flavor="standoc" version="1.0.0" schema-version="1.2.1">
+  <bibdata type="standard">
+    <title language="en" format="text/plain">Minimal StanDoc fixture</title>
+    <docidentifier>fixture-1</docidentifier>
+    <docnumber>1</docnumber>
+    <date type="published"><on>2026-01-01</on></date>
+    <contributor>
+      <role type="author"/>
+      <organization>
+        <name>Fixture Works</name>
+      </organization>
+    </contributor>
+    <contributor>
+      <role type="publisher"/>
+      <organization>
+        <name>Fixture Works</name>
+      </organization>
+    </contributor>
+    <edition>1</edition>
+    <language>en</language>
+    <script>Latn</script>
+    <status><stage>published</stage></status>
+    <copyright>
+      <from>2026</from>
+      <owner>
+        <organization>
+          <name>Fixture Works</name>
+        </organization>
+      </owner>
+    </copyright>
+    <ext>
+      <doctype>standard</doctype>
+      <flavor>standoc</flavor>
+    </ext>
+  </bibdata>
+  <boilerplate>
+    <copyright-statement>
+      <clause>
+        <p id="p0">© Fixture Works 2026</p>
+      </clause>
+    </copyright-statement>
+  </boilerplate>
+  <sections>
+    <clause id="s1" obligation="normative" inline-header="false">
+      <title id="t1">Scope</title>
+      <p id="p1">This is a minimal fixture document exercising the core StanDoc model.</p>
+    </clause>
+  </sections>
+</metanorma>

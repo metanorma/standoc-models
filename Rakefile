@@ -214,3 +214,16 @@ task :site do
   require_relative "site/generate"
   StandocSite.build!
 end
+
+desc "Validate examples/*.xml against the compiled standoc grammar"
+task :"fixtures:xml" do
+  sh "ruby", "tools/validate_xml.rb"
+end
+
+desc "Validate examples/*.yaml against the LML model"
+task :"fixtures:yaml" do
+  sh "ruby", "tools/validate_yaml.rb"
+end
+
+desc "Validate XML and YAML instance fixtures"
+task fixtures: [:"fixtures:xml", :"fixtures:yaml"]
