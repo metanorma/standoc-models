@@ -10892,7 +10892,7 @@
           }
         },
         "terminology": {
-          "type": "string"
+          "$ref": "#/$defs/TermsSection"
         },
         "guidance": {
           "$ref": "#/$defs/ClauseSection"
@@ -10984,7 +10984,7 @@
           }
         },
         "terminology": {
-          "type": "string"
+          "$ref": "#/$defs/TermsSection"
         },
         "guidance": {
           "$ref": "#/$defs/ClauseSection"
@@ -11076,7 +11076,7 @@
           }
         },
         "terminology": {
-          "type": "string"
+          "$ref": "#/$defs/TermsSection"
         },
         "guidance": {
           "$ref": "#/$defs/ClauseSection"
@@ -11174,7 +11174,7 @@
           }
         },
         "terminology": {
-          "type": "string"
+          "$ref": "#/$defs/TermsSection"
         },
         "guidance": {
           "$ref": "#/$defs/ClauseSection"
@@ -11266,7 +11266,7 @@
           }
         },
         "terminology": {
-          "type": "string"
+          "$ref": "#/$defs/TermsSection"
         },
         "guidance": {
           "$ref": "#/$defs/ClauseSection"
@@ -11364,7 +11364,7 @@
           }
         },
         "terminology": {
-          "type": "string"
+          "$ref": "#/$defs/TermsSection"
         },
         "guidance": {
           "$ref": "#/$defs/ClauseSection"
@@ -11462,7 +11462,7 @@
           }
         },
         "terminology": {
-          "type": "string"
+          "$ref": "#/$defs/TermsSection"
         },
         "guidance": {
           "$ref": "#/$defs/ClauseSection"
@@ -11560,7 +11560,7 @@
           }
         },
         "terminology": {
-          "type": "string"
+          "$ref": "#/$defs/TermsSection"
         },
         "guidance": {
           "$ref": "#/$defs/ClauseSection"
@@ -11674,7 +11674,7 @@
           "$ref": "#/$defs/FundRisk"
         },
         "profile": {
-          "type": "string"
+          "$ref": "#/$defs/OrganizationProfile"
         },
         "type": {
           "$ref": "#/$defs/ServiceProviderType"
@@ -11686,7 +11686,7 @@
           "$ref": "#/$defs/ClauseSection"
         },
         "managerProfile": {
-          "type": "string"
+          "$ref": "#/$defs/PersonalProfile"
         },
         "structure": {
           "$ref": "#/$defs/ClauseSection"
@@ -11698,7 +11698,7 @@
           "$ref": "#/$defs/ClauseSection"
         },
         "referTo": {
-          "type": "string"
+          "$ref": "#/$defs/OrganizationProfile"
         },
         "feeTables": {
           "type": "array",
@@ -11805,7 +11805,7 @@
           "$ref": "#/$defs/FundRisk"
         },
         "profile": {
-          "type": "string"
+          "$ref": "#/$defs/OrganizationProfile"
         },
         "type": {
           "$ref": "#/$defs/ServiceProviderType"
@@ -11817,7 +11817,7 @@
           "$ref": "#/$defs/ClauseSection"
         },
         "managerProfile": {
-          "type": "string"
+          "$ref": "#/$defs/PersonalProfile"
         },
         "structure": {
           "$ref": "#/$defs/ClauseSection"
@@ -11829,7 +11829,7 @@
           "$ref": "#/$defs/ClauseSection"
         },
         "referTo": {
-          "type": "string"
+          "$ref": "#/$defs/OrganizationProfile"
         },
         "feeTables": {
           "type": "array",
@@ -11936,7 +11936,7 @@
           "$ref": "#/$defs/FundRisk"
         },
         "profile": {
-          "type": "string"
+          "$ref": "#/$defs/OrganizationProfile"
         },
         "type": {
           "$ref": "#/$defs/ServiceProviderType"
@@ -11948,7 +11948,7 @@
           "$ref": "#/$defs/ClauseSection"
         },
         "managerProfile": {
-          "type": "string"
+          "$ref": "#/$defs/PersonalProfile"
         },
         "structure": {
           "$ref": "#/$defs/ClauseSection"
@@ -11960,7 +11960,7 @@
           "$ref": "#/$defs/ClauseSection"
         },
         "referTo": {
-          "type": "string"
+          "$ref": "#/$defs/OrganizationProfile"
         },
         "feeTables": {
           "type": "array",
@@ -12067,7 +12067,7 @@
           "$ref": "#/$defs/FundRisk"
         },
         "profile": {
-          "type": "string"
+          "$ref": "#/$defs/OrganizationProfile"
         },
         "type": {
           "$ref": "#/$defs/ServiceProviderType"
@@ -12079,7 +12079,7 @@
           "$ref": "#/$defs/ClauseSection"
         },
         "managerProfile": {
-          "type": "string"
+          "$ref": "#/$defs/PersonalProfile"
         },
         "structure": {
           "$ref": "#/$defs/ClauseSection"
@@ -12091,7 +12091,7 @@
           "$ref": "#/$defs/ClauseSection"
         },
         "referTo": {
-          "type": "string"
+          "$ref": "#/$defs/OrganizationProfile"
         },
         "feeTables": {
           "type": "array",
@@ -12198,7 +12198,7 @@
           "$ref": "#/$defs/FundRisk"
         },
         "profile": {
-          "type": "string"
+          "$ref": "#/$defs/OrganizationProfile"
         },
         "type": {
           "$ref": "#/$defs/ServiceProviderType"
@@ -12210,7 +12210,7 @@
           "$ref": "#/$defs/ClauseSection"
         },
         "managerProfile": {
-          "type": "string"
+          "$ref": "#/$defs/PersonalProfile"
         },
         "structure": {
           "$ref": "#/$defs/ClauseSection"
@@ -12222,7 +12222,269 @@
           "$ref": "#/$defs/ClauseSection"
         },
         "referTo": {
+          "$ref": "#/$defs/OrganizationProfile"
+        },
+        "feeTables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FeeTable"
+          },
+          "minItems": 1
+        },
+        "definitions": {
+          "$ref": "#/$defs/DefinitionSection"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "preface",
+        "body",
+        "terms",
+        "riskDisclosure",
+        "introduction",
+        "summary",
+        "investment",
+        "contributions",
+        "valuation",
+        "dealing",
+        "fees",
+        "general",
+        "funds",
+        "risks",
+        "profile",
+        "type",
+        "name",
+        "description",
+        "name",
+        "managerProfile",
+        "structure",
+        "descriptor",
+        "investmentFocus",
+        "risks",
+        "description",
+        "referTo",
+        "definitions"
+      ]
+    },
+    "OrganizationProfile": {
+      "type": "object",
+      "title": "OrganizationProfile",
+      "properties": {
+        "class": {
           "type": "string"
+        },
+        "preface": {
+          "$ref": "#/$defs/SchemeOfferPreface"
+        },
+        "body": {
+          "$ref": "#/$defs/SchemeOfferBody"
+        },
+        "annex": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ClauseSection"
+          }
+        },
+        "terms": {
+          "$ref": "#/$defs/TermCollection"
+        },
+        "riskDisclosure": {
+          "$ref": "#/$defs/BasicSection"
+        },
+        "introduction": {
+          "$ref": "#/$defs/BasicSection"
+        },
+        "summary": {
+          "$ref": "#/$defs/ClauseSection"
+        },
+        "management": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ServiceProvider"
+          },
+          "minItems": 1
+        },
+        "investment": {
+          "$ref": "#/$defs/InvestmentSection"
+        },
+        "contributions": {
+          "$ref": "#/$defs/ClauseSection"
+        },
+        "valuation": {
+          "$ref": "#/$defs/ClauseSection"
+        },
+        "dealing": {
+          "$ref": "#/$defs/ClauseSection"
+        },
+        "fees": {
+          "$ref": "#/$defs/FeesAndChargesSection"
+        },
+        "general": {
+          "$ref": "#/$defs/ClauseSection"
+        },
+        "funds": {
+          "$ref": "#/$defs/FundDescription"
+        },
+        "risks": {
+          "$ref": "#/$defs/FundRisk"
+        },
+        "profile": {
+          "$ref": "#/$defs/OrganizationProfile"
+        },
+        "type": {
+          "$ref": "#/$defs/ServiceProviderType"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "$ref": "#/$defs/ClauseSection"
+        },
+        "managerProfile": {
+          "$ref": "#/$defs/PersonalProfile"
+        },
+        "structure": {
+          "$ref": "#/$defs/ClauseSection"
+        },
+        "descriptor": {
+          "$ref": "#/$defs/ClauseSection"
+        },
+        "investmentFocus": {
+          "$ref": "#/$defs/ClauseSection"
+        },
+        "referTo": {
+          "$ref": "#/$defs/OrganizationProfile"
+        },
+        "feeTables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FeeTable"
+          },
+          "minItems": 1
+        },
+        "definitions": {
+          "$ref": "#/$defs/DefinitionSection"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "preface",
+        "body",
+        "terms",
+        "riskDisclosure",
+        "introduction",
+        "summary",
+        "investment",
+        "contributions",
+        "valuation",
+        "dealing",
+        "fees",
+        "general",
+        "funds",
+        "risks",
+        "profile",
+        "type",
+        "name",
+        "description",
+        "name",
+        "managerProfile",
+        "structure",
+        "descriptor",
+        "investmentFocus",
+        "risks",
+        "description",
+        "referTo",
+        "definitions"
+      ]
+    },
+    "PersonalProfile": {
+      "type": "object",
+      "title": "PersonalProfile",
+      "properties": {
+        "class": {
+          "type": "string"
+        },
+        "preface": {
+          "$ref": "#/$defs/SchemeOfferPreface"
+        },
+        "body": {
+          "$ref": "#/$defs/SchemeOfferBody"
+        },
+        "annex": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ClauseSection"
+          }
+        },
+        "terms": {
+          "$ref": "#/$defs/TermCollection"
+        },
+        "riskDisclosure": {
+          "$ref": "#/$defs/BasicSection"
+        },
+        "introduction": {
+          "$ref": "#/$defs/BasicSection"
+        },
+        "summary": {
+          "$ref": "#/$defs/ClauseSection"
+        },
+        "management": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ServiceProvider"
+          },
+          "minItems": 1
+        },
+        "investment": {
+          "$ref": "#/$defs/InvestmentSection"
+        },
+        "contributions": {
+          "$ref": "#/$defs/ClauseSection"
+        },
+        "valuation": {
+          "$ref": "#/$defs/ClauseSection"
+        },
+        "dealing": {
+          "$ref": "#/$defs/ClauseSection"
+        },
+        "fees": {
+          "$ref": "#/$defs/FeesAndChargesSection"
+        },
+        "general": {
+          "$ref": "#/$defs/ClauseSection"
+        },
+        "funds": {
+          "$ref": "#/$defs/FundDescription"
+        },
+        "risks": {
+          "$ref": "#/$defs/FundRisk"
+        },
+        "profile": {
+          "$ref": "#/$defs/OrganizationProfile"
+        },
+        "type": {
+          "$ref": "#/$defs/ServiceProviderType"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "$ref": "#/$defs/ClauseSection"
+        },
+        "managerProfile": {
+          "$ref": "#/$defs/PersonalProfile"
+        },
+        "structure": {
+          "$ref": "#/$defs/ClauseSection"
+        },
+        "descriptor": {
+          "$ref": "#/$defs/ClauseSection"
+        },
+        "investmentFocus": {
+          "$ref": "#/$defs/ClauseSection"
+        },
+        "referTo": {
+          "$ref": "#/$defs/OrganizationProfile"
         },
         "feeTables": {
           "type": "array",
@@ -12335,7 +12597,7 @@
           "$ref": "#/$defs/FundRisk"
         },
         "profile": {
-          "type": "string"
+          "$ref": "#/$defs/OrganizationProfile"
         },
         "type": {
           "$ref": "#/$defs/ServiceProviderType"
@@ -12347,7 +12609,7 @@
           "$ref": "#/$defs/ClauseSection"
         },
         "managerProfile": {
-          "type": "string"
+          "$ref": "#/$defs/PersonalProfile"
         },
         "structure": {
           "$ref": "#/$defs/ClauseSection"
@@ -12359,7 +12621,7 @@
           "$ref": "#/$defs/ClauseSection"
         },
         "referTo": {
-          "type": "string"
+          "$ref": "#/$defs/OrganizationProfile"
         },
         "feeTables": {
           "type": "array",
@@ -12466,7 +12728,7 @@
           "$ref": "#/$defs/FundRisk"
         },
         "profile": {
-          "type": "string"
+          "$ref": "#/$defs/OrganizationProfile"
         },
         "type": {
           "$ref": "#/$defs/ServiceProviderType"
@@ -12478,7 +12740,7 @@
           "$ref": "#/$defs/ClauseSection"
         },
         "managerProfile": {
-          "type": "string"
+          "$ref": "#/$defs/PersonalProfile"
         },
         "structure": {
           "$ref": "#/$defs/ClauseSection"
@@ -12490,7 +12752,7 @@
           "$ref": "#/$defs/ClauseSection"
         },
         "referTo": {
-          "type": "string"
+          "$ref": "#/$defs/OrganizationProfile"
         },
         "feeTables": {
           "type": "array",
@@ -12597,7 +12859,7 @@
           "$ref": "#/$defs/FundRisk"
         },
         "profile": {
-          "type": "string"
+          "$ref": "#/$defs/OrganizationProfile"
         },
         "type": {
           "$ref": "#/$defs/ServiceProviderType"
@@ -12609,7 +12871,7 @@
           "$ref": "#/$defs/ClauseSection"
         },
         "managerProfile": {
-          "type": "string"
+          "$ref": "#/$defs/PersonalProfile"
         },
         "structure": {
           "$ref": "#/$defs/ClauseSection"
@@ -12621,7 +12883,7 @@
           "$ref": "#/$defs/ClauseSection"
         },
         "referTo": {
-          "type": "string"
+          "$ref": "#/$defs/OrganizationProfile"
         },
         "feeTables": {
           "type": "array",
@@ -12728,7 +12990,7 @@
           "$ref": "#/$defs/FundRisk"
         },
         "profile": {
-          "type": "string"
+          "$ref": "#/$defs/OrganizationProfile"
         },
         "type": {
           "$ref": "#/$defs/ServiceProviderType"
@@ -12740,7 +13002,7 @@
           "$ref": "#/$defs/ClauseSection"
         },
         "managerProfile": {
-          "type": "string"
+          "$ref": "#/$defs/PersonalProfile"
         },
         "structure": {
           "$ref": "#/$defs/ClauseSection"
@@ -12752,7 +13014,7 @@
           "$ref": "#/$defs/ClauseSection"
         },
         "referTo": {
-          "type": "string"
+          "$ref": "#/$defs/OrganizationProfile"
         },
         "feeTables": {
           "type": "array",

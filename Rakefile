@@ -47,11 +47,9 @@ end
 # "Any" is the wildcard extension point (e.g. UnitsML in MiscContainer).
 BUILTIN_TYPES = %w[Integer Boolean Float Text String Date DateTime Any].freeze
 
-# Modelling debt lint can see, deferred to the #181 content review:
-# mpfa's profile types were modelled in the .wsd era but never as LML.
-KNOWN_MISSING_TYPES = %w[Terms OrganizationProfile PersonalProfile].freeze
-# Two distinct passthrough concepts (block wrapper vs inline span) have
-# shared this name since the .lutaml era; renaming one is a modelling call.
+# The grammar carries both passthrough concepts under one element name
+# (standoc.rnc: `passthrough` block form + `passthrough_inline`), so the
+# two same-named LML classes are a faithful model, not drift.
 KNOWN_DUPLICATE_TYPES = %w[Passthrough].freeze
 
 def lml_defined_types(path)
@@ -100,7 +98,7 @@ task :lint do
 
         raw = m[2].split("[")[0].split("{")[0].gsub(/<<[^>]*>>/, "").strip
         next if raw.empty? || raw.start_with?('"') || BUILTIN_TYPES.include?(raw)
-        unless all_types.key?(raw) || KNOWN_MISSING_TYPES.include?(raw)
+        unless all_types.key?(raw)
           errors << "#{f}:#{i + 1}: attribute '#{m[1]}' references undefined type '#{raw}'"
         end
       end
@@ -114,7 +112,7 @@ task :lint do
       m = line.match(/^\s*(owner|member)\s+(\w+)/)
       next unless m
 
-      unless all_types.key?(m[2]) || KNOWN_MISSING_TYPES.include?(m[2])
+      unless all_types.key?(m[2])
         errors << "#{v}:#{i + 1}: association #{m[1]} '#{m[2]}' is not a known type"
       end
     end

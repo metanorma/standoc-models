@@ -44,7 +44,7 @@ ret = ""
 GRAMMARS =
   %w(biblio-compile standoc-compile standoc-presentation-compile
      isostandard-compile isostandard-amd
-     iec generic csd csa gbstandard m3d rsd ieee un ogc nist itu ietf
+     iec generic cc csa gbstandard m3d rsd ieee un ogc nist itu ietf
      iho bipm bsi jis plateau
      relaton-ieee-compile relaton-iso-compile relaton-iec-compile
      relaton-bsi-compile relaton-gb-compile relaton-mpfa-compile
@@ -72,6 +72,6 @@ GRAMMARS.each do |g|
     ret += "#{g}: #{e}" if /multiple definitions/.match?(e[:message])
   end
 rescue Jing::Error => e
-  ret + "#{g}: Jing failed with error: #{e}"
+  ret += "#{g}: Jing failed with error: #{e}"
 end
 ret.empty? or warn "\n\n***ERRORS***\n#{ret}\n"
