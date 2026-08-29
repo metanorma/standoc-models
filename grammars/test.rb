@@ -41,22 +41,15 @@ def check_interleaving_in_include(filename)
 end
 
 ret = ""
-GRAMMARS =
-  %w(biblio-compile standoc-compile standoc-presentation-compile
-     isostandard-compile isostandard-amd
-     iec generic csd csa gbstandard m3d rsd ieee un ogc nist itu ietf
-     iho bipm bsi jis plateau
-     relaton-ieee-compile relaton-iso-compile relaton-iec-compile
-     relaton-bsi-compile relaton-gb-compile relaton-mpfa-compile
-     relaton-bipm-compile relaton-w3c-compile relaton-3gpp-compile
-     relaton-csa-compile relaton-cc-compile relaton-ietf-compile
-     relaton-iho-compile relaton-itu-compile relaton-m3aawg-compile
-     relaton-nist-compile relaton-ribose-compile relaton-ogc-compile
-     relaton-un-compile relaton-cen-compile relaton-ecma-compile
-     relaton-cie-compile relaton-iana-compile relaton-omg-compile
-     relaton-oasis-compile relaton-jis-compile relaton-etsi-compile
-     relaton-plateau-compile relaton-ccdsd-compile)
-    .freeze
+# Validation set derives from the compiled grammars: every composite
+# (-compile/-amd) and flavour document grammar. Bare shared layers
+# (standoc, biblio, basicdoc, reqt, bare relaton-*) are validated through
+# their composites and standalone quirks are out of scope.
+SHARED_LAYERS = /\A(standoc|standoc-presentation|standoc-collection|biblio|biblio-standoc|biblio-presentation|basicdoc|reqt)\z/.freeze
+GRAMMARS = Dir.glob("*.rng").map { |f| File.basename(f, ".rng") }.sort
+             .reject { |g| g.match?(SHARED_LAYERS) }
+             .reject { |g| g.start_with?("relaton-") && !g.end_with?("-compile") }
+             .reject { |g| g.start_with?("fixture-") }
 
 GRAMMARS.each do |g|
   warn "validating #{g}"
@@ -72,6 +65,6 @@ GRAMMARS.each do |g|
     ret += "#{g}: #{e}" if /multiple definitions/.match?(e[:message])
   end
 rescue Jing::Error => e
-  ret + "#{g}: Jing failed with error: #{e}"
+  ret += "#{g}: Jing failed with error: #{e}"
 end
 ret.empty? or warn "\n\n***ERRORS***\n#{ret}\n"

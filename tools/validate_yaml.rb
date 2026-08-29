@@ -1,0 +1,156 @@
+# frozen_string_literal: true
+
+# Validates examples/*.yaml instances against the LML model.
+#
+# YAML convention (shared with basicdoc/relaton-models): every typed node
+# carries `class` (the LML class name); keys are LML attribute names
+# (inherited attributes count); plain scalars are leaf values; `{text: ...}`
+# maps are text leaves.
+#
+# Inheritance is resolved from LML native syntax (`class X < Y`) and from
+# view associations with owner_type inheritance, across every module; the
+# basicdoc and relaton-models submodules close the type set.
+
+require "yaml"
+require "lutaml/lml"
+
+ROOT = File.expand_path("..", __dir__)
+
+def model_files
+  # Definition modules only (models/<package>/...); top-level models/*.lml
+  # are diagram views, which the definition parser does not consume.
+  @model_files ||= Dir[File.join(ROOT, "*/models/*/**/*.lml")] +
+                   Dir[File.join(ROOT, "grammars/basicdoc-models/**/models/**/*.lml")] +
+                   Dir[File.join(ROOT, "grammars/relaton-models/**/models/**/*.lml")]
+end
+
+def parsed_models
+  @parsed_models ||= model_files.each_with_object({}) do |f, acc|
+    begin
+      doc = Lutaml::Lml::Pipeline.call(File.read(f))
+      (doc.classes || []).each { |k| acc[k.name] ||= { kind: "class", obj: k, file: f } }
+      (doc.enums || []).each { |e| acc[e.name] ||= { kind: "enum", obj: e, file: f } }
+    rescue StandardError
+      nil
+    end
+  end
+end
+
+def defined_types
+  parsed_models.transform_values { |v| v[:file] }
+end
+
+def duplicate_warnings
+  by_type = Hash.new { |h, k| h[k] = [] }
+  parsed_models.each_value { |info| by_type[info[:obj].name] << info[:file] unless by_type[info[:obj].name].include?(info[:file]) }
+  by_type.select { |_t, files| files.size > 1 }
+end
+
+def parent_of
+  @parent_of ||= begin
+    parents = {}
+    parsed_models.each_value do |info|
+      next unless info[:kind] == "class"
+
+      parent = info[:obj].respond_to?(:parent_class) ? info[:obj].parent_class : nil
+      parents[info[:obj].name] ||= parent if parent
+    end
+    Dir[File.join(ROOT, "*/models/*.lml")].each do |v|
+      File.read(v).scan(/association\s*\{[^}]*?owner\s+(\w+)[^}]*?member\s+(\w+)[^}]*?owner_type\s+inheritance/m).each do |parent, child|
+        parents[child] ||= parent
+      end
+    end
+    parents
+  end
+end
+
+def attributes_of(type)
+  @attributes_of ||= {}
+  @attributes_of[type] ||= begin
+    info = parsed_models[type]
+    own = if info && info[:obj].respond_to?(:attributes) && info[:obj].attributes
+      info[:obj].attributes.map do |a|
+        type_str = a.type.to_s.gsub(/<<[^>]*>>/, "").strip
+        [a.name.to_s, type_str]
+      end
+    else
+      []
+    end
+    inherited = parent_of[type] ? attributes_of(parent_of[type]) : []
+    (own + inherited).reject { |n, _| n == "definition" }
+  end
+end
+
+def enum_values_of(type)
+  info = parsed_models[type]
+  return [] unless info && info[:kind] == "enum"
+
+  if info[:obj].respond_to?(:values) && info[:obj].values.to_a.any?
+    info[:obj].values.map(&:to_s)
+  elsif info[:obj].respond_to?(:attributes) && info[:obj].attributes
+    info[:obj].attributes.map(&:name).map(&:to_s) - %w[definition]
+  else
+    []
+  end
+end
+
+RESERVED = %w[class text].freeze
+
+@errors = []
+
+def check_node(node, where)
+  case node
+  when Hash
+    return if node.keys == ["text"]
+
+    klass = node["class"]
+    if klass.nil?
+      @errors << "#{where}: node without class"
+      return
+    elsif !defined_types.key?(klass)
+      @errors << "#{where}: unknown class #{klass}"
+      return
+    end
+
+    attrs = attributes_of(klass)
+    attr_names = attrs.map(&:first)
+    enum_types = attrs.each_with_object({}) do |(n, t), h|
+      h[n] = t if enum_values_of(t).any?
+    end
+
+    node.each do |k, v|
+      if RESERVED.include?(k)
+        check_node(v, "#{where}.#{k}") if v.is_a?(Hash) || v.is_a?(Array)
+      elsif attr_names.include?(k)
+        if enum_types[k] && v.is_a?(String) && !enum_values_of(enum_types[k]).include?(v)
+          @errors << "#{where}: #{klass}.#{k} value '#{v}' not in enum #{enum_types[k]} (#{enum_values_of(enum_types[k]).first(12).join(', ')}...)"
+        end
+        check_node(v, "#{where}.#{k}") if v.is_a?(Hash) || v.is_a?(Array)
+      else
+        @errors << "#{where}: '#{k}' is not an attribute of #{klass} (has: #{(attr_names + RESERVED).uniq.join(', ')})"
+      end
+    end
+  when Array
+    node.each_with_index { |child, i| check_node(child, "#{where}[#{i}]") }
+  end
+end
+
+dupes = duplicate_warnings.map { |t, files| "#{t}: #{files.map { |f| f.sub("#{ROOT}/", "") }.join(", ")}" }
+unless dupes.empty?
+  warn "duplicate type definitions (first definition wins):"
+  dupes.each { |d| warn "  #{d}" }
+end
+
+Dir[File.join(ROOT, "examples", "*.yaml")].sort.each do |path|
+  @errors.clear
+  data = YAML.safe_load_file(path, permitted_classes: [], aliases: false)
+  data = data.values.first while data.is_a?(Hash) && data.keys.size == 1 && data.values.first.is_a?(Hash) && !data.key?("class")
+  check_node(data, File.basename(path))
+  if @errors.empty?
+    puts "fixtures:yaml OK #{File.basename(path)}"
+  else
+    puts "fixtures:yaml FAIL #{File.basename(path)}"
+    @errors.each { |e| puts "  #{e}" }
+    exit 1
+  end
+end

@@ -1,0 +1,6 @@
+class ReferenceToTermSource {
+  definition {
+    Identifier of the source where the term is defined.
+  }
+  +content: String[1..*]
+}

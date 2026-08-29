@@ -1,0 +1,62 @@
+name: rake
+
+permissions:
+  contents: read
+
+on:
+  push:
+    branches: [main]
+    tags: [v*]
+  pull_request:
+
+jobs:
+  rake:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # Non-recursive: the lint closure + fixtures need the direct pins;
+      # recursive checkout would chase the basicdoc <-> relaton cycle.
+      - run: git submodule update --init grammars/relaton-models grammars/basicdoc-models grammars/metanorma-requirements-models
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true
+      - run: sudo apt-get install -y graphviz
+      - run: bundle exec rake
+      - run: bundle exec rake verify
+      - run: bundle exec rake parity
+      - run: bundle exec rake lint
+      - run: bundle exec rake fixtures:yaml
+      - run: bundle exec rake schema
+      # schema freshness: the committed schema must match the LML
+      - run: git diff --exit-code -- schema/
+
+  # Regeneration parity gate: committed .rng must be byte-identical to
+  # regeneration from the pinned submodule sources.
+  grammar-parity:
+    runs-on: ubuntu-latest
+    steps:
+      # Non-recursive: basicdoc-models and relaton-models submodule each
+      # other, so recursive checkout would chase the cycle. The build only
+      # needs the three direct pins.
+      - uses: actions/checkout@v4
+      - run: git submodule update --init grammars/relaton-models grammars/basicdoc-models grammars/metanorma-requirements-models
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true
+      # trang is resolved by make.sh: TRANG_JAR env -> PATH -> pinned
+      # jing-trang V20241231 build under grammars/vendor/ (needs ant).
+      - run: sudo apt-get update && sudo apt-get install -y ant
+      - run: cd grammars && ./make.sh
+      # The XML fixture validates against the freshly compiled chain
+      # (standoc-compile.rng exists only after the build; .rng are not
+      # committed — main's generate-on-demand direction).
+      - run: bundle exec ruby tools/validate_xml.rb
+      # Only tracked sources are in the parity gate; vendored inputs,
+      # versions.json and all .rng outputs are gitignored.
+      - run: git diff --exit-code -- grammars/*.rnc grammars/*.rng

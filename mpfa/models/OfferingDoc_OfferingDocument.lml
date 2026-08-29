@@ -53,6 +53,20 @@ diagram OfferingDoc_OfferingDocument {
     +profile: OrganizationProfile
     +type: ServiceProviderType
   }
+
+  class OrganizationProfile {
+    definition {
+      Profile of an organization acting as a service provider to the scheme
+      (referenced from the MPFA offering-document scheme requirements).
+    }
+  }
+
+  class PersonalProfile {
+    definition {
+      Profile of the person or entity managing a fund described in the
+      offering document.
+    }
+  }
   
   enum ServiceProviderType <<enumeration>>{
     trustee

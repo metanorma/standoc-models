@@ -3,6 +3,7 @@
 /grammars/biblio-standoc.rnc
 /grammars/biblio-compile.rnc
 /grammars/basicdoc.rnc
+/grammars/basicdoc-compile.rnc
 /grammars/reqt.rnc
 /grammars/mathml/
 /grammars/relaton-*.rnc
@@ -15,11 +16,12 @@
 /grammars/jing-trang/
 /grammars/vendor/
 
-# Bundler
-Gemfile.lock
 
 # LXR / site build outputs
 *.lxr
 *.spa
 *.xsd
 /_site/
+/grammars/Gemfile.lock
+fixture-standoc-compile.rng
+__pycache__/

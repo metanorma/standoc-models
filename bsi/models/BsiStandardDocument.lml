@@ -1,13 +1,7 @@
 diagram Bsi_BsiStandardDocument {
-  include iso_document/IsoStandardDocument.lml
   include bsi_document/BsiStandardDocument.lml
-  include iso_document/blocks/IsoAdmonitionBlock.lml
-  include iso_document/blocks/IsoAdmonitionType.lml
   include bsi_document/blocks/BsiAdmonitionBlock.lml
   include bsi_document/blocks/BsiAdmonitionType.lml
-  include basic_document/idelements/IdElement.lml
-  include standard_document/blocks/FigureBlock.lml
-  include standard_document/blocks/TableBlock.lml
   include bsi_document/blocks/BsiFigureBlock.lml
   include bsi_document/blocks/BsiFigureWidthType.lml
   include bsi_document/blocks/BsiTableBlock.lml

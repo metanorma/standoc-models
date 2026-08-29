@@ -6,6 +6,24 @@ https://github.com/metanorma/metanorma-core/issues/16[metanorma-core#16].
 This repository replaced the former per-flavour `metanorma-model-*`
 repositories; their commit histories are preserved here.
 
+[IMPORTANT]
+.Prime directive — the models are the LML files
+====
+The information models of this repository are the **LML files**:
+`<flavour>/models/*.lml` and the LutaML definition modules they include.
+They are the single source of truth for the document models.
+
+The RNC/RNG grammars in `grammars/` are **implementation files that
+accompany the models** — hand-maintained artifacts, slated for retirement
+by the model-driven programme (issue #181: schemas and classes generated
+from the LML models).
+
+This MUST NOT be violated: never treat RNC grammars as the model
+definitions; never describe, edit, or restructure this repository as if
+the grammars were the models. When a model changes, the LML changes
+first; the grammars follow.
+====
+
 == Layout
 
 `grammars/`::
@@ -22,33 +40,38 @@ per former `metanorma-model-<flavour>` repository: `bipm`, `bsi`, `cc`,
 `csa`, `gb`, `ieee`, `iho`, `iso`, `itu`, `m3aawg`, `mpfa`, `nist`,
 `ogc`, `ribose`, `standoc`, `un`.
 
-The repository has a single root `Gemfile` (lutaml-lml, lutaml-xsd,
-ruby-jing) and a single root `Makefile` — per-flavour Gemfiles and
-Makefiles are deliberately not a thing.
+The repository has a single root `Gemfile` (rake, lutaml-lml, lutaml-xsd,
+ruby-jing) and a single root `Rakefile` — per-flavour Gemfiles and build
+scripts are deliberately not a thing.
 
 == Building the grammars
 
-Two scripts in `grammars/` with strictly separated concerns:
+Two scripts in `grammars/` with strictly separated concerns, plus one
+shared vendoring helper:
 
 * `./make.sh` — deterministic build. Vendors the `.rnc` inputs from the
-  checked-out submodule pins, compiles everything to `.rng` with trang,
-  and runs the validation suite. Never updates submodules, never writes
-  `versions.json`. Requires submodules to be initialized
-  (`git submodule update --init --recursive`).
+  checked-out submodule pins (via `scripts/vendor-submodule-grammars.rb`),
+  compiles everything to `.rng` with trang, and runs the validation suite.
+  Never updates submodules, never writes `versions.json`. Requires
+  submodules to be initialized (`git submodule update --init --recursive`).
 * `./refresh-submodules.sh` — the only network path: updates submodules
   to their remotes, checks out `main` in each, and records versions in
   `versions.json`. Run manually when pulling in a new upstream release,
   then run `./make.sh`.
+* `scripts/vendor-submodule-grammars.rb` — the single implementation of
+  submodule → `grammars/` vendoring. Called by both `make.sh` and the
+  Pages deploy workflow.
 
 Trang is resolved in order: the `TRANG_JAR` environment variable, a
 `trang` on `PATH` (e.g. Homebrew), or a one-time build of the pinned
 upstream ref `V20241231` under `grammars/vendor/` (gitignored; cacheable
 in CI). No more clones of jing-trang's drifting `main`.
 
-CI enforces a **regeneration parity gate**: the committed `.rng`
-artifacts must be byte-identical to regeneration output from the pinned
-sources. Hand-edits to generated artifacts, or source changes committed
-without regenerating, fail the build.
+Grammar artifacts are **built on demand**: `.rng` are not committed —
+`make.sh` compiles every `.rnc` in the hub and the validation suite
+derives its set from the compiled grammars. The `grammar-parity` CI job
+rebuilds from the pinned sources and validates the instance fixtures
+against the fresh chain.
 
 == Model diagrams
 
@@ -56,23 +79,38 @@ without regenerating, fail the build.
 `<flavour>/images/*.png` are committed generated output. From the repo
 root:
 
-  make            # all flavours
-  make iso        # one flavour
-  make verify     # assert every committed .png really is a PNG
-  make clean
+  rake            # all flavours
+  rake iso        # one flavour
+  rake verify     # assert every committed .png really is a PNG
+  rake clean
 
-== LXR schema packages
+== Model catalogue and LXR schema packages
 
-Each flavour carries a `build-config.yml` schema set; the Pages workflow
-(`.github/workflows/deploy.yml`) builds an `.lxr` grammar package and SPA
-HTML per flavour with `lutaml-xsd` and publishes them to GitHub Pages.
+The Pages workflow (`.github/workflows/deploy.yml`) publishes two layers to
+GitHub Pages from each flavour's `build-config.yml`:
+
+* the **model catalogue** — `rake site` renders `site/` (ERB templates) into
+  `_site/`: a clause-numbered index of the base layer and every flavour,
+  with per-flavour pages showing each diagram card, its grammar companion
+  and a link to its schema browser, plus the generated JSON Schema and the
+  twin instance fixtures as machine-readable downloads;
+* the **LXR schema packages** — one `.lxr` grammar package + SPA per flavour
+  built with `lutaml-xsd`, overlaid under `<flavour>/` alongside the
+  catalogue.
+
+Flavour diagrams are **fully encapsulated** (same convention as
+relaton-models#70): a flavour view includes only its own module's models;
+classes from other layers render as collapsed, name-only boxes. The
+`standoc/` base views are the exploded reference set. `rake parity` guards
+the layout invariants.
 
 == Vendoring
 
 Flavour gems vendor the compiled RNG (`grammars/copy.sh`, run from a
-workspace with gem checkouts as siblings). Vendored copies keep their
-legacy `isodoc*.rng` filenames because gem code loads those paths; the
-bridge retires with generated-schema loading (issue #181).
+workspace with gem checkouts as siblings). Destination filenames use the
+post-rename `standoc.*` names and gem-local legacy names (e.g.
+`isostandard.rng`) because gem code loads those paths; the bridge retires
+with generated-schema loading (issue #181).
 
 == Where work happens
 

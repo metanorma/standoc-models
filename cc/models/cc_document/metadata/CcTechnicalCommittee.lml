@@ -1,4 +1,4 @@
-class CcTechnicalCommittee{
+class CcTechnicalCommittee {
     definition {
       CalConnect technical committee.
     }

@@ -1,4 +1,4 @@
-class StandardReferencesSection{
+class StandardReferencesSection {
   definition {
   The `StandardReferencesSection` class within _StandardDocument_
   is used to represent a bibliography section.

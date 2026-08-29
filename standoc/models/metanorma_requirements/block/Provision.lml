@@ -1,4 +1,4 @@
-class ProvisionBlock <<MetanormaRequirement>> {
+class Provision <<MetanormaRequirement>> {
   definition {
     Requirement, Recommendation, or Permission formulated in machine-readable form.
     Further details vary according to the specific requirements model chosen, as

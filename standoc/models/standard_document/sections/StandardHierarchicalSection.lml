@@ -1,4 +1,4 @@
-class StandardHierarchicalSection{
+class StandardHierarchicalSection {
   definition {
     A hierarchical section containing other sections, within a _StandardDocument_.
   }

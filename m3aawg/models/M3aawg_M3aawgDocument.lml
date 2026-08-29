@@ -8,8 +8,8 @@ diagram M3aawg_M3aawgDocument {
   
   class M3Document{
       +bibdata: M3DBibliographicItem
-      +foreword: HiererchicalSection[0..1]
-      +introduction: HiererchicalSection[0..1]
+      +foreword: HierarchicalSection[0..1]
+      +introduction: HierarchicalSection[0..1]
       +sections: ClauseSection[1..*]
       +annex: AnnexSection[0..*]
   }

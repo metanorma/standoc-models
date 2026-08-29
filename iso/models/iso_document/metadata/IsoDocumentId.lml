@@ -1,4 +1,4 @@
-class IsoDocumentId{
+class IsoDocumentId {
     definition {
       Representation of the identifier for an ISO/IEC document, giving its individual semantic components.
     }

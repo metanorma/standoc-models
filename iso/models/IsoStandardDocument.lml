@@ -3,9 +3,6 @@ diagram IsoDoc_IsoStandardDocument {
   caption 'Elements of the ISO Standard Model'
 
 
-  include standard_document/StandardDocument.lml
-  include standard_document/sections/AnnexSection.lml
-  include standard_document/sections/ClauseSection.lml
 
   include iso_document/IsoStandardDocument.lml
   include iso_document/IsoAmendmentDocument.lml

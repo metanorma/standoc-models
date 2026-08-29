@@ -15,7 +15,7 @@ diagram IeeeBibliographicItem {
   class IeeeVersion{
     +date: Date
     +status: DocumentStatus
-    +id: DocumentId
+    +id: DocumentIdentifier
     +uri: TypedUri
   }
   

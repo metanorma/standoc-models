@@ -1,0 +1,70 @@
+@startuml ItuStandardDocument
+/'
+Diagram:        ItuStandardDocument
+DateCreate:     22/08/2018
+Description:    Metanorma IsoDoc is a family of document models intended to represent ISO Standards and similarly structured standards,
+                based on the Metanorma StandardDocument ("StanDoc") and BasicDocument ("BasicDoc") models.
+                It is used to abstract the automated generation of standard documents in various formats from well-defined authoring tools;
+                and to validate the structural conformance of authored standards to specifications.
+- 20190311: Moved Keyword from TextElement to BibliographicItem
+- 20191029: Add ol/@class 
+- 20191106: Add add, del
+- 20210405: Move add, del to standoc
+'/
+
+'******* CONFIGURATION ************************************************
+!include style.uml.inc
+
+
+'******* CLASS DEFINITION *********************************************
+class StandardDocument <<StandardDocument>> {
+
+}
+
+class OrderedList <<BasicDocument>> {
+}
+
+class ItuOrderedList {
+  +class: ItuOrderedListClass[0..*]
+}
+
+enum ItuOrderedListClass <<enumeration>> {
+  steps
+}
+
+
+class ItuStandardDocument {
+    +bibdata: ItuBibliographicItem
+    +foreword: HierarchicalSection[0..1]
+    +introduction: HierarchicalSection[0..1]
+    +sections: ClauseSection[1..*]
+    +annex: AnnexSection[0..*]
+}
+
+
+class IdElement <<BasicDocument>>{
+
+}
+
+class Figure{
+    +source: String[0..1]
+    +name: LocalizedString[0..1]
+    +note: ParagraphWithFootnote[0..*]
+    +figure: Figure[0..*]
+    +definitions: DefinitionList[0..1]
+    +pre: String[0..1]
+    +content: TextElement[0..*]
+}
+
+'******* NOTES ********************************************************
+
+
+
+'******* CLASS RELATIONS **********************************************
+StandardDocument <|-- ItuStandardDocument
+
+IdElement <|-- Figure
+OrderedList <|-- ItuOrderedList
+ItuOrderedList <-- ItuOrderedListClass
+
+@enduml

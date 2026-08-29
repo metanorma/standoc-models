@@ -1,4 +1,4 @@
-class DefinitionSection{
+class DefinitionSection {
   definition {
   Definition sections consist of one or more definition lists (`DefinitionCollection`),
   are used to define symbols and

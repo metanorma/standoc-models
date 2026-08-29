@@ -17,7 +17,7 @@ class IsoSections {
         Terms & Definitions clause.
       }
     }
-    +definitions: DefinitionsSection[0..1] {
+    +definitions: DefinitionSection[0..1] {
       definition {
         Symbols & Abbreviated Terms clause.
       }

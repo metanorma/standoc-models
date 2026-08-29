@@ -1,3 +1,6 @@
+# POSIX sh (invoked as `sh copy.sh` by make.sh); no pipes, so no pipefail
+set -eu
+
 echo "Copying..."
 
 metanorma_version=`git tag --sort=committerdate | tail -1`

@@ -1,4 +1,4 @@
-class TermsSection{
+class TermsSection {
   definition {
   Term sections (`TermsSection`) give elaborated definitions of terms used in
   a standardization document.

@@ -1,4 +1,4 @@
-class GbStandardType{
+class GbStandardType {
   definition {
     Type of Chinese standard.
   }

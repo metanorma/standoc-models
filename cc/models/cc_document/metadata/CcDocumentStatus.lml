@@ -1,4 +1,4 @@
-class CcDocumentStatus{
+class CcDocumentStatus {
     definition {
       Publication status of CalConnect document.
     }

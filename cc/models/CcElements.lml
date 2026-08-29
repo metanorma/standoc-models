@@ -3,8 +3,6 @@ diagram CcElements {
   caption 'Elements of CalConnect Standard Model'
 
 
-  include basic_document/TextElement.lml
-  include basic_document/IdElement.lml
   include cc_document/elements/CcKeyword.lml
   include cc_document/elements/CcFigure.lml
 

@@ -1,4 +1,4 @@
-class IsoSubGroup{
+class IsoSubGroup {
     definition {
       Editorial group set up in ISO or IEC to work on producing documents.
     }

@@ -9,22 +9,10 @@ set -euo pipefail
 cd "$(dirname "$0")"
 
 # --- vendor grammar inputs from the submodule pins -------------------------
-cp relaton-models/grammars/biblio.rnc .
-cp relaton-models/grammars/biblio-standoc.rnc .
-cp relaton-models/grammars/biblio-compile.rnc .
-cp basicdoc-models/grammars/basicdoc.rnc .
-# basicdoc.rnc references the W3C MathML grammar via `external "mathml/..."`;
-# vendor those sources so trang can resolve them at compile time.
-cp -r basicdoc-models/grammars/mathml .
-cp metanorma-requirements-models/grammars/reqt.rnc .
-
-# relaton-<flavour>.rnc flavour overlays come from the unified
-# relaton-models repository (each former relaton-model-<flavour> repo lives
-# under <flavour>/ there since the 2026-08 unification).
-for f in relaton-models/*/grammars/relaton-*.rnc
-do
-  cp "$f" .
-done
+# All .rnc vendoring (shared layers, per-flavour relaton overlays, mathml)
+# lives in scripts/vendor-submodule-grammars.rb — the single implementation,
+# shared with deploy.yml.
+ruby ../scripts/vendor-submodule-grammars.rb
 
 # a failed copy above would otherwise surface only as an unrelated trang
 # "file not found" error at compile time
@@ -61,10 +49,12 @@ fi
 
 echo "Compiling..."
 
-for i in biblio biblio-compile biblio-standoc basicdoc reqt relaton-ieee relaton-iso relaton-iec relaton-bsi relaton-gb relaton-mpfa relaton-bipm relaton-w3c relaton-3gpp relaton-csa relaton-cc relaton-ietf relaton-iho relaton-itu relaton-m3aawg relaton-nist relaton-ribose relaton-ogc relaton-un relaton-cen relaton-ecma relaton-etsi relaton-plateau relaton-cie relaton-iana relaton-omg relaton-oasis relaton-jis relaton-ccsds standoc standoc-presentation biblio-presentation standoc-collection standoc-compile standoc-presentation-compile isostandard isostandard-compile isostandard-amd iec cc gbstandard ribose ieee ogc nist itu ietf generic iho bipm bsi jis plateau relaton-ieee-compile relaton-iso-compile relaton-iec-compile relaton-bsi-compile relaton-gb-compile relaton-mpfa-compile relaton-bipm-compile relaton-w3c-compile relaton-3gpp-compile relaton-csa-compile relaton-cc-compile relaton-ietf-compile relaton-iho-compile relaton-itu-compile relaton-m3aawg-compile relaton-nist-compile relaton-ribose-compile relaton-ogc-compile relaton-un-compile relaton-cen-compile relaton-ecma-compile relaton-etsi-compile relaton-cie-compile relaton-iana-compile relaton-omg-compile relaton-oasis-compile relaton-jis-compile relaton-plateau-compile relaton-ccsds-compile
+# Compile set = every .rnc in the hub (tracked sources + vendored
+# submodule inputs alike; new flavour grammars compile automatically).
+for i in $(ls *.rnc | sed 's/\.rnc$//' | sort)
 do
   echo $i
-  trang -I rnc -O rng $i.rnc $i.rng
+  trang -I rnc -O rng "$i.rnc" "$i.rng"
 done
 
 bundle exec ruby test.rb

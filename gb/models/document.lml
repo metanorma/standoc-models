@@ -1,8 +1,6 @@
 diagram GbDocument {
 
-  include iso_document/IsoStandardDocument.lml
   include gb_document/GbStandardDocument.lml
-  include iso_document/IsoBibliographicItem.lml
   include gb_document/metadata/GbBibliographicItem.lml
   include gb_document/metadata/Ccs.lml
   include gb_document/metadata/GbTechnicalCommittee.lml

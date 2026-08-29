@@ -1,4 +1,4 @@
-class GraphicalSymbolDesignation {
+class GraphicalDesignation {
   definition {
     A designation realised as a graphical symbol.
   }
