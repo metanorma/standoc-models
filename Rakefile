@@ -227,3 +227,8 @@ end
 
 desc "Validate XML and YAML instance fixtures"
 task fixtures: [:"fixtures:xml", :"fixtures:yaml"]
+
+desc "Regenerate the JSON Schema from the LML models (freshness-gated in CI)"
+task :schema do
+  sh "python3", "tools/generate_schema.py"
+end

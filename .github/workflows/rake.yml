@@ -22,6 +22,11 @@ jobs:
       - run: bundle exec rake
       - run: bundle exec rake verify
       - run: bundle exec rake parity
+      - run: bundle exec rake lint
+      - run: bundle exec rake fixtures
+      - run: bundle exec rake schema
+      # schema freshness: the committed schema must match the LML
+      - run: git diff --exit-code -- schema/
 
   # Regeneration parity gate: committed .rng must be byte-identical to
   # regeneration from the pinned submodule sources.
