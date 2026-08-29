@@ -14,6 +14,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # Non-recursive: the lint closure + fixtures need the direct pins;
+      # recursive checkout would chase the basicdoc <-> relaton cycle.
+      - run: git submodule update --init grammars/relaton-models grammars/basicdoc-models grammars/metanorma-requirements-models
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.3"
